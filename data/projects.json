@@ -5,106 +5,34 @@
     "description": "打造个人习惯闭环，形成飞轮效应",
     "cover": "/project-1.jpg",
     "year": "2025",
-    "tags": ["习惯", "自律", "工具"],
-    "category": "AIGC",
+    "tags": ["习惯", "自律", "生产力"],
+    "category": "工具",
     "story": {
       "problem": "1. 用完成习惯兑换吃大餐等奖励，难以形成习惯闭环\n2. 容易为一个伪需求冲动消费",
-      "process": "1. 将同领域的习惯和奖励分组，组内的习惯只能兑换组内的奖励。\n2. 积累一定的能量，才可以兑换奖励，过滤掉无法坚持的习惯",
+      "process": "1. 将习惯和奖励绑定，完成习惯，对应的奖励获得能量。\n2. 积累到一定的能量，才可以兑换奖励，过滤掉无法坚持的习惯",
       "result": "成功构建了一套完整的习惯闭环，产生飞轮效应，同时过滤掉伪需求，减少冲动消费。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/habit-flywheel",
-      "demo": "/demos/project-1-demo.mp4"
+      "demo": "https://tool.myandong.xyz"
     }
   },
   {
-    "id": "growth-tracker",
-    "title": "个人成长记录系统",
-    "description": "追踪学习进度、习惯养成和目标达成的综合性成长管理工具",
-    "cover": "/project-2.jpg", 
-    "year": "2024",
-    "tags": ["成长", "追踪", "管理"],
-    "category": "工具",
-    "story": {
-      "problem": "个人成长缺乏系统性记录和量化分析，难以持续改进",
-      "process": "设计简洁的记录界面，建立科学的评估体系，加入数据可视化",
-      "result": "帮助用户形成良好的自我管理习惯，实现可量化的个人成长"
-    },
-    "links": {
-      "github": "https://github.com/MeiYanDong/growth-tracker",
-      "demo": "/demos/project-2-demo.mp4"
-    }
-  },
-  {
-    "id": "investment-calculator",
-    "title": "定投理财计算器",
-    "description": "科学的定投策略分析工具，帮助理性投资决策",
-    "cover": "/project-3.jpg",
-    "year": "2024", 
-    "tags": ["理财", "定投", "计算器"],
-    "category": "金融",
-    "story": {
-      "problem": "投资决策缺乏科学依据，容易受情绪影响做出错误选择",
-      "process": "研究定投理论，设计直观的计算界面，加入风险评估功能",
-      "result": "为投资者提供理性的决策支持，帮助建立长期投资思维"
-    },
-    "links": {
-      "github": "https://github.com/MeiYanDong/investment-calc",
-      "demo": "/demos/project-3-demo.mp4"
-    }
-  },
-  {
-    "id": "fitness-tracker",
-    "title": "运动健身追踪应用",
-    "description": "记录运动数据，制定健身计划，培养运动习惯的综合应用",
-    "cover": "/project-4.jpg",
-    "year": "2024",
-    "tags": ["运动", "健身", "健康"],
-    "category": "健康",
-    "story": {
-      "problem": "运动缺乏规划和记录，难以坚持和看到进步",
-      "process": "设计科学的训练计划，建立激励机制，加入社交分享功能",
-      "result": "帮助用户养成规律运动习惯，实现健康生活方式转变"
-    },
-    "links": {
-      "github": "https://github.com/MeiYanDong/fitness-app",
-      "demo": "/demos/project-4-demo.mp4"
-    }
-  },
-  {
-    "id": "reading-notes",
-    "title": "阅读笔记管理系统",
-    "description": "系统化管理读书笔记，构建个人知识体系的学习工具",
-    "cover": "/project-5.jpg",
-    "year": "2024",
-    "tags": ["阅读", "笔记", "知识管理"],
-    "category": "学习",
-    "story": {
-      "problem": "阅读笔记分散，缺乏系统整理，知识无法有效积累和应用",
-      "process": "设计标签分类系统，建立知识关联网络，加入搜索和复习功能",
-      "result": "构建了完整的个人知识管理体系，显著提升学习效果"
-    },
-    "links": {
-      "github": "https://github.com/MeiYanDong/reading-notes",
-      "demo": "/demos/project-5-demo.mp4"
-    }
-  },
-  {
-    "id": "portfolio-website",
-    "title": "个人作品集网站",
-    "description": "展示个人项目和成长历程的极简风格作品集网站",
-    "cover": "/project-6.jpg",
+    "id": "game-portfolio",
+    "title": "游戏作品集",
+    "description": "游戏作品集，展示个人游戏开发能力",
+    "cover": "/塔防花园.png", 
     "year": "2025",
-    "tags": ["作品集", "网站", "设计"],
-    "category": "Web",
+    "tags": ["游戏", "休闲", "策略"],
+    "category": "游戏",
     "story": {
-      "problem": "需要一个专业的平台来展示个人项目和技能发展历程",
-      "process": "采用极简设计理念，使用现代前端技术，注重用户体验和加载性能",
-      "result": "创建了一个优雅、高效的个人品牌展示平台"
+      "problem": "",
+      "process": "",
+      "result": ""
     },
     "links": {
-      "github": "https://github.com/MeiYanDong/portfolio",
-      "demo": "/demos/project-6-demo.mp4"
+      "github": "https://github.com/MeiYanDong/Games",
+      "demo": "https://game.myandong.xyz"
     }
   }
 ] 

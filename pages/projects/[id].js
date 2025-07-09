@@ -93,7 +93,7 @@ export default function ProjectDetail() {
                   rel="noopener noreferrer"
                   className="btn"
                 >
-                  在线演示
+                  访问网站
                 </a>
               )}
             </div>

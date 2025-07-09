@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { GitHubIcon, XiaohongshuIcon, TwitterIcon } from './SocialIcons'
+import { GitHubIcon, XiaohongshuIcon, TwitterIcon, JikeIcon } from './SocialIcons'
 
 export default function Layout({ children }) {
   return (
@@ -43,6 +43,10 @@ export default function Layout({ children }) {
               <a href="https://x.com/mei_yandon12585" target="_blank" rel="noopener" className="social-link">
                 <TwitterIcon size={16} />
                 <span>推特</span>
+              </a>
+              <a href="https://okjk.co/gjPeyX" target="_blank" rel="noopener" className="social-link">
+                <JikeIcon size={16} />
+                <span>即刻</span>
               </a>
               <span className="wechat">微信: MYanDong-</span>
             </div>

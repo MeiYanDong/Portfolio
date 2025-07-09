@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon } from '../components/SocialIcons'
+import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon, JikeIcon } from '../components/SocialIcons'
 
 export default function Contact() {
   const [copied, setCopied] = useState('')
@@ -36,6 +36,14 @@ export default function Contact() {
       value: '@mei_yandon12585',
       link: 'https://x.com/mei_yandon12585',
       copyText: 'https://x.com/mei_yandon12585'
+    },
+    {
+      icon: <JikeIcon size={48} className="social-icon" />,
+      title: '即刻',
+      description: '分享个人思考和生活感悟',
+      value: '@https://okjk.co/gjPeyX',
+      link: 'https://okjk.co/gjPeyX',
+      copyText: 'https://okjk.co/gjPeyX'
     },
     {
       icon: <WechatIcon size={48} className="social-icon" />,
