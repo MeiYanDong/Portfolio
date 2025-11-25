@@ -162,7 +162,7 @@ export default function About() {
               <XiaohongshuIcon size={20} className="contact-icon" />
               <span>小红书</span>
             </a>
-            <a href="https://x.com/mei_yandon12585" target="_blank" rel="noopener" className="contact-link">
+            <a href="https://x.com/MYanDong1" target="_blank" rel="noopener" className="contact-link">
               <TwitterIcon size={20} className="contact-icon" />
               <span>推特</span>
             </a>

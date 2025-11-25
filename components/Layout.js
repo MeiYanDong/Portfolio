@@ -40,7 +40,7 @@ export default function Layout({ children }) {
                 <XiaohongshuIcon size={16} />
                 <span>小红书</span>
               </a>
-              <a href="https://x.com/mei_yandon12585" target="_blank" rel="noopener" className="social-link">
+              <a href="https://x.com/MYanDong1" target="_blank" rel="noopener" className="social-link">
                 <TwitterIcon size={16} />
                 <span>推特</span>
               </a>

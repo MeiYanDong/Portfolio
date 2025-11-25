@@ -17,31 +17,31 @@ export default function Contact() {
       icon: <GitHubIcon size={48} className="social-icon" />,
       title: 'GitHub',
       description: '查看我的代码和项目',
-      value: 'github.com/MeiYanDong',
+      value: 'MeiYanDong',
       link: 'https://github.com/MeiYanDong',
-      copyText: 'https://github.com/MeiYanDong'
+      copyText: 'MeiYanDong'
     },
     {
       icon: <XiaohongshuIcon size={48} className="social-icon" />,
       title: '小红书',
       description: '分享AI绘画和视频',
-      value: '小红书主页',
+      value: 'MYanDong',
       link: 'https://www.xiaohongshu.com/user/profile/64800729000000000f006c55',
-      copyText: 'https://www.xiaohongshu.com/user/profile/64800729000000000f006c55'
+      copyText: 'MYanDong'
     },
     {
       icon: <TwitterIcon size={48} className="social-icon" />,
       title: '推特',
-      description: '技术动态和思考分享',
-      value: '@mei_yandon12585',
-      link: 'https://x.com/mei_yandon12585',
-      copyText: 'https://x.com/mei_yandon12585'
+      description: 'AI x Web3 成长分享',
+      value: '@MYanDong1',
+      link: 'https://x.com/MYanDong1',
+      copyText: 'MYanDong1'
     },
     {
       icon: <JikeIcon size={48} className="social-icon" />,
       title: '即刻',
       description: '分享个人思考和生活感悟',
-      value: '@https://okjk.co/gjPeyX',
+      value: '即刻主页',
       link: 'https://okjk.co/gjPeyX',
       copyText: 'https://okjk.co/gjPeyX'
     },
@@ -113,11 +113,6 @@ export default function Contact() {
               <p>人工智能在内容创作中的应用、工具使用心得、创作技巧分享</p>
             </div>
             <div className="topic-card">
-              <div className="topic-icon">💻</div>
-              <h3>技术学习</h3>
-              <p>前端开发经验、项目架构设计、学习方法和资源推荐</p>
-            </div>
-            <div className="topic-card">
               <div className="topic-icon">📈</div>
               <h3>个人成长</h3>
               <p>习惯养成、目标管理、时间规划、自我提升的心得体会</p>
@@ -126,16 +121,6 @@ export default function Contact() {
               <div className="topic-icon">💰</div>
               <h3>理财投资</h3>
               <p>定投策略、资产配置、理财规划、投资心理学探讨</p>
-            </div>
-            <div className="topic-card">
-              <div className="topic-icon">🏃</div>
-              <h3>运动健身</h3>
-              <p>运动计划制定、健身心得、运动与学习的平衡</p>
-            </div>
-            <div className="topic-card">
-              <div className="topic-icon">🤝</div>
-              <h3>项目合作</h3>
-              <p>开源项目贡献、技术方案讨论、共同学习成长</p>
             </div>
           </div>
         </section>
