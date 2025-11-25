@@ -11,10 +11,11 @@ export default function About() {
   const timeline = [
     { year: '2023中', event: '第一次暑假工家教，工资3000，转给父母朋友2000+' },
     { year: '2023下', event: '认知觉醒，开始广泛阅读书籍，微信读书与得到总时长1000+小时' },
-    { year: '2023末', event: '开启定投BTC之旅，截止202506，收益率80%+' },
+    { year: '2023末', event: '开启定投BTC之旅，截止202507，收益率至100%+，出本金' },
     { year: '2024中', event: '完成人生首次半马' },
     { year: '2024下', event: '开始接触AI绘画和视频，开启AIGC创作' },
-    { year: '2025初', event: 'AI之路继续深入：AI Agent、AI Coding等' }
+    { year: '2025初', event: 'AI之路继续深入：AI Agent、AI Coding等' },
+    { year: '2025中', event: '成为 「YouWare」Founding Creator，并独立开发第一款产品：「习惯飞轮」' }
   ]
 
   return (
