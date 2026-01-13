@@ -24,8 +24,9 @@ export default function Home() {
             <div className="intro">
               <h1>你好，我是梅炎栋</h1>
               <p>
-                一位普通不甘于平庸专注个人成长的大学生。<br />
-                阅读、运动、定投，AIGC创作者，终身学习者，践行者。
+              05年21岁 | AI x Web3
+              <br />普通不甘平庸 专注个人成长
+              <br />终生学习者、践行者
               </p>
               <Link href="/projects" className="btn hero-btn">
                 浏览我的项目

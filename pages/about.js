@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon } from '../components/SocialIcons'
+import { BookOpen, Target, Lightbulb, Scale, Sun, RefreshCw, Zap } from 'lucide-react'
 
 export default function About() {
   const skills = [
@@ -15,7 +16,8 @@ export default function About() {
     { year: '2024中', event: '完成人生首次半马' },
     { year: '2024下', event: '开始接触AI绘画和视频，开启AIGC创作' },
     { year: '2025初', event: 'AI之路继续深入：AI Agent、AI Coding等' },
-    { year: '2025中', event: '成为 「YouWare」Founding Creator，并独立开发第一款产品：「习惯飞轮」' }
+    { year: '2025中', event: '成为 「YouWare」Founding Creator，并独立开发第一款产品：「习惯飞轮」' },
+    { year: '2025下', event: '利用 AI 编程，基于自身需求，开发多款工具' }
   ]
 
   return (
@@ -47,22 +49,22 @@ export default function About() {
           <h2>我的理念</h2>
           <div className="philosophy-grid">
             <div className="philosophy-card">
-              <div className="icon">📚</div>
+              <div className="icon"><BookOpen size={40} /></div>
               <h3>终身学习</h3>
               <p>保持好奇心，持续学习新知识新技能，让自己始终处于成长状态。</p>
             </div>
             <div className="philosophy-card">
-              <div className="icon">🎯</div>
+              <div className="icon"><Target size={40} /></div>
               <h3>目标导向</h3>
               <p>设定明确目标，制定可行计划，用行动将想法变为现实。</p>
             </div>
             <div className="philosophy-card">
-              <div className="icon">💡</div>
+              <div className="icon"><Lightbulb size={40} /></div>
               <h3>创新实践</h3>
               <p>拥抱新技术，特别是AIGC领域，用创新思维解决实际问题。</p>
             </div>
             <div className="philosophy-card">
-              <div className="icon">⚖️</div>
+              <div className="icon"><Scale size={40} /></div>
               <h3>平衡发展</h3>
               <p>技术学习、身体健康、财务规划并重，追求全面的个人发展。</p>
             </div>
@@ -95,19 +97,19 @@ export default function About() {
             <h3>个人特质</h3>
             <div className="traits-grid">
               <div className="trait-card">
-                <div className="trait-icon">🌅</div>
+                <div className="trait-icon"><Sun size={40} /></div>
                 <h4>乐观自信</h4>
                 <p>总能于黑暗中见光明<br/>
                   因为黑夜无论怎样悠长，白昼总会到来</p>
               </div>
               <div className="trait-card">
-                <div className="trait-icon">🔄</div>
+                <div className="trait-icon"><RefreshCw size={40} /></div>
                 <h4>反思复盘</h4>
                 <p>时刻反思当下，调整行为<br/>
                   周期性复盘生活，指导未来方向</p>
               </div>
               <div className="trait-card">
-                <div className="trait-icon">💪</div>
+                <div className="trait-icon"><Zap size={40} /></div>
                 <h4>不抱怨，不后悔</h4>
                 <p>知道自己无法穿越时空回到过去<br/>
                   所以宁愿抱怨后悔<br/>
@@ -255,6 +257,7 @@ export default function About() {
         .icon {
           font-size: 2.5rem;
           margin-bottom: 1rem;
+          color: var(--accent-purple);
         }
 
         .philosophy-card h3 {
@@ -356,6 +359,7 @@ export default function About() {
         .trait-icon {
           font-size: 2.5rem;
           margin-bottom: 1rem;
+          color: var(--accent-purple);
         }
 
         .trait-card h4 {

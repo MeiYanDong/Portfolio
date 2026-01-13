@@ -1,12 +1,97 @@
 [
   {
+    "id": "binance-airdrop-monitor",
+    "title": "币安空投监控",
+    "description": "自动监控币安Alpha空投信息，发现新空投或信息更新时推送通知到飞书",
+    "cover": "/airdrop.png",
+    "year": "2026",
+    "category": "工具",
+    "tags": ["加密货币", "自动化", "监控"],
+    "story": {
+      "problem": "",
+      "process": "",
+      "result": ""
+    },
+    "links": {
+      "github": "https://github.com/MeiYanDong/Binance-Alpha-Airdrop-Monitor"
+    }
+  },
+  {
+    "id": "pets-santa-online",
+    "title": "宠物圣诞照",
+    "description": "AI宠物圣诞照片生成应用 - 上传宠物照片，生成各种节日风格的圣诞主题图片",
+    "cover": "/pets-santa.png",
+    "year": "2025",
+    "category": "应用",
+    "tags": ["AI", "图片生成", "应用"],
+    "story": {
+      "problem": "",
+      "process": "",
+      "result": ""
+    },
+    "links": {
+      "github": "https://github.com/MeiYanDong/pets-santa-online"
+    }
+  },
+  {
+    "id": "obsidian-life-calendar",
+    "title": "人生日历",
+    "description": "Obsidian人生日历插件 - 用格子可视化你的一生，每一天都是一个彩色方块",
+    "cover": "/life-calendar.png",
+    "year": "2025",
+    "category": "工具",
+    "tags": ["Obsidian", "插件", "可视化"],
+    "story": {
+      "problem": "",
+      "process": "",
+      "result": ""
+    },
+    "links": {
+      "github": "https://github.com/MeiYanDong/obsidian-life-calendar"
+    }
+  },
+  {
+    "id": "share-card",
+    "title": "分享卡片",
+    "description": "Chrome扩展 - 右键或手动输入文字，快速生成可分享的卡片图片",
+    "cover": "/share-card.png",
+    "year": "2025",
+    "category": "工具",
+    "tags": ["Chrome扩展", "Markdown", "分享"],
+    "story": {
+      "problem": "",
+      "process": "",
+      "result": ""
+    },
+    "links": {
+      "github": "https://github.com/MeiYanDong/ShareCard"
+    }
+  },
+  {
+    "id": "prompt-manager",
+    "title": "提示词管理器",
+    "description": "浏览器扩展 - 管理和组织AI提示词，提高使用AI的效率",
+    "cover": "/prompt-manager.png",
+    "year": "2025",
+    "category": "工具",
+    "tags": ["AI", "提示词", "浏览器扩展"],
+    "story": {
+      "problem": "",
+      "process": "",
+      "result": ""
+    },
+    "links": {
+      "github": "https://github.com/MeiYanDong/prompt-manager"
+    }
+  },
+  {
     "id": "AI-Coding",
     "title": "习惯飞轮",
     "description": "打造个人习惯闭环，形成飞轮效应",
     "cover": "/project-1.jpg",
     "year": "2025",
     "tags": ["习惯", "自律", "生产力"],
-    "category": "工具",
+    "category": "应用",
     "story": {
       "problem": "1. 用完成习惯兑换吃大餐等奖励，难以形成习惯闭环\n2. 容易为一个伪需求冲动消费",
       "process": "1. 将习惯和奖励绑定，完成习惯，对应的奖励获得能量。\n2. 积累到一定的能量，才可以兑换奖励，过滤掉无法坚持的习惯",
@@ -21,7 +106,7 @@
     "id": "game-portfolio",
     "title": "游戏作品集",
     "description": "游戏作品集，展示个人游戏开发能力",
-    "cover": "/塔防花园.png", 
+    "cover": "/tower-defense-garden.png",
     "year": "2025",
     "tags": ["游戏", "休闲", "策略"],
     "category": "游戏",
@@ -35,4 +120,4 @@
       "demo": "https://game.myandong.xyz"
     }
   }
-] 
+]
