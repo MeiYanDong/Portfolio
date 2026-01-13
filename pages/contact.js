@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon, JikeIcon } from '../components/SocialIcons'
+import { Bot, TrendingUp, Wallet, Mail, Target } from 'lucide-react'
 
 export default function Contact() {
   const [copied, setCopied] = useState('')
@@ -108,17 +109,17 @@ export default function Contact() {
           <h2>我们可以聊什么？</h2>
           <div className="topics-grid">
             <div className="topic-card">
-              <div className="topic-icon">🤖</div>
+              <div className="topic-icon"><Bot size={32} /></div>
               <h3>AIGC创作</h3>
               <p>人工智能在内容创作中的应用、工具使用心得、创作技巧分享</p>
             </div>
             <div className="topic-card">
-              <div className="topic-icon">📈</div>
+              <div className="topic-icon"><TrendingUp size={32} /></div>
               <h3>个人成长</h3>
               <p>习惯养成、目标管理、时间规划、自我提升的心得体会</p>
             </div>
             <div className="topic-card">
-              <div className="topic-icon">💰</div>
+              <div className="topic-icon"><Wallet size={32} /></div>
               <h3>理财投资</h3>
               <p>定投策略、资产配置、理财规划、投资心理学探讨</p>
             </div>
@@ -128,14 +129,14 @@ export default function Contact() {
         {/* 回复时间说明 */}
         <section className="response-info">
           <div className="info-card">
-            <h3>📬 回复时间</h3>
+            <h3><Mail size={20} style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}} />回复时间</h3>
             <p>
               我通常会在24小时内回复消息。如果是紧急事务，
               建议通过微信联系，我会尽快回复。
             </p>
           </div>
           <div className="info-card">
-            <h3>🎯 最佳联系方式</h3>
+            <h3><Target size={20} style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}} />最佳联系方式</h3>
             <p>
               <strong>深度合作</strong>：微信联系
             </p>
@@ -293,6 +294,7 @@ export default function Contact() {
         .topic-icon {
           font-size: 2rem;
           margin-bottom: 1rem;
+          color: var(--accent-purple);
         }
 
         .topic-card h3 {

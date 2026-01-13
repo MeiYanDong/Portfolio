@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon } from '../components/SocialIcons'
-import { BookOpen, Target, Lightbulb, Scale, Sun, RefreshCw, Zap } from 'lucide-react'
+import { BookOpen, Target, Lightbulb, Scale, Sun, RefreshCw, Zap, Newspaper } from 'lucide-react'
 
 export default function About() {
   const skills = [
@@ -149,6 +149,34 @@ export default function About() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* 公众号 */}
+        <section className="wechat-oa">
+          <h2>公众号</h2>
+          <p className="wechat-oa-desc">记录生活感悟与成长思考</p>
+          <div className="wechat-oa-grid">
+            <a
+              href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkwNTcyMzg4OQ==&action=getalbum&album_id=4301714421690138625&scene=126#wechat_redirect"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wechat-oa-card"
+            >
+              <div className="wechat-oa-icon"><Newspaper size={40} /></div>
+              <h3>人生日报</h3>
+              <p>每日记录与反思</p>
+            </a>
+            <a
+              href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkwNTcyMzg4OQ==&action=getalbum&album_id=4075396452263100417&scene=126#wechat_redirect"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wechat-oa-card"
+            >
+              <div className="wechat-oa-icon"><Newspaper size={40} /></div>
+              <h3>人生周报</h3>
+              <p>每周复盘与总结</p>
+            </a>
           </div>
         </section>
 
@@ -460,6 +488,59 @@ export default function About() {
           margin: 0;
         }
 
+        .wechat-oa {
+          margin: 4rem 0;
+          text-align: center;
+        }
+
+        .wechat-oa h2 {
+          margin-bottom: 0.5rem;
+          color: var(--text-primary);
+        }
+
+        .wechat-oa-desc {
+          color: var(--text-secondary);
+          margin: 0 auto 2rem;
+          text-align: center;
+        }
+
+        .wechat-oa-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .wechat-oa-card {
+          background: var(--bg-card);
+          padding: 2rem;
+          border-radius: 12px;
+          border: 1px solid var(--border-color);
+          text-decoration: none;
+          transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .wechat-oa-card:hover {
+          transform: translateY(-4px);
+          border-color: var(--accent-purple);
+        }
+
+        .wechat-oa-icon {
+          color: var(--accent-purple);
+          margin-bottom: 1rem;
+        }
+
+        .wechat-oa-card h3 {
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        .wechat-oa-card p {
+          color: var(--text-secondary);
+          font-size: 0.875rem;
+        }
+
         .contact-preview {
           margin: 4rem 0 2rem;
           text-align: center;
@@ -541,6 +622,11 @@ export default function About() {
 
           .timeline-year {
             width: auto;
+          }
+
+          .wechat-oa-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
           }
 
           .contact-links {
