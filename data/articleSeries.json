@@ -1,0 +1,10 @@
+[
+  {
+    "id": "scientific-networking",
+    "title": "科学上网",
+    "summary": "记录从购买代理服务、配置客户端，到为 AI 工具准备静态住宅 IP 和智能分流的完整流程。",
+    "status": "连载中",
+    "topics": ["科学上网", "代理配置", "AI 工具"],
+    "order": 1
+  }
+]

@@ -14,6 +14,7 @@ export default function Layout({ children }) {
             <div className="nav-links">
               <Link href="/">首页</Link>
               <Link href="/projects">项目</Link>
+              <Link href="/articles">文章</Link>
               <Link href="/about">关于</Link>
               <Link href="/contact">联系</Link>
             </div>
@@ -164,4 +165,4 @@ export default function Layout({ children }) {
       `}</style>
     </div>
   )
-} 
+}
