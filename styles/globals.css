@@ -23,10 +23,40 @@ html {
 body {
   font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
   background-color: var(--bg-primary);
+  background-image: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(179, 157, 219, 0.035) 47%,
+    rgba(179, 157, 219, 0.078) 50%,
+    rgba(179, 157, 219, 0.035) 53%,
+    transparent 62%,
+    transparent 100%
+  );
+  background-size: 260% 180%;
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.65;
   font-size: 16px;
   font-weight: 400;
+  animation: global-bg-scan 9s linear infinite;
+}
+
+@keyframes global-bg-scan {
+  from {
+    background-position: -180% 0;
+  }
+
+  to {
+    background-position: 180% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background-position: 50% 0;
+  }
 }
 
 /* 基础排版 */
@@ -112,8 +142,8 @@ a:hover {
   .container {
     padding: 0 1rem;
   }
-  
+
   h1 {
     font-size: 2rem;
   }
-} 
+}

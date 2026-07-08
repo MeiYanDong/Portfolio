@@ -1,16 +1,18 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import projectsData from '../../data/projects.json'
 
-export default function ProjectDetail() {
-  const router = useRouter()
-  const { id } = router.query
-  
-  // 查找当前项目
-  const project = projectsData.find(p => p.id === id)
-  
-  // 如果项目不存在，显示404
+const tierLabels = {
+  featured: '精选项目',
+  selected: '入选项目',
+  archive: '早期作品'
+}
+
+function hasText(value) {
+  return typeof value === 'string' && value.trim().length > 0
+}
+
+export default function ProjectDetail({ project, nextProject }) {
   if (!project) {
     return (
       <div className="container">
@@ -26,12 +28,14 @@ export default function ProjectDetail() {
             text-align: center;
             padding: 4rem 0;
           }
+
           .not-found h1 {
             margin-bottom: 1rem;
             color: var(--text-secondary);
           }
+
           .not-found p {
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem;
             color: var(--text-secondary);
           }
         `}</style>
@@ -39,9 +43,13 @@ export default function ProjectDetail() {
     )
   }
 
-  // 获取下一个项目（用于导航）
-  const currentIndex = projectsData.findIndex(p => p.id === id)
-  const nextProject = projectsData[(currentIndex + 1) % projectsData.length]
+  const stack = project.stack || project.tags || []
+  const highlights = project.highlights || []
+  const storySections = [
+    { title: '问题', body: project.story?.problem },
+    { title: '过程', body: project.story?.process },
+    { title: '结果', body: project.story?.result }
+  ].filter((section) => hasText(section.body))
 
   return (
     <>
@@ -51,48 +59,39 @@ export default function ProjectDetail() {
       </Head>
 
       <div className="container">
-        {/* 返回按钮 */}
         <nav className="breadcrumb">
           <Link href="/projects" className="back-link">
-            ← 返回项目列表
+            返回项目列表
           </Link>
         </nav>
 
-        {/* 项目头部 */}
         <section className="project-hero">
-          <div className="project-image-large">
+          <div className="project-visual">
             <img src={project.cover} alt={project.title} />
           </div>
           <div className="project-intro">
             <div className="project-meta-header">
-              <span className="project-year">{project.year}</span>
-              <span className="project-category">{project.category}</span>
+              <span>{tierLabels[project.tier] || '项目'}</span>
+              <span>{project.year}</span>
+              <span>{project.category}</span>
             </div>
             <h1>{project.title}</h1>
             <p className="project-lead">{project.description}</p>
-            <div className="project-tags-large">
-              {project.tags.map((tag, index) => (
-                <span key={index} className="tag-large">{tag}</span>
-              ))}
-            </div>
+            {project.role && <p className="project-role">{project.role}</p>}
+            {project.resumeLine && (
+              <div className="resume-block">
+                <span>简历表达</span>
+                <p>{project.resumeLine}</p>
+              </div>
+            )}
             <div className="project-links">
-              {project.links.github && (
-                <a 
-                  href={project.links.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn btn-outline"
-                >
+              {project.links?.github && (
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
                   GitHub 源码
                 </a>
               )}
-              {project.links.demo && (
-                <a 
-                  href={project.links.demo} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn"
-                >
+              {project.links?.demo && (
+                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn">
                   访问网站
                 </a>
               )}
@@ -100,36 +99,62 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        {/* 项目故事 */}
-        <section className="project-story">
-          <h2>项目故事</h2>
-          <div className="story-sections">
-            <div className="story-section">
-              <h3>🤔 遇到的问题</h3>
-              <p>{project.story.problem}</p>
+        <section className="project-overview">
+          {project.impact && (
+            <div className="overview-panel">
+              <h2>结果与价值</h2>
+              <p>{project.impact}</p>
             </div>
-            <div className="story-section">
-              <h3>🛠️ 解决过程</h3>
-              <p>{project.story.process}</p>
+          )}
+          {stack.length > 0 && (
+            <div className="overview-panel">
+              <h2>技术栈</h2>
+              <div className="stack-list">
+                {stack.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
             </div>
-            <div className="story-section">
-              <h3>✨ 最终结果</h3>
-              <p>{project.story.result}</p>
-            </div>
-          </div>
+          )}
         </section>
 
-        {/* 下一个项目 */}
+        {highlights.length > 0 && (
+          <section className="project-section">
+            <div className="section-label">CAPABILITIES</div>
+            <h2>关键能力</h2>
+            <div className="highlight-list">
+              {highlights.map((highlight) => (
+                <p key={highlight}>{highlight}</p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {storySections.length > 0 && (
+          <section className="project-section">
+            <div className="section-label">CASE STUDY</div>
+            <h2>项目故事</h2>
+            <div className="story-grid">
+              {storySections.map((section) => (
+                <div key={section.title} className="story-section">
+                  <h3>{section.title}</h3>
+                  <p>{section.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="next-project">
-          <h3>下一个项目</h3>
+          <h2>下一个项目</h2>
           <Link href={`/projects/${nextProject.id}`} className="next-project-card card">
             <div className="next-project-image">
               <img src={nextProject.cover} alt={nextProject.title} />
             </div>
             <div className="next-project-info">
-              <h4>{nextProject.title}</h4>
-              <p>{nextProject.description}</p>
-              <span className="next-arrow">查看详情 →</span>
+              <span>{tierLabels[nextProject.tier] || nextProject.category}</span>
+              <h3>{nextProject.title}</h3>
+              <p>{nextProject.resumeLine || nextProject.description}</p>
             </div>
           </Link>
         </section>
@@ -137,13 +162,12 @@ export default function ProjectDetail() {
 
       <style jsx>{`
         .breadcrumb {
-          padding: 1rem 0;
+          padding: 1.25rem 0;
         }
 
         .back-link {
           color: var(--text-secondary);
           font-size: 0.875rem;
-          transition: color 0.2s ease;
         }
 
         .back-link:hover {
@@ -152,75 +176,95 @@ export default function ProjectDetail() {
 
         .project-hero {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
           gap: 3rem;
-          align-items: center;
-          margin-bottom: 4rem;
+          align-items: stretch;
+          padding: 2rem 0 3rem;
+          border-bottom: 1px solid var(--border-color);
         }
 
-        .project-image-large {
-          width: 100%;
-          height: 400px;
-          border-radius: 12px;
+        .project-visual {
+          min-height: 360px;
           overflow: hidden;
           border: 1px solid var(--border-color);
+          border-radius: 8px;
+          background: var(--bg-card);
         }
 
-        .project-image-large img {
+        .project-visual img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          filter: saturate(0.8);
+        }
+
+        .project-intro {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .project-meta-header {
           display: flex;
-          gap: 1rem;
-          margin-bottom: 1rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1.25rem;
         }
 
-        .project-year, .project-category {
-          font-size: 0.75rem;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
+        .project-meta-header span {
           border: 1px solid var(--border-color);
-          background: var(--bg-card);
+          border-radius: 4px;
+          padding: 0.35rem 0.6rem;
           color: var(--text-secondary);
+          font-size: 0.75rem;
         }
 
         .project-intro h1 {
-          margin-bottom: 1.5rem;
-          background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          max-width: 780px;
+          margin-bottom: 1rem;
         }
 
         .project-lead {
-          font-size: 1.125rem;
+          max-width: 760px;
           color: var(--text-secondary);
-          line-height: 1.7;
-          margin-bottom: 2rem;
+          font-size: 1.08rem;
+          line-height: 1.8;
         }
 
-        .project-tags-large {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-bottom: 2rem;
-        }
-
-        .tag-large {
-          font-size: 0.875rem;
+        .project-role {
+          max-width: 760px;
           color: var(--accent-purple);
-          background: rgba(179, 157, 219, 0.1);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          border: 1px solid rgba(179, 157, 219, 0.2);
+          font-size: 0.95rem;
+        }
+
+        .resume-block {
+          margin: 1.25rem 0 1.5rem;
+          padding: 1rem;
+          border-left: 3px solid var(--accent-purple);
+          background: var(--bg-card);
+        }
+
+        .resume-block span,
+        .section-label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: var(--accent-purple);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+        }
+
+        .resume-block p {
+          max-width: none;
+          margin-bottom: 0;
+          color: var(--text-primary);
+          line-height: 1.75;
         }
 
         .project-links {
           display: flex;
-          gap: 1rem;
+          flex-wrap: wrap;
+          gap: 0.75rem;
         }
 
         .btn-outline {
@@ -234,69 +278,123 @@ export default function ProjectDetail() {
           color: var(--bg-primary);
         }
 
-        .project-story {
-          margin-bottom: 4rem;
-        }
-
-        .project-story h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .story-sections {
+        .project-overview {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1rem;
+          padding: 2rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .overview-panel {
+          padding: 1.25rem;
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          background: var(--bg-card);
+        }
+
+        .overview-panel h2 {
+          margin-bottom: 0.75rem;
+          font-size: 1.1rem;
+        }
+
+        .overview-panel p {
+          max-width: none;
+          margin-bottom: 0;
+          color: var(--text-secondary);
+          line-height: 1.75;
+        }
+
+        .stack-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .stack-list span {
+          border: 1px solid var(--border-color);
+          border-radius: 4px;
+          padding: 0.3rem 0.55rem;
+          color: var(--text-secondary);
+          font-size: 0.78rem;
+        }
+
+        .project-section {
+          padding: 3rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-section h2 {
+          margin-bottom: 1.25rem;
+        }
+
+        .highlight-list {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1rem;
+        }
+
+        .highlight-list p {
+          max-width: none;
+          min-height: 100%;
+          margin-bottom: 0;
+          padding: 1rem;
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          color: var(--text-secondary);
+          background: var(--bg-card);
+          line-height: 1.7;
+        }
+
+        .story-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1rem;
         }
 
         .story-section {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
+          padding: 1.25rem;
           border: 1px solid var(--border-color);
+          border-radius: 8px;
+          background: var(--bg-card);
         }
 
         .story-section h3 {
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-          font-size: 1.125rem;
+          margin-bottom: 0.75rem;
+          font-size: 1rem;
         }
 
         .story-section p {
+          max-width: none;
+          margin-bottom: 0;
           color: var(--text-secondary);
-          line-height: 1.7;
+          line-height: 1.75;
           white-space: pre-line;
         }
 
         .next-project {
-          margin-bottom: 2rem;
+          padding: 3rem 0 4rem;
         }
 
-        .next-project h3 {
-          margin-bottom: 1.5rem;
-          color: var(--text-primary);
+        .next-project h2 {
+          margin-bottom: 1rem;
+          font-size: 1.2rem;
         }
 
         .next-project-card {
           display: grid;
-          grid-template-columns: 200px 1fr;
-          gap: 1.5rem;
-          padding: 1.5rem;
-          text-decoration: none;
+          grid-template-columns: 160px minmax(0, 1fr);
+          gap: 1.25rem;
+          padding: 1rem;
           color: inherit;
-          transition: transform 0.2s ease;
-        }
-
-        .next-project-card:hover {
-          transform: translateY(-2px);
+          text-decoration: none;
         }
 
         .next-project-image {
-          width: 100%;
-          height: 120px;
-          border-radius: 8px;
+          height: 110px;
           overflow: hidden;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
         }
 
         .next-project-image img {
@@ -305,57 +403,83 @@ export default function ProjectDetail() {
           object-fit: cover;
         }
 
-        .next-project-info h4 {
-          margin-bottom: 0.5rem;
-          transition: color 0.2s ease;
+        .next-project-info span {
+          display: block;
+          margin-bottom: 0.4rem;
+          color: var(--text-secondary);
+          font-size: 0.75rem;
         }
 
-        .next-project-card:hover .next-project-info h4 {
-          color: var(--accent-purple);
+        .next-project-info h3 {
+          margin-bottom: 0.5rem;
         }
 
         .next-project-info p {
+          max-width: none;
+          margin-bottom: 0;
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          line-height: 1.5;
-          margin-bottom: 1rem;
+          font-size: 0.9rem;
         }
 
-        .next-arrow {
-          color: var(--accent-purple);
-          font-size: 0.875rem;
-          font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-          .project-hero {
+        @media (max-width: 900px) {
+          .project-hero,
+          .project-overview,
+          .highlight-list,
+          .story-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
           }
 
-          .project-image-large {
-            height: 250px;
+          .project-visual {
+            min-height: 260px;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .project-hero {
+            gap: 1.5rem;
           }
 
           .project-links {
             flex-direction: column;
           }
 
-          .story-sections {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+          .project-links :global(a) {
+            justify-content: center;
           }
 
           .next-project-card {
-            grid-template-columns: 1fr;
-            gap: 1rem;
+            grid-template-columns: 84px minmax(0, 1fr);
           }
 
           .next-project-image {
-            height: 150px;
+            height: 84px;
           }
         }
       `}</style>
     </>
   )
-} 
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: projectsData.map((project) => ({
+      params: { id: project.id }
+    })),
+    fallback: false
+  }
+}
+
+export async function getStaticProps({ params }) {
+  const currentIndex = projectsData.findIndex((project) => project.id === params.id)
+
+  if (currentIndex === -1) {
+    return { notFound: true }
+  }
+
+  return {
+    props: {
+      project: projectsData[currentIndex],
+      nextProject: projectsData[(currentIndex + 1) % projectsData.length]
+    }
+  }
+}
