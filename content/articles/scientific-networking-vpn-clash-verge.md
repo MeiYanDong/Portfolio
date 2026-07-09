@@ -2,7 +2,7 @@
 title: 科学上网：购买 VPN 与配置 Clash Verge
 summary: 从购买流量包、复制订阅链接，到在 Clash Verge 里管理订阅、测试节点和开启系统代理的完整流程。
 date: 2026-07-06
-topics: 科学上网, 代理配置
+topics: 科学上网
 tags: VPN, SakuraCat, Clash Verge, 系统代理
 series: scientific-networking
 seriesOrder: 1

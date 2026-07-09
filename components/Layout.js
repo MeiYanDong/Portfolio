@@ -152,6 +152,13 @@ export default function Layout({ children }) {
             gap: 1rem;
           }
 
+          .nav-links {
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem 1.25rem;
+          }
+
           .footer-content {
             flex-direction: column;
             text-align: center;

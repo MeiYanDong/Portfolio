@@ -14,7 +14,8 @@ const categoryLabels = {
   'On-chain Automation': '链上自动化',
   'Product Workbenches': '产品工作台',
   'AI Agent Systems': '智能体系统',
-  'Personal Knowledge Tools': '个人知识工具'
+  'Personal Knowledge Tools': '个人知识工具',
+  'Creative Applications': '创意应用'
 }
 
 function categoryLabel(category) {

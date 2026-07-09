@@ -2,7 +2,7 @@
 title: 科学上网进阶：静态住宅
 summary: Claude 对 IP 管控很严，一般的节点不行，得配上静态住宅 IP。
 date: 2026-07-07
-topics: 科学上网, 代理配置, AI 工具
+topics: 科学上网
 tags: Claude, 静态住宅 IP, Clash Verge, FlClash, 智能分流
 series: scientific-networking
 seriesOrder: 2

@@ -8,8 +8,72 @@ const tierLabels = {
   archive: '早期作品'
 }
 
+const categoryLabels = {
+  'On-chain Automation': '链上自动化',
+  'Product Workbenches': '产品工作台',
+  'AI Agent Systems': '智能体系统',
+  'Personal Knowledge Tools': '个人知识工具',
+  'Creative Applications': '创意应用',
+  工具: '工具',
+  应用: '应用',
+  游戏: '游戏'
+}
+
+function categoryLabel(category) {
+  return categoryLabels[category] || category
+}
+
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0
+}
+
+function ProjectVisual({ project, compact = false }) {
+  if (project.cover) {
+    return <img src={project.cover} alt={project.coverAlt || project.title} />
+  }
+
+  const visual = project.visual || {}
+  const signals = (visual.signals || project.tags || project.stack || []).slice(0, compact ? 3 : 4)
+  const metrics = (
+    visual.metrics || [
+      { value: project.year, label: '年份' },
+      { value: categoryLabel(project.category), label: '主题' },
+      { value: tierLabels[project.tier] || '项目', label: '层级' }
+    ]
+  ).slice(0, compact ? 2 : 3)
+
+  return (
+    <div
+      className={`generated-project-visual${compact ? ' compact' : ''}`}
+      style={{ '--visual-accent': visual.accent || '#b39ddb' }}
+      aria-label={`${project.title} 项目视觉封面`}
+    >
+      <div className="visual-scanline" />
+      <div className="visual-header">
+        <span>{visual.kicker || categoryLabel(project.category)}</span>
+        <strong>{project.year}</strong>
+      </div>
+      <div className="visual-body">
+        <strong className="visual-title">{project.title}</strong>
+        <p>{visual.summary || project.description}</p>
+      </div>
+      <div className="visual-metrics">
+        {metrics.map((item) => (
+          <span key={`${item.label}-${item.value}`}>
+            <strong>{item.value}</strong>
+            <small>{item.label}</small>
+          </span>
+        ))}
+      </div>
+      {signals.length > 0 && (
+        <div className="visual-tags">
+          {signals.map((signal) => (
+            <em key={signal}>{signal}</em>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function ProjectDetail({ project, nextProject }) {
@@ -54,7 +118,7 @@ export default function ProjectDetail({ project, nextProject }) {
   return (
     <>
       <Head>
-        <title>{project.title} - 梅炎栋</title>
+        <title>{`${project.title} - 梅炎栋`}</title>
         <meta name="description" content={project.description} />
       </Head>
 
@@ -67,13 +131,13 @@ export default function ProjectDetail({ project, nextProject }) {
 
         <section className="project-hero">
           <div className="project-visual">
-            <img src={project.cover} alt={project.title} />
+            <ProjectVisual project={project} />
           </div>
           <div className="project-intro">
             <div className="project-meta-header">
               <span>{tierLabels[project.tier] || '项目'}</span>
               <span>{project.year}</span>
-              <span>{project.category}</span>
+              <span>{categoryLabel(project.category)}</span>
             </div>
             <h1>{project.title}</h1>
             <p className="project-lead">{project.description}</p>
@@ -149,10 +213,10 @@ export default function ProjectDetail({ project, nextProject }) {
           <h2>下一个项目</h2>
           <Link href={`/projects/${nextProject.id}`} className="next-project-card card">
             <div className="next-project-image">
-              <img src={nextProject.cover} alt={nextProject.title} />
+              <ProjectVisual project={nextProject} compact />
             </div>
             <div className="next-project-info">
-              <span>{tierLabels[nextProject.tier] || nextProject.category}</span>
+              <span>{tierLabels[nextProject.tier] || categoryLabel(nextProject.category)}</span>
               <h3>{nextProject.title}</h3>
               <p>{nextProject.resumeLine || nextProject.description}</p>
             </div>
@@ -183,7 +247,16 @@ export default function ProjectDetail({ project, nextProject }) {
           border-bottom: 1px solid var(--border-color);
         }
 
+        .project-hero > *,
+        .project-overview > *,
+        .highlight-list > *,
+        .story-grid > * {
+          min-width: 0;
+        }
+
         .project-visual {
+          width: 100%;
+          min-width: 0;
           min-height: 360px;
           overflow: hidden;
           border: 1px solid var(--border-color);
@@ -198,8 +271,186 @@ export default function ProjectDetail({ project, nextProject }) {
           filter: saturate(0.8);
         }
 
+        .generated-project-visual {
+          position: relative;
+          display: flex;
+          box-sizing: border-box;
+          width: 100%;
+          min-height: 100%;
+          height: 100%;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 1.25rem;
+          overflow: hidden;
+          padding: 1.25rem;
+          background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
+            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%),
+            #101010;
+        }
+
+        .generated-project-visual * {
+          box-sizing: border-box;
+          min-width: 0;
+        }
+
+        .generated-project-visual::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+          background-size: 42px 42px;
+          opacity: 0.22;
+        }
+
+        .generated-project-visual::after {
+          content: '';
+          position: absolute;
+          right: -22%;
+          bottom: -20%;
+          width: 74%;
+          height: 56%;
+          border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 38%);
+          transform: rotate(-12deg);
+          background: linear-gradient(135deg, color-mix(in srgb, var(--visual-accent), transparent 82%), transparent);
+        }
+
+        .visual-scanline,
+        .visual-header,
+        .visual-body,
+        .visual-metrics,
+        .visual-tags {
+          position: relative;
+          z-index: 1;
+        }
+
+        .visual-scanline {
+          height: 2px;
+          width: 100%;
+          background: linear-gradient(90deg, var(--visual-accent), transparent);
+        }
+
+        .visual-header,
+        .visual-metrics,
+        .visual-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .visual-body {
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .visual-header {
+          justify-content: space-between;
+          color: var(--text-secondary);
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+        }
+
+        .visual-header strong {
+          color: var(--visual-accent);
+          font-size: 0.82rem;
+          letter-spacing: 0;
+        }
+
+        .visual-title {
+          display: block;
+          max-width: 92%;
+          margin-bottom: 0.75rem;
+          color: var(--text-primary);
+          font-weight: 800;
+          font-size: clamp(1.8rem, 4vw, 3.3rem);
+          line-height: 1.02;
+          overflow-wrap: anywhere;
+        }
+
+        .visual-body p {
+          max-width: 82%;
+          margin-bottom: 0;
+          color: var(--text-secondary);
+          line-height: 1.75;
+          overflow-wrap: anywhere;
+        }
+
+        .visual-metrics span {
+          min-width: 112px;
+          border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 48%);
+          border-radius: 6px;
+          padding: 0.65rem 0.75rem;
+          background: rgba(0, 0, 0, 0.22);
+        }
+
+        .visual-metrics strong,
+        .visual-metrics small {
+          display: block;
+        }
+
+        .visual-metrics strong {
+          margin-bottom: 0.22rem;
+          color: var(--text-primary);
+          font-size: 0.95rem;
+          line-height: 1.2;
+        }
+
+        .visual-metrics small,
+        .visual-tags em {
+          color: var(--text-secondary);
+          font-size: 0.72rem;
+          font-style: normal;
+        }
+
+        .visual-tags em {
+          border: 1px solid var(--border-color);
+          border-radius: 999px;
+          padding: 0.32rem 0.52rem;
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .generated-project-visual.compact {
+          gap: 0.45rem;
+          padding: 0.65rem;
+        }
+
+        .generated-project-visual.compact .visual-scanline,
+        .generated-project-visual.compact .visual-metrics,
+        .generated-project-visual.compact .visual-tags {
+          display: none;
+        }
+
+        .generated-project-visual.compact .visual-header {
+          font-size: 0.55rem;
+        }
+
+        .generated-project-visual.compact .visual-title {
+          max-width: none;
+          margin-bottom: 0.35rem;
+          font-size: 1rem;
+          line-height: 1.15;
+        }
+
+        .generated-project-visual.compact .visual-body p {
+          display: -webkit-box;
+          max-width: none;
+          overflow: hidden;
+          color: var(--text-secondary);
+          font-size: 0.68rem;
+          line-height: 1.35;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
         .project-intro {
           display: flex;
+          min-width: 0;
           flex-direction: column;
           justify-content: center;
         }
@@ -229,12 +480,14 @@ export default function ProjectDetail({ project, nextProject }) {
           color: var(--text-secondary);
           font-size: 1.08rem;
           line-height: 1.8;
+          overflow-wrap: anywhere;
         }
 
         .project-role {
           max-width: 760px;
           color: var(--accent-purple);
           font-size: 0.95rem;
+          overflow-wrap: anywhere;
         }
 
         .resume-block {
@@ -259,6 +512,7 @@ export default function ProjectDetail({ project, nextProject }) {
           margin-bottom: 0;
           color: var(--text-primary);
           line-height: 1.75;
+          overflow-wrap: anywhere;
         }
 
         .project-links {
@@ -439,6 +693,13 @@ export default function ProjectDetail({ project, nextProject }) {
             gap: 1.5rem;
           }
 
+          .project-visual,
+          .project-intro,
+          .overview-panel,
+          .resume-block {
+            max-width: calc(100vw - 2rem);
+          }
+
           .project-links {
             flex-direction: column;
           }
@@ -453,6 +714,221 @@ export default function ProjectDetail({ project, nextProject }) {
 
           .next-project-image {
             height: 84px;
+          }
+        }
+      `}</style>
+      <style jsx global>{`
+        .project-visual img,
+        .next-project-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .project-visual img {
+          filter: saturate(0.8);
+        }
+
+        .generated-project-visual {
+          position: relative;
+          display: flex;
+          box-sizing: border-box;
+          width: 100%;
+          min-height: 100%;
+          height: 100%;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 1.25rem;
+          overflow: hidden;
+          padding: 1.25rem;
+          background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
+            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%),
+            #101010;
+        }
+
+        .generated-project-visual * {
+          box-sizing: border-box;
+          min-width: 0;
+        }
+
+        .generated-project-visual::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+          background-size: 42px 42px;
+          opacity: 0.22;
+        }
+
+        .generated-project-visual::after {
+          content: '';
+          position: absolute;
+          right: -22%;
+          bottom: -20%;
+          width: 74%;
+          height: 56%;
+          border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 38%);
+          transform: rotate(-12deg);
+          background: linear-gradient(135deg, color-mix(in srgb, var(--visual-accent), transparent 82%), transparent);
+        }
+
+        .visual-scanline,
+        .visual-header,
+        .visual-body,
+        .visual-metrics,
+        .visual-tags {
+          position: relative;
+          z-index: 1;
+        }
+
+        .visual-scanline {
+          height: 2px;
+          width: 100%;
+          background: linear-gradient(90deg, var(--visual-accent), transparent);
+        }
+
+        .visual-header,
+        .visual-metrics,
+        .visual-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .visual-body {
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+
+        .visual-header {
+          justify-content: space-between;
+          color: var(--text-secondary);
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+        }
+
+        .visual-header strong {
+          color: var(--visual-accent);
+          font-size: 0.82rem;
+          letter-spacing: 0;
+        }
+
+        .visual-title {
+          display: block;
+          max-width: 92%;
+          margin-bottom: 0.75rem;
+          color: var(--text-primary);
+          font-weight: 800;
+          font-size: clamp(1.8rem, 4vw, 3.3rem);
+          line-height: 1.02;
+          overflow-wrap: anywhere;
+        }
+
+        .visual-body p {
+          max-width: 82%;
+          margin-bottom: 0;
+          color: var(--text-secondary);
+          line-height: 1.75;
+          overflow-wrap: anywhere;
+        }
+
+        .visual-metrics span {
+          min-width: 112px;
+          border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 48%);
+          border-radius: 6px;
+          padding: 0.65rem 0.75rem;
+          background: rgba(0, 0, 0, 0.22);
+        }
+
+        .visual-metrics strong,
+        .visual-metrics small {
+          display: block;
+        }
+
+        .visual-metrics strong {
+          margin-bottom: 0.22rem;
+          color: var(--text-primary);
+          font-size: 0.95rem;
+          line-height: 1.2;
+        }
+
+        .visual-metrics small,
+        .visual-tags em {
+          color: var(--text-secondary);
+          font-size: 0.72rem;
+          font-style: normal;
+        }
+
+        .visual-tags em {
+          border: 1px solid var(--border-color);
+          border-radius: 999px;
+          padding: 0.32rem 0.52rem;
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .generated-project-visual.compact {
+          gap: 0.45rem;
+          padding: 0.65rem;
+        }
+
+        .generated-project-visual.compact .visual-scanline,
+        .generated-project-visual.compact .visual-metrics,
+        .generated-project-visual.compact .visual-tags {
+          display: none;
+        }
+
+        .generated-project-visual.compact .visual-header {
+          font-size: 0.55rem;
+        }
+
+        .generated-project-visual.compact .visual-title {
+          max-width: none;
+          margin-bottom: 0.35rem;
+          font-size: 1rem;
+          line-height: 1.15;
+        }
+
+        .generated-project-visual.compact .visual-body p {
+          display: -webkit-box;
+          max-width: none;
+          overflow: hidden;
+          color: var(--text-secondary);
+          font-size: 0.68rem;
+          line-height: 1.35;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        @media (max-width: 560px) {
+          .generated-project-visual {
+            padding: 1rem;
+            max-width: 100%;
+          }
+
+          .visual-title,
+          .visual-body,
+          .visual-body p,
+          .visual-tags {
+            max-width: 100%;
+          }
+
+          .visual-title {
+            font-size: clamp(1.6rem, 8vw, 2rem);
+          }
+
+          .visual-metrics {
+            display: none;
+          }
+
+          .visual-body p {
+            display: none;
           }
         }
       `}</style>

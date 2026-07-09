@@ -3,18 +3,29 @@
     "id": "42-market-sniper",
     "source": "42space",
     "title": "42 Market Sniper",
-    "description": "面向 42 预测市场的扫描、开盘计划、资金检查和事件交易自动化系统。",
-    "resumeLine": "构建 42 预测市场自动化交易系统，覆盖市场扫描、开盘计划、资金检查、事件执行、持仓追踪和运行验证。",
-    "impact": "从单次扫描脚本演进为多 profile 生产运行系统，支持 dry-run、回放、资金检查、事件持仓、自动卖出和运行状态读回。",
-    "cover": "/airdrop.png",
+    "description": "围绕 42 预测市场的发现、计划、资金检查、交易执行和运行验证系统。",
+    "resumeLine": "构建 42 预测市场自动化交易系统，将市场扫描、开盘计划、资金校验、事件交易、持仓追踪和运行读回拆成可验证链路。",
+    "impact": "把临时脚本演进为可 dry-run、可回放、可部署的生产系统，能用交易回执、服务状态和 profile 配置证明当前运行状态。",
+    "cover": "/projects/covers/42-market-sniper.png",
     "year": "2026",
     "tier": "featured",
     "category": "On-chain Automation",
     "role": "产品设计 / Node.js 工程 / 链上执行 / 生产运维",
-    "stack": ["Node.js", "viem", "42 REST", "systemd", "Feishu 通知"],
-    "tags": ["预测市场", "链上交易", "自动化", "生产运维"],
+    "stack": [
+      "Node.js",
+      "viem",
+      "42 REST",
+      "systemd",
+      "Feishu 通知"
+    ],
+    "tags": [
+      "预测市场",
+      "链上交易",
+      "自动化",
+      "生产运维"
+    ],
     "highlights": [
-      "把市场发现、计划生成、资金校验、执行和复盘拆成可验证命令。",
+      "把市场发现、计划生成、资金校验、执行和复盘拆成可单独验证的命令。",
       "默认 dry-run，只有显式执行路径才会签名发交易，降低生产误操作风险。",
       "围绕事件市场补充持仓、自动卖出、回放、状态读回和热路径性能验证。"
     ],
@@ -25,50 +36,75 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/42space"
-    }
+    },
+    "coverAlt": "42 Market Sniper 市场与交易字段标注截图"
   },
   {
     "id": "virtuals-whale-radar",
     "source": "virtuals-whale-radar",
     "title": "Virtuals Whale Radar",
-    "description": "Virtuals 生态项目发射前后的钱包、资金和项目观察台。",
-    "resumeLine": "构建 Virtuals 生态链上雷达，持续追踪项目、钱包、大户行为和发射前后资金信号。",
-    "impact": "项目覆盖观察台、钱包监控、发射前后资金判断和自动买入执行管线，是持续迭代的 Web3 情报与执行系统。",
-    "cover": "/tower-defense-garden.png",
+    "description": "面向 Virtuals 生态的项目、钱包与资金信号雷达，用策略实验室承载观察、回放和执行前判断。",
+    "resumeLine": "构建 Virtuals 生态链上雷达，将项目采集、钱包监控、资金信号、策略回放和执行准备组织成持续运行的工作台。",
+    "impact": "把“哪个项目值得盯、资金是否异常、策略是否稳定”从临时判断变成可切换项目、可回放、可恢复的情报系统。",
+    "cover": "/projects/covers/virtuals-whale-radar.png",
     "year": "2026",
     "tier": "featured",
     "category": "On-chain Automation",
     "role": "产品设计 / 链上数据工程 / 自动化策略",
-    "stack": ["Node.js", "链上数据", "RPC", "钱包监控", "运行脚本"],
-    "tags": ["Virtuals", "链上雷达", "钱包监控", "Web3"],
+    "stack": [
+      "Node.js",
+      "链上数据",
+      "RPC",
+      "钱包监控",
+      "运行脚本"
+    ],
+    "tags": [
+      "Virtuals",
+      "链上雷达",
+      "钱包监控",
+      "Web3"
+    ],
     "highlights": [
       "围绕项目发射前后最关键的问题组织信息：谁在买、资金怎么动、是否值得继续盯。",
-      "把观察、判断和执行拆成可维护的工作区，而不是一次性脚本。",
-      "长期迭代到恢复、启动、自动买入和运行状态诊断等运维流程。"
+      "将观察、策略回放、风险判断和执行准备拆成可维护的工作区。",
+      "长期补齐恢复、启动、自动买入和运行状态诊断等运维流程。"
     ],
     "story": {
-      "problem": "Virtuals 生态项目变化快，单靠手动刷信息很难及时判断项目、钱包和资金流向。",
+      "problem": "Virtuals 生态项目变化快，项目、钱包和资金信号分散，单靠手动刷新很难持续判断。",
       "process": "搭建以项目、钱包、资金行为为核心的雷达工作区，并围绕发射、买入、监控、恢复和运行状态持续补齐工具链。",
-      "result": "形成一个可持续使用的 Virtuals 生态观察台，能把链上信号转化成更清晰的项目判断和执行准备。"
+      "result": "形成一个可持续使用的 Virtuals 生态观察台，把链上信号转化成更清晰的项目判断和执行准备。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/virtuals-whale-radar"
-    }
+    },
+    "coverAlt": "Virtuals Whale Radar 策略实验室截图"
   },
   {
     "id": "okx-boost-workbench",
     "source": "OKX-Boost 交易量计算",
     "title": "OKX Boost 钱包工作台",
-    "description": "用于计算 BNB Chain 和 X Layer 上 OKX Boost 活动交易量的多钱包工作台。",
-    "resumeLine": "构建 OKX Boost 多钱包交易量工作台，支持快照窗口、链上交易量计算、规则加成和缺口判断。",
+    "description": "用于计算 BNB Chain 与 X Layer 上 OKX Boost 活动交易量的多钱包工作台。",
+    "resumeLine": "构建 OKX Boost 多钱包交易量工作台，支持快照窗口、链上交易量计算、规则加成、达标判断和缺口定位。",
     "impact": "把活动参与者最关心的“哪些钱包够、哪些还差、今天是否刷到位”变成可视化工作台和可复查数据流。",
-    "cover": "/share-card.png",
+    "cover": "/projects/covers/okx-boost-workbench.png",
     "year": "2026",
     "tier": "featured",
     "category": "Product Workbenches",
     "role": "全栈开发 / 链上数据处理 / 产品设计",
-    "stack": ["React", "Vite", "TypeScript", "Node.js", "Redis", "链上扫描"],
-    "tags": ["OKX", "交易量计算", "多钱包", "数据工作台"],
+    "stack": [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Node.js",
+      "Redis",
+      "链上扫描"
+    ],
+    "tags": [
+      "OKX",
+      "交易量计算",
+      "多钱包",
+      "数据工作台"
+    ],
     "highlights": [
       "把多钱包、多链、快照窗口和活动规则统一进一个工作台。",
       "支持按钱包查看进度、缺口和历史结果，降低手动表格统计成本。",
@@ -81,50 +117,97 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/okx-boost-volume-calculator"
-    }
+    },
+    "coverAlt": "OKX Boost 钱包总览与快照预警截图"
   },
   {
     "id": "matchmaking-studio",
     "source": "marry2",
     "title": "Matchmaking Studio",
-    "description": "面向红娘与婚恋服务机构的 AI 客户建档和匹配工作台。",
-    "resumeLine": "设计并实现婚恋服务 AI 工作台，将客户录音转写、结构化建档、档案更新和匹配跟进串成可追踪流程。",
-    "impact": "把高度依赖人工整理的客户沟通记录转化为结构化档案和后续补问信息，提升红娘重复工作效率。",
-    "cover": "/pets-santa.png",
+    "description": "把婚恋顾问的录音、笔记、客户档案和匹配进度组织成一个 AI 工作台。",
+    "resumeLine": "设计并实现婚恋服务 AI 工作台，将客户录音转写、结构化建档、档案更新、补问建议和匹配跟进串成可追踪流程。",
+    "impact": "把高度依赖人工整理的客户沟通记录转化为结构化档案，帮助红娘减少重复整理，并保留后续跟进线索。",
     "year": "2026",
     "tier": "featured",
     "category": "Product Workbenches",
     "role": "产品设计 / 全栈开发 / AI 工作流设计",
-    "stack": ["Next.js", "React", "Supabase", "OpenAI", "Anthropic", "PDF 解析"],
-    "tags": ["AI 工作台", "CRM", "语音转文字", "结构化信息"],
+    "stack": [
+      "Next.js",
+      "React",
+      "Supabase",
+      "OpenAI",
+      "Anthropic",
+      "PDF 解析"
+    ],
+    "tags": [
+      "AI 工作台",
+      "CRM",
+      "语音转文字",
+      "结构化信息"
+    ],
     "highlights": [
-      "围绕真实业务角色设计，不是通用聊天机器人。",
+      "围绕红娘这个具体业务角色设计，不做通用聊天机器人。",
       "把录音、转写、结构化客户档案、补问和匹配进度连接成工作流。",
-      "引入 AI 网关和多模型能力，用于稳定处理非结构化沟通材料。"
+      "引入多模型能力处理非结构化沟通材料，并保留人工确认边界。"
     ],
     "story": {
-      "problem": "红娘服务中大量客户信息存在于沟通录音和零散笔记里，人工整理慢，遗漏风险高，也难以持续更新。",
-      "process": "将录音转写、结构化抽取、档案更新、匹配状态和补问设计成同一个工作台，并围绕真实操作路径做数据和界面建模。",
+      "problem": "婚恋服务中大量客户信息存在于沟通录音和零散笔记里，人工整理慢，遗漏风险高，也难以持续更新。",
+      "process": "将录音转写、结构化抽取、档案更新、匹配状态和补问建议设计成同一个工作台，并围绕真实操作路径做数据和界面建模。",
       "result": "形成一个垂直业务 AI 工作台案例，展示从业务问题、AI 能力到可用产品流程的完整落地能力。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/matchmaking-studio"
+    },
+    "visual": {
+      "accent": "#ef9a9a",
+      "kicker": "婚恋服务 AI 工作台",
+      "summary": "把录音、档案、补问和匹配跟进串成一个可追踪流程。",
+      "signals": [
+        "录音转写",
+        "结构化档案",
+        "补问建议",
+        "匹配跟进"
+      ],
+      "metrics": [
+        {
+          "value": "AI 工作台",
+          "label": "形态"
+        },
+        {
+          "value": "婚恋 CRM",
+          "label": "场景"
+        },
+        {
+          "value": "全栈",
+          "label": "角色"
+        }
+      ]
     }
   },
   {
     "id": "intelos",
     "source": "IntelOS",
     "title": "IntelOS",
-    "description": "面向公司、项目和生态的多 Agent 情报追踪系统。",
-    "resumeLine": "构建多 Agent 情报系统，为不同追踪目标维护独立指令、记忆、数据源和更新流程。",
+    "description": "为公司、项目和生态建立可配置的情报 Agent，每个追踪对象都有独立指令、记忆、数据源和更新节奏。",
+    "resumeLine": "构建多 Agent 情报系统，为不同追踪目标维护独立 instructions、memory、数据源配置和持续更新流程。",
     "impact": "将外部世界动态追踪从临时搜索升级为可配置、可记忆、可持续更新的情报工作台。",
-    "cover": "/prompt-manager.png",
     "year": "2026",
     "tier": "featured",
     "category": "AI Agent Systems",
     "role": "系统设计 / Next.js 开发 / 数据建模",
-    "stack": ["Next.js", "TypeScript", "SQLite", "better-sqlite3", "TwitterAPI.io"],
-    "tags": ["AI Agent", "情报系统", "知识库", "监控"],
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "SQLite",
+      "better-sqlite3",
+      "TwitterAPI.io"
+    ],
+    "tags": [
+      "AI Agent",
+      "情报系统",
+      "知识库",
+      "监控"
+    ],
     "highlights": [
       "每个追踪目标拥有独立 agent 指令、memory 和数据源配置。",
       "用工作台承载持续追踪，而不是一次性摘要。",
@@ -137,22 +220,57 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/IntelOS"
+    },
+    "visual": {
+      "accent": "#80cbc4",
+      "kicker": "多 Agent 情报系统",
+      "summary": "为不同追踪对象维护独立指令、记忆、数据源和更新流程。",
+      "signals": [
+        "Agent Memory",
+        "数据源配置",
+        "质量门控",
+        "情报追踪"
+      ],
+      "metrics": [
+        {
+          "value": "Agent",
+          "label": "核心"
+        },
+        {
+          "value": "情报系统",
+          "label": "场景"
+        },
+        {
+          "value": "Next.js",
+          "label": "实现"
+        }
+      ]
     }
   },
   {
     "id": "daily-ai-digest",
     "source": "Readwise",
     "title": "Daily AI Digest",
-    "description": "把 AI 前线动态、Readwise 订阅和 Claude Code 社区内容自动整理进 Reader。",
-    "resumeLine": "构建 AI 信息流自动化系统，完成多源采集、摘要生成、去重保存和 Readwise Reader 投递。",
-    "impact": "将每日信息筛选压缩为可阅读的 3 分钟摘要，并沉淀为可复用的自动化流程。",
-    "cover": "/life-calendar.png",
+    "description": "把 AI 前线动态、Readwise 订阅和社区内容自动整理成可保存、可回溯的中文日报。",
+    "resumeLine": "构建 AI 信息流自动化系统，完成多源采集、摘要生成、去重保存、Readwise Reader 投递和运行证据回写。",
+    "impact": "将高噪声信息流压缩成每日可阅读摘要，并沉淀出可重复运行、可检查结果的自动化流程。",
     "year": "2026",
     "tier": "featured",
     "category": "AI Agent Systems",
     "role": "自动化工程 / 内容系统设计 / Python 脚本开发",
-    "stack": ["Python", "Readwise Reader", "RSS", "Claude", "Markdown"],
-    "tags": ["信息流", "自动摘要", "Readwise", "AI 日报"],
+    "stack": [
+      "Python",
+      "Readwise Reader",
+      "RSS",
+      "Claude",
+      "Markdown"
+    ],
+    "tags": [
+      "信息流",
+      "自动摘要",
+      "Readwise",
+      "AI 日报"
+    ],
     "highlights": [
       "将 RSS、Readwise 订阅和 Claude Code 社区内容纳入统一日报流程。",
       "支持原始输入导出、摘要生成、保存回 Reader 和自动化记忆同步。",
@@ -161,26 +279,61 @@
     "story": {
       "problem": "AI 信息密度高、更新快，人工阅读所有订阅内容成本过高，容易错过重要工程变化。",
       "process": "搭建采集、清洗、摘要、保存和运行证据回写流程，将信息处理压缩为每日可执行自动化。",
-      "result": "形成持续运行的信息流系统，能把高噪声输入转化成稳定、可读、可回溯的 AI 日报。"
+      "result": "形成持续运行的信息流系统，把高噪声输入转化成稳定、可读、可回溯的 AI 日报。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/readwise-daily-summary"
+    },
+    "visual": {
+      "accent": "#90caf9",
+      "kicker": "AI 信息流自动化",
+      "summary": "把多源订阅、摘要、去重和 Reader 保存变成每日可执行流程。",
+      "signals": [
+        "RSS",
+        "Readwise",
+        "摘要生成",
+        "去重保存"
+      ],
+      "metrics": [
+        {
+          "value": "日报",
+          "label": "输出"
+        },
+        {
+          "value": "多源",
+          "label": "输入"
+        },
+        {
+          "value": "可回溯",
+          "label": "证据"
+        }
+      ]
     }
   },
   {
     "id": "echo-notes",
     "source": "回声笔记",
     "title": "Echo Notes",
-    "description": "把 flomo memo 生成可随机漫游、反复聆听的个人声音记忆。",
-    "resumeLine": "构建个人笔记音频化系统，将 flomo memo 转成中英文 TTS 音频，并支持按版本跳过和随机复听。",
-    "impact": "把写下的碎片笔记转化为可反复播放的记忆材料，打通个人知识输入和声音复习场景。",
-    "cover": "/project-1.jpg",
+    "description": "把 flomo memo 转成可随机漫游、反复聆听的个人声音记忆系统。",
+    "resumeLine": "构建个人笔记音频化系统，将 flomo memo 转成中英文 TTS 音频，并通过版本判断、跳过重复和随机播放支持持续复听。",
+    "impact": "把写下后容易沉没的碎片笔记转化为可反复播放的声音资产，增强个人知识复习频率。",
     "year": "2026",
     "tier": "selected",
     "category": "Personal Knowledge Tools",
     "role": "产品设计 / 自动化脚本 / TTS 工作流",
-    "stack": ["Python", "flomo", "MiniMax TTS", "Markdown", "音频生成"],
-    "tags": ["个人知识库", "TTS", "flomo", "自动化"],
+    "stack": [
+      "Python",
+      "flomo",
+      "MiniMax TTS",
+      "Markdown",
+      "音频生成"
+    ],
+    "tags": [
+      "个人知识库",
+      "TTS",
+      "flomo",
+      "自动化"
+    ],
     "highlights": [
       "用 memo id 和更新时间做版本 key，避免重复生成。",
       "每条 memo 支持中文和英文两个音频版本。",
@@ -193,22 +346,56 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/echo-notes"
+    },
+    "visual": {
+      "accent": "#ffcc80",
+      "kicker": "个人声音记忆",
+      "summary": "将 memo 变成中英文音频，让笔记从一次性记录变成可复听材料。",
+      "signals": [
+        "flomo",
+        "TTS",
+        "版本跳过",
+        "随机复听"
+      ],
+      "metrics": [
+        {
+          "value": "音频化",
+          "label": "能力"
+        },
+        {
+          "value": "中英双语",
+          "label": "输出"
+        },
+        {
+          "value": "个人知识",
+          "label": "主题"
+        }
+      ]
     }
   },
   {
     "id": "xhs-publish-skill",
     "source": "xhs-publish-skill",
     "title": "小红书图文发布流程",
-    "description": "把长内容整理成小红书图文卡片、标题、正文和话题标签的发布工作流。",
-    "resumeLine": "设计内容发布自动化 Skill，将长文章或网页转化为小红书图文卡片和配套发布文案。",
-    "impact": "把从理解内容到生成竖版卡片、标题、正文、话题和发布素材整理的流程沉淀为可复用 Skill。",
-    "cover": "/share-card.png",
+    "description": "把长文章或网页内容整理成小红书图文卡片、标题、正文和话题标签的发布流程。",
+    "resumeLine": "设计内容发布自动化 Skill，将长内容转化为小红书竖版卡片、标题正文、话题标签和可交付素材目录。",
+    "impact": "把“理解内容、拆重点、写文案、做卡片、整理素材”的重复工作沉淀为可复用 Agent 流程。",
     "year": "2026",
     "tier": "selected",
     "category": "AI Agent Systems",
     "role": "Skill 设计 / 内容工作流 / 自动化发布",
-    "stack": ["Markdown", "Codex Skill", "内容结构化", "图片卡片生成"],
-    "tags": ["小红书", "内容自动化", "Skill", "图文卡片"],
+    "stack": [
+      "Markdown",
+      "Codex Skill",
+      "内容结构化",
+      "图片卡片生成"
+    ],
+    "tags": [
+      "小红书",
+      "内容自动化",
+      "Skill",
+      "图文卡片"
+    ],
     "highlights": [
       "从原始内容中提炼适合小红书传播的重点。",
       "生成竖版图文卡片、标题、正文和话题标签。",
@@ -221,6 +408,31 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/xhs-publish-skill"
+    },
+    "visual": {
+      "accent": "#ff8a80",
+      "kicker": "内容发布 Skill",
+      "summary": "把长内容拆成卡片、标题、正文和话题标签，形成发布素材包。",
+      "signals": [
+        "内容拆解",
+        "竖版卡片",
+        "发布文案",
+        "素材整理"
+      ],
+      "metrics": [
+        {
+          "value": "Skill",
+          "label": "形态"
+        },
+        {
+          "value": "图文发布",
+          "label": "场景"
+        },
+        {
+          "value": "可复用",
+          "label": "结果"
+        }
+      ]
     }
   },
   {
@@ -228,15 +440,25 @@
     "source": "个人资产追踪",
     "title": "个人加密资产追踪",
     "description": "本地多钱包加密资产追踪工作台，按币种和钱包两个维度汇总资产。",
-    "resumeLine": "构建本地加密资产追踪工作台，调用 OKX Onchain OS CLI 查询多链资产并生成钱包/币种双维度视图。",
-    "impact": "把多个钱包的资产查看从手动切换钱包和链，变成统一刷新、统一汇总的本地工作台。",
-    "cover": "/life-calendar.png",
+    "resumeLine": "构建本地加密资产追踪工作台，调用 OKX Onchain OS CLI 查询多链资产，并生成钱包/币种双维度视图。",
+    "impact": "把多个钱包的资产查看从手动切换钱包和链，变成统一刷新、统一汇总、隐私边界清晰的本地工作台。",
     "year": "2026",
     "tier": "selected",
     "category": "Product Workbenches",
     "role": "全栈开发 / 本地工具设计 / 数据聚合",
-    "stack": ["React", "Vite", "Express", "TypeScript", "OKX Onchain OS CLI"],
-    "tags": ["资产追踪", "多钱包", "本地工作台", "加密资产"],
+    "stack": [
+      "React",
+      "Vite",
+      "Express",
+      "TypeScript",
+      "OKX Onchain OS CLI"
+    ],
+    "tags": [
+      "资产追踪",
+      "多钱包",
+      "本地工作台",
+      "加密资产"
+    ],
     "highlights": [
       "按币种汇总所有钱包资产，快速看整体持仓。",
       "按钱包展示总金额和主要持仓，保留执行视角。",
@@ -249,148 +471,315 @@
     },
     "links": {
       "github": "https://github.com/MeiYanDong/personal-crypto-asset-tracker"
+    },
+    "visual": {
+      "accent": "#4dd0e1",
+      "kicker": "本地资产工作台",
+      "summary": "按钱包和币种双维度聚合链上资产，保持本地隐私边界。",
+      "signals": [
+        "多钱包",
+        "资产聚合",
+        "本地服务",
+        "OKX CLI"
+      ],
+      "metrics": [
+        {
+          "value": "本地优先",
+          "label": "边界"
+        },
+        {
+          "value": "双维度",
+          "label": "视图"
+        },
+        {
+          "value": "多链资产",
+          "label": "对象"
+        }
+      ]
     }
   },
   {
     "id": "binance-airdrop-monitor",
     "title": "币安空投监控",
-    "description": "自动监控币安Alpha空投信息，发现新空投或信息更新时推送通知到飞书",
+    "description": "自动监控币安 Alpha 空投信息，在新空投或规则更新出现时推送飞书通知。",
     "cover": "/airdrop.png",
     "year": "2026",
     "tier": "archive",
-    "category": "工具",
+    "category": "On-chain Automation",
     "role": "自动化脚本 / 通知系统",
-    "stack": ["自动化", "Feishu 通知"],
-    "tags": ["加密货币", "自动化", "监控"],
+    "stack": [
+      "自动化脚本",
+      "Feishu 通知",
+      "信息监控"
+    ],
+    "tags": [
+      "加密货币",
+      "自动化",
+      "监控"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "空投活动信息变化快，人工反复刷新容易漏掉新活动或规则更新。",
+      "process": "将信息源检查、变更判断和飞书通知拆成自动化流程，减少人工查看频率。",
+      "result": "形成一个轻量级监控工具，把空投机会发现从手动刷新转成自动提醒。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/Binance-Alpha-Airdrop-Monitor"
-    }
+    },
+    "source": "Binance-Alpha-Airdrop-Monitor",
+    "resumeLine": "构建币安 Alpha 空投监控脚本，自动检测新活动和信息更新，并通过飞书通知降低人工刷新成本。",
+    "impact": "把需要频繁手动查看的空投信息变成可订阅提醒，适合作为轻量级信息监控和通知自动化案例。",
+    "coverAlt": "币安空投监控封面",
+    "highlights": [
+      "围绕活动新增和信息更新建立监控触发条件。",
+      "用飞书通知把监控结果送到日常工作流。",
+      "适合轻量级、高频变化的信息源自动盯盘。"
+    ]
   },
   {
     "id": "pets-santa-online",
     "title": "宠物圣诞照",
-    "description": "AI宠物圣诞照片生成应用 - 上传宠物照片，生成各种节日风格的圣诞主题图片",
+    "description": "上传宠物照片后生成节日风格图片的 AI 图片应用。",
     "cover": "/pets-santa.png",
     "year": "2025",
     "tier": "archive",
-    "category": "应用",
-    "role": "AI 应用开发",
-    "stack": ["AI 图片生成", "Web App"],
-    "tags": ["AI", "图片生成", "应用"],
+    "category": "Creative Applications",
+    "role": "AI 应用开发 / 产品体验设计",
+    "stack": [
+      "AI 图片生成",
+      "Web App",
+      "图片上传"
+    ],
+    "tags": [
+      "AI",
+      "图片生成",
+      "应用"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "通用图片生成工具对普通用户门槛较高，节日场景下用户更需要一个明确、快速的生成入口。",
+      "process": "把需求收窄到宠物圣诞照，围绕图片上传、风格生成和结果下载设计体验。",
+      "result": "形成一个垂直 AI 图片应用案例，展示从模型能力到可用产品的包装能力。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/pets-santa-online"
-    }
+    },
+    "source": "pets-santa-online",
+    "resumeLine": "开发 AI 宠物圣诞照生成应用，围绕上传、生成、预览和下载完成一个垂直图像生成体验。",
+    "impact": "用一个低门槛、强场景的节日应用验证 AI 图片生成在消费级小工具里的产品化方式。",
+    "coverAlt": "宠物圣诞照应用封面",
+    "highlights": [
+      "选择具体节日场景，降低用户理解成本。",
+      "围绕上传、生成、预览、下载建立完整闭环。",
+      "把 AI 图片能力包装成普通用户能直接使用的小应用。"
+    ]
   },
   {
     "id": "obsidian-life-calendar",
     "title": "人生日历",
-    "description": "Obsidian人生日历插件 - 用格子可视化你的一生，每一天都是一个彩色方块",
+    "description": "Obsidian 插件，用格子把人生时间可视化为可长期查看的日历。",
     "cover": "/life-calendar.png",
     "year": "2025",
     "tier": "archive",
-    "category": "工具",
-    "role": "Obsidian 插件开发",
-    "stack": ["Obsidian", "插件"],
-    "tags": ["Obsidian", "插件", "可视化"],
+    "category": "Personal Knowledge Tools",
+    "role": "Obsidian 插件开发 / 可视化设计",
+    "stack": [
+      "Obsidian",
+      "插件",
+      "数据可视化"
+    ],
+    "tags": [
+      "Obsidian",
+      "插件",
+      "可视化"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "长期目标和时间消耗很难在日常笔记里被持续感知，容易只关注短期任务。",
+      "process": "将人生时间映射成可视化方块，并封装为 Obsidian 插件，放回用户已有知识库环境。",
+      "result": "形成一个轻量但明确的个人知识工具，把时间意识变成可视化日常提醒。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/obsidian-life-calendar"
-    }
+    },
+    "source": "obsidian-life-calendar",
+    "resumeLine": "开发 Obsidian 人生日历插件，将人生时间拆成可视化方块，帮助用户在笔记系统中持续感知时间。",
+    "impact": "把抽象时间感转成每天都能看到的视觉反馈，补齐个人知识库里的长期主义提醒。",
+    "coverAlt": "Obsidian 人生日历插件封面",
+    "highlights": [
+      "在 Obsidian 内部承载时间可视化，不打断原有笔记流。",
+      "用格子化表达让长期时间变得可感知。",
+      "适合作为个人知识工具与插件开发案例。"
+    ]
   },
   {
     "id": "share-card",
     "title": "分享卡片",
-    "description": "Chrome扩展 - 右键或手动输入文字，快速生成可分享的卡片图片",
+    "description": "Chrome 扩展，右键选中文本或手动输入内容后快速生成可分享卡片图片。",
     "cover": "/share-card.png",
     "year": "2025",
     "tier": "archive",
-    "category": "工具",
-    "role": "Chrome 扩展开发",
-    "stack": ["Chrome Extension", "Markdown"],
-    "tags": ["Chrome扩展", "Markdown", "分享"],
+    "category": "Personal Knowledge Tools",
+    "role": "Chrome 扩展开发 / 内容工具设计",
+    "stack": [
+      "Chrome Extension",
+      "Markdown",
+      "图片生成"
+    ],
+    "tags": [
+      "Chrome扩展",
+      "Markdown",
+      "分享"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "网页内容想转成可分享图片时，常常需要截图、裁剪和重新排版，流程割裂。",
+      "process": "用 Chrome 扩展承接文本选择和手动输入，再生成统一风格的分享卡片。",
+      "result": "形成一个贴近浏览器工作流的内容工具，提高摘录和分享效率。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/ShareCard"
-    }
+    },
+    "source": "ShareCard",
+    "resumeLine": "开发分享卡片 Chrome 扩展，将网页文本选择、Markdown 输入和卡片图片生成整合到浏览器工作流。",
+    "impact": "把临时截图和手动排版转成一键生成卡片，降低内容摘录和社交分享成本。",
+    "coverAlt": "分享卡片 Chrome 扩展封面",
+    "highlights": [
+      "支持网页右键选中文本直接进入卡片生成。",
+      "支持手动输入和 Markdown 内容，覆盖更多分享场景。",
+      "把内容摘录、排版和导出整合成一个浏览器内工具。"
+    ]
   },
   {
     "id": "prompt-manager",
     "title": "提示词管理器",
-    "description": "浏览器扩展 - 管理和组织AI提示词，提高使用AI的效率",
+    "description": "浏览器扩展，用于管理、组织和复用日常 AI 提示词。",
     "cover": "/prompt-manager.png",
     "year": "2025",
     "tier": "archive",
-    "category": "工具",
-    "role": "浏览器扩展开发",
-    "stack": ["浏览器扩展", "AI 工作流"],
-    "tags": ["AI", "提示词", "浏览器扩展"],
+    "category": "AI Agent Systems",
+    "role": "浏览器扩展开发 / AI 工作流设计",
+    "stack": [
+      "浏览器扩展",
+      "AI 工作流",
+      "提示词管理"
+    ],
+    "tags": [
+      "AI",
+      "提示词",
+      "浏览器扩展"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "常用提示词分散在聊天记录、文档和剪贴板里，查找和复用都不稳定。",
+      "process": "把提示词管理前置到浏览器扩展，提供统一的组织和调用入口。",
+      "result": "形成一个轻量 AI 工作流工具，帮助高频 AI 使用者减少重复准备成本。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/prompt-manager"
-    }
+    },
+    "source": "prompt-manager",
+    "resumeLine": "开发提示词管理浏览器扩展，将常用 AI 提示词沉淀为可分类、可检索、可复用的个人工作流资产。",
+    "impact": "把零散复制粘贴的提示词变成可维护库，提高重复 AI 任务的启动速度和稳定性。",
+    "coverAlt": "提示词管理器封面",
+    "highlights": [
+      "围绕常用提示词的保存、分类和复用设计。",
+      "让提示词从临时文本变成可维护资产。",
+      "适合作为 AI 使用效率工具和浏览器扩展案例。"
+    ]
   },
   {
     "id": "AI-Coding",
     "title": "习惯飞轮",
-    "description": "打造个人习惯闭环，形成飞轮效应",
-    "cover": "/project-1.jpg",
+    "description": "把习惯、能量和奖励兑换绑定起来的个人生产力应用。",
     "year": "2025",
     "tier": "archive",
-    "category": "应用",
+    "category": "Personal Knowledge Tools",
     "role": "产品设计 / 应用开发",
-    "stack": ["生产力工具", "Web App"],
-    "tags": ["习惯", "自律", "生产力"],
+    "stack": [
+      "生产力工具",
+      "Web App",
+      "行为设计"
+    ],
+    "tags": [
+      "习惯",
+      "自律",
+      "生产力"
+    ],
     "story": {
-      "problem": "1. 用完成习惯兑换吃大餐等奖励，难以形成习惯闭环\n2. 容易为一个伪需求冲动消费",
-      "process": "1. 将习惯和奖励绑定，完成习惯，对应的奖励获得能量。\n2. 积累到一定的能量，才可以兑换奖励，过滤掉无法坚持的习惯",
-      "result": "成功构建了一套完整的习惯闭环，产生飞轮效应，同时过滤掉伪需求，减少冲动消费。"
+      "problem": "直接用奖励刺激习惯，容易变成先消费后放弃，也难以判断某个奖励是否真的值得。",
+      "process": "将习惯和奖励绑定，完成习惯后获得对应能量，只有积累到一定能量才能兑换奖励。",
+      "result": "构建了一套习惯闭环，既推动持续行动，也减少冲动消费。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/Habit_Flywheel_1",
       "demo": "https://tool.myandong.xyz"
+    },
+    "source": "Habit_Flywheel_1",
+    "resumeLine": "设计习惯飞轮应用，将习惯完成、能量积累和奖励兑换连接起来，用产品机制过滤冲动消费和伪需求。",
+    "impact": "把“想养成习惯”和“想买奖励”之间加上持续行动门槛，让奖励成为习惯闭环的一部分。",
+    "highlights": [
+      "将习惯完成转化为能量，避免奖励和行动脱节。",
+      "用兑换门槛过滤无法持续的伪需求。",
+      "把个人行为管理做成可操作的产品机制。"
+    ],
+    "visual": {
+      "accent": "#c5e1a5",
+      "kicker": "习惯与奖励机制",
+      "summary": "用能量积累把习惯完成和奖励兑换连接起来。",
+      "signals": [
+        "习惯完成",
+        "能量积累",
+        "奖励兑换",
+        "行为闭环"
+      ],
+      "metrics": [
+        {
+          "value": "飞轮",
+          "label": "机制"
+        },
+        {
+          "value": "生产力",
+          "label": "主题"
+        },
+        {
+          "value": "Web App",
+          "label": "形态"
+        }
+      ]
     }
   },
   {
     "id": "game-portfolio",
     "title": "游戏作品集",
-    "description": "游戏作品集，展示个人游戏开发能力",
+    "description": "面向网页端的小游戏集合，用实际玩法展示个人游戏开发和交互实现能力。",
     "cover": "/tower-defense-garden.png",
     "year": "2025",
     "tier": "archive",
-    "category": "游戏",
-    "role": "游戏开发",
-    "stack": ["游戏", "Web"],
-    "tags": ["游戏", "休闲", "策略"],
+    "category": "Creative Applications",
+    "role": "游戏开发 / 前端交互实现",
+    "stack": [
+      "游戏",
+      "Web",
+      "交互设计"
+    ],
+    "tags": [
+      "游戏",
+      "休闲",
+      "策略"
+    ],
     "story": {
-      "problem": "",
-      "process": "",
-      "result": ""
+      "problem": "游戏开发能力很难只靠文字说明呈现，访问者需要直接体验规则和交互反馈。",
+      "process": "将小游戏整理成统一作品集入口，让每个作品都能作为独立 Demo 被打开和体验。",
+      "result": "形成一个可试玩的游戏展示页，补充个人项目中的创意交互和游戏开发证据。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/Games",
       "demo": "https://game.myandong.xyz"
-    }
+    },
+    "source": "Games",
+    "resumeLine": "构建网页游戏作品集，沉淀休闲、策略和交互类小游戏，用可试玩 Demo 展示游戏逻辑和前端实现能力。",
+    "impact": "相比静态项目说明，游戏作品集能让访问者直接体验规则、反馈和交互手感。",
+    "coverAlt": "网页游戏作品集封面",
+    "highlights": [
+      "用可试玩 Demo 展示游戏规则和反馈。",
+      "覆盖休闲、策略和交互类实现练习。",
+      "作为前端动效、状态管理和玩法设计的展示入口。"
+    ]
   }
 ]
