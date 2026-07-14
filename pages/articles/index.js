@@ -86,7 +86,7 @@ export default function Articles({ articles, topics, series }) {
   }, [allTopics, router.query.topic, selectedTopic])
 
   const filteredArticles = useMemo(() => {
-    return articles.filter((article) => {
+    const matches = articles.filter((article) => {
       const topicMatched = selectedTopic === '全部' || article.topics.includes(selectedTopic)
       const queryMatched =
         !normalizedQuery ||
@@ -94,6 +94,19 @@ export default function Articles({ articles, topics, series }) {
         textPool(article).toLowerCase().includes(normalizedQuery)
       return topicMatched && queryMatched
     })
+
+    if (selectedTopic === '全部' || matches.length < 2) return matches
+
+    const orderedSeries = matches[0].seriesId
+    const isSingleOrderedSeries =
+      orderedSeries &&
+      matches.every(
+        (article) => article.seriesId === orderedSeries && Number.isFinite(article.seriesOrder)
+      )
+
+    return isSingleOrderedSeries
+      ? [...matches].sort((a, b) => a.seriesOrder - b.seriesOrder)
+      : matches
   }, [articles, normalizedQuery, selectedTopic])
 
   const visibleSeries = useMemo(() => {

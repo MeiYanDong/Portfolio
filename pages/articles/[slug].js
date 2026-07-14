@@ -341,6 +341,10 @@ export default function ArticleDetail({ article, html, series, seriesArticles, p
           margin-bottom: 1rem;
         }
 
+        :global(.article-body a) {
+          overflow-wrap: anywhere;
+        }
+
         :global(.article-body ul),
         :global(.article-body ol) {
           margin: 0 0 1.2rem 1.35rem;
