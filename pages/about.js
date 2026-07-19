@@ -1,640 +1,529 @@
 import Head from 'next/head'
-import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon } from '../components/SocialIcons'
-import { BookOpen, Target, Lightbulb, Scale, Sun, RefreshCw, Zap, Newspaper } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowUpRight, Download } from 'lucide-react'
+import profilesData from '../data/profiles.json'
+
+const timeline = [
+  {
+    year: '2024',
+    title: '开始 AIGC 内容实践',
+    description: '从 AI 绘画与视频进入生成式 AI，持续测试工具、内容形式和平台表达。'
+  },
+  {
+    year: '2025',
+    title: '把真实需求做成产品',
+    description: '使用 AI Coding 独立完成习惯飞轮、提示词管理器、分享卡片和游戏作品集等产品。'
+  },
+  {
+    year: '2026',
+    title: '进入内容运营与自动化',
+    description: '围绕 AI 工具完成内容选题、制作、发布和复盘，并把稳定流程沉淀为 Skill 与自动化脚本。'
+  },
+  {
+    year: '现在',
+    title: '寻找 AI 内容运营实践机会',
+    description: '希望在真实团队中继续验证内容判断、平台运营、AI 协作和流程搭建能力。'
+  }
+]
 
 export default function About() {
-  const skills = [
-    { category: 'AIGC创作', items: ['ChatGPT', 'Midjourney', 'KLing', 'Cursor'] },
-    { category: '自动化',   items: ['影刀RPA',  'Coze'] },
-    { category: '生活技能', items: ['阅读书籍', '运动健身', '理财规划', '时间管理'] }
-  ]
-
-  const timeline = [
-    { year: '2023中', event: '第一次暑假工家教，工资3000，转给父母朋友2000+' },
-    { year: '2023下', event: '认知觉醒，开始广泛阅读书籍，微信读书与得到总时长1000+小时' },
-    { year: '2023末', event: '开启定投BTC之旅，截止202507，收益率至100%+，出本金' },
-    { year: '2024中', event: '完成人生首次半马' },
-    { year: '2024下', event: '开始接触AI绘画和视频，开启AIGC创作' },
-    { year: '2025初', event: 'AI之路继续深入：AI Agent、AI Coding等' },
-    { year: '2025中', event: '成为 「YouWare」Founding Creator，并独立开发第一款产品：「习惯飞轮」' },
-    { year: '2025下', event: '利用 AI 编程，基于自身需求，开发多款工具' }
-  ]
+  const profile = profilesData[0]
 
   return (
     <>
       <Head>
-        <title>关于我 - 梅炎栋</title>
-        <meta name="description" content="了解梅炎栋的成长历程、技能专长和人生理念" />
+        <title>关于 - 梅炎栋</title>
+        <meta
+          name="description"
+          content="了解梅炎栋的学习背景、AI 内容运营能力、Vibe Coding 实践与人机协作方式。"
+        />
       </Head>
 
-      <div className="container">
-        {/* Hero 部分 */}
+      <main className="about-shell">
         <section className="about-hero">
-          <div className="hero-content">
-            <div className="avatar-large">
-              <img src="/avatar.jpg" alt="梅炎栋" />
-            </div>
-            <div className="hero-text">
-              <h1>关于我</h1>
-              <p className="lead">
-                我是梅炎栋，一个普通但不甘于平庸的大学生。<br/>
-                相信通过持续学习和实践，每个人都能在自己的领域闪闪发光。
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* 个人理念 */}
-        <section className="philosophy">
-          <h2>我的理念</h2>
-          <div className="philosophy-grid">
-            <div className="philosophy-card">
-              <div className="icon"><BookOpen size={40} /></div>
-              <h3>终身学习</h3>
-              <p>保持好奇心，持续学习新知识新技能，让自己始终处于成长状态。</p>
-            </div>
-            <div className="philosophy-card">
-              <div className="icon"><Target size={40} /></div>
-              <h3>目标导向</h3>
-              <p>设定明确目标，制定可行计划，用行动将想法变为现实。</p>
-            </div>
-            <div className="philosophy-card">
-              <div className="icon"><Lightbulb size={40} /></div>
-              <h3>创新实践</h3>
-              <p>拥抱新技术，特别是AIGC领域，用创新思维解决实际问题。</p>
-            </div>
-            <div className="philosophy-card">
-              <div className="icon"><Scale size={40} /></div>
-              <h3>平衡发展</h3>
-              <p>技术学习、身体健康、财务规划并重，追求全面的个人发展。</p>
+          <div className="about-hero-copy">
+            <p className="about-kicker">关于</p>
+            <h1>梅炎栋</h1>
+            <strong>{profile.role} / Vibe Coding 实践者</strong>
+            <p>{profile.summary}</p>
+            <div className="about-actions">
+              <Link href="/profiles/ai-content-operations" className="about-primary-action">
+                查看岗位档案
+                <ArrowUpRight size={17} />
+              </Link>
+              <a
+                href={profile.resume.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-secondary-action"
+              >
+                <Download size={17} />
+                PDF 简历
+              </a>
             </div>
           </div>
         </section>
 
-        {/* 性格测试与个人特质 */}
-        <section className="personality">
-          <h2>性格测试与个人特质</h2>
-          
-          {/* 性格测试结果 */}
-          <div className="personality-tests">
-            <h3>性格测试结果</h3>
-            <div className="tests-grid">
-              <div className="test-card">
-                <div className="test-label">MBTI性格测试</div>
-                <div className="test-result">INTP</div>
-                <div className="test-description">逻辑学家型人格</div>
-              </div>
-              <div className="test-card">
-                <div className="test-label">霍兰德职业兴趣测试</div>
-                <div className="test-result">ECR</div>
-                <div className="test-description">主导兴趣: 企业</div>
-              </div>
-            </div>
+        <section className="about-facts" aria-label="基本信息">
+          <div>
+            <span>教育</span>
+            <strong>南通大学</strong>
+            <small>应用统计学本科 / 2027 届</small>
           </div>
-
-          {/* 个人特质 */}
-          <div className="personality-traits">
-            <h3>个人特质</h3>
-            <div className="traits-grid">
-              <div className="trait-card">
-                <div className="trait-icon"><Sun size={40} /></div>
-                <h4>乐观自信</h4>
-                <p>总能于黑暗中见光明<br/>
-                  因为黑夜无论怎样悠长，白昼总会到来</p>
-              </div>
-              <div className="trait-card">
-                <div className="trait-icon"><RefreshCw size={40} /></div>
-                <h4>反思复盘</h4>
-                <p>时刻反思当下，调整行为<br/>
-                  周期性复盘生活，指导未来方向</p>
-              </div>
-              <div className="trait-card">
-                <div className="trait-icon"><Zap size={40} /></div>
-                <h4>不抱怨，不后悔</h4>
-                <p>知道自己无法穿越时空回到过去<br/>
-                  所以宁愿抱怨后悔<br/>
-                  不如从现在开始，端正态度，奋发图强<br/>
-                  让未来的自己不会后悔当下的自己</p>
-              </div>
-            </div>
+          <div>
+            <span>方向</span>
+            <strong>AI 内容运营</strong>
+            <small>内容、产品与自动化</small>
+          </div>
+          <div>
+            <span>到岗</span>
+            <strong>暑期全职</strong>
+            <small>开学后可兼职</small>
+          </div>
+          <div>
+            <span>所在地</span>
+            <strong>{profile.location}</strong>
+            <small>可沟通实习安排</small>
           </div>
         </section>
 
-        {/* 技能专长 */}
-        <section className="skills">
-          <h2>技能专长</h2>
-          <div className="skills-grid">
-            {skills.map((skillGroup, index) => (
-              <div key={index} className="skill-group">
-                <h3>{skillGroup.category}</h3>
-                <div className="skill-items">
-                  {skillGroup.items.map((skill, skillIndex) => (
-                    <span key={skillIndex} className="skill-tag">{skill}</span>
-                  ))}
-                </div>
+        <section className="about-section about-intro">
+          <div className="about-section-heading">
+            <span>我在做什么</span>
+            <h2>把内容判断、产品实践和 AI 协作连成一条工作链</h2>
+          </div>
+          <div className="about-prose">
+            <p>
+              我的起点不是“会使用多少 AI 工具”，而是遇到一个真实问题后，能否把它研究清楚、组织成别人能理解的内容，或者进一步做成可运行的产品。
+            </p>
+            <p>
+              在内容工作中，我独立负责选题、事实核验、文案、素材、发布和复盘；在产品工作中，我使用 Claude Code 与 Codex 完成需求拆解、实现、测试和迭代。AI 参与执行，但目标、判断和最终责任始终由我承担。
+            </p>
+            <p>
+              我希望个人网站不只陈列作品，所以把“项目”“案例”“文章”分开：项目说明做出了什么，案例说明如何产生结果，文章记录对具体问题的理解。
+            </p>
+          </div>
+        </section>
+
+        <section className="about-section">
+          <div className="about-section-heading">
+            <span>能力结构</span>
+            <h2>四项可以进入真实工作的能力</h2>
+          </div>
+          <div className="about-capability-list">
+            {profile.capabilities.map((capability) => (
+              <div key={capability.index}>
+                <span>{capability.index}</span>
+                <h3>{capability.title}</h3>
+                <p>{capability.description}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 成长时间线 */}
-        <section className="timeline">
-          <h2>成长历程</h2>
-          <div className="timeline-list">
-            {timeline.map((item, index) => (
-              <div key={index} className="timeline-item">
-                <div className="timeline-year">{item.year}</div>
-                <div className="timeline-content">
-                  <p>{item.event}</p>
-                </div>
+        <section className="about-section">
+          <div className="about-section-heading">
+            <span>实践路径</span>
+            <h2>从生成内容，到搭建产品和工作流</h2>
+          </div>
+          <div className="about-timeline">
+            {timeline.map((item) => (
+              <div key={item.year}>
+                <span>{item.year}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 公众号 */}
-        <section className="wechat-oa">
-          <h2>公众号</h2>
-          <p className="wechat-oa-desc">记录生活感悟与成长思考</p>
-          <div className="wechat-oa-grid">
-            <a
-              href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkwNTcyMzg4OQ==&action=getalbum&album_id=4301714421690138625&scene=126#wechat_redirect"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wechat-oa-card"
-            >
-              <div className="wechat-oa-icon"><Newspaper size={40} /></div>
-              <h3>人生日报</h3>
-              <p>每日记录与反思</p>
-            </a>
-            <a
-              href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzkwNTcyMzg4OQ==&action=getalbum&album_id=4075396452263100417&scene=126#wechat_redirect"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wechat-oa-card"
-            >
-              <div className="wechat-oa-icon"><Newspaper size={40} /></div>
-              <h3>人生周报</h3>
-              <p>每周复盘与总结</p>
-            </a>
+        <section className="about-section about-working-model">
+          <div className="about-section-heading">
+            <span>人机协作</span>
+            <h2>AI 是执行杠杆，不是责任替代</h2>
           </div>
-        </section>
-
-        {/* 联系方式 */}
-        <section className="contact-preview">
-          <h2>让我们连接</h2>
-          <p>如果你对我的项目感兴趣，或者想要交流学习心得，随时欢迎联系我！</p>
-          <div className="contact-links">
-            <a href="https://github.com/MeiYanDong" target="_blank" rel="noopener" className="contact-link">
-              <GitHubIcon size={20} className="contact-icon" />
-              <span>GitHub</span>
-            </a>
-            <a href="https://www.xiaohongshu.com/user/profile/64800729000000000f006c55" target="_blank" rel="noopener" className="contact-link">
-              <XiaohongshuIcon size={20} className="contact-icon" />
-              <span>小红书</span>
-            </a>
-            <a href="https://x.com/MYanDong1" target="_blank" rel="noopener" className="contact-link">
-              <TwitterIcon size={20} className="contact-icon" />
-              <span>推特</span>
-            </a>
-            <div className="contact-link">
-              <WechatIcon size={20} className="contact-icon" />
-              <span>微信: MYanDong-</span>
+          <div className="about-model-ledger">
+            <div>
+              <span>本人负责</span>
+              <strong>目标、事实与最终判断</strong>
+              <p>{profile.workingModel.human}</p>
+            </div>
+            <div>
+              <span>AI 协作</span>
+              <strong>研究、初稿与重复执行</strong>
+              <p>{profile.workingModel.ai}</p>
+            </div>
+            <div>
+              <span>沉淀结果</span>
+              <strong>可以复用和验证的系统</strong>
+              <p>{profile.workingModel.result}</p>
             </div>
           </div>
         </section>
-      </div>
 
-      <style jsx>{`
-        .about-hero {
-          padding: 3rem 0 4rem;
-          text-align: center;
-        }
+        <section className="about-next">
+          <div>
+            <span>继续了解</span>
+            <h2>从真实工作结果开始</h2>
+            <p>查看 Token 中转站内容运营案例，或浏览我已经完成的产品和自动化项目。</p>
+          </div>
+          <div>
+            <Link href="/cases/token-relay-content-operations">
+              查看代表案例
+              <ArrowUpRight size={17} />
+            </Link>
+            <Link href="/projects">
+              浏览全部项目
+              <ArrowUpRight size={17} />
+            </Link>
+            <Link href="/contact">
+              联系我
+              <ArrowUpRight size={17} />
+            </Link>
+          </div>
+        </section>
+      </main>
 
-        .hero-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 2rem;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .avatar-large {
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          overflow: hidden;
-          border: 4px solid var(--accent-purple);
-          transition: transform 0.3s ease;
-        }
-
-        .avatar-large:hover {
-          transform: rotate(5deg) scale(1.05);
-        }
-
-        .avatar-large img {
+      <style jsx global>{`
+        .about-shell {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .hero-text h1 {
-          margin-bottom: 1rem;
-          background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .lead {
-          font-size: 1.25rem;
-          color: var(--text-secondary);
-          line-height: 1.7;
-        }
-
-        .philosophy {
-          margin: 4rem 0;
-        }
-
-        .philosophy h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .philosophy-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 2rem;
-        }
-
-        .philosophy-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          text-align: center;
-          transition: transform 0.2s ease;
-        }
-
-        .philosophy-card:hover {
-          transform: translateY(-4px);
-        }
-
-        .icon {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-          color: var(--accent-purple);
-        }
-
-        .philosophy-card h3 {
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-        }
-
-        .philosophy-card p {
-          color: var(--text-secondary);
-          line-height: 1.6;
-        }
-
-        .personality {
-          margin: 4rem 0;
-        }
-
-        .personality h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .personality-tests {
-          margin-bottom: 3rem;
-        }
-
-        .personality-tests h3 {
-          text-align: center;
-          margin-bottom: 2rem;
-          color: var(--accent-purple);
-          font-size: 1.5rem;
-        }
-
-        .tests-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-          max-width: 800px;
+          max-width: 1320px;
           margin: 0 auto;
+          padding: 0 1.5rem 5rem;
         }
 
-        .test-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          text-align: center;
-          transition: transform 0.2s ease;
+        .about-hero {
+          position: relative;
+          display: flex;
+          align-items: flex-end;
+          min-height: 510px;
+          overflow: hidden;
+          padding: 4rem 3rem 3rem;
+          border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
+          isolation: isolate;
         }
 
-        .test-card:hover {
-          transform: translateY(-4px);
+        .about-hero::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -2;
+          background: url('/avatar.jpg') 76% 42% / cover no-repeat;
+          filter: grayscale(0.18) saturate(0.66) contrast(1.04);
+          transform: scale(1.025);
         }
 
-        .test-label {
-          font-size: 0.875rem;
-          color: var(--text-secondary);
-          margin-bottom: 1rem;
+        .about-hero::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          background:
+            linear-gradient(90deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.9) 52%, rgba(7, 7, 7, 0.24) 100%),
+            linear-gradient(0deg, rgba(7, 7, 7, 0.9), transparent 70%);
         }
 
-        .test-result {
-          font-size: 2rem;
-          font-weight: bold;
+        .about-hero-copy {
+          max-width: 820px;
+        }
+
+        .about-kicker,
+        .about-section-heading > span,
+        .about-next > div:first-child > span,
+        .about-facts span {
           color: var(--accent-purple);
-          margin-bottom: 0.5rem;
+          font-size: 0.74rem;
+          font-weight: 800;
         }
 
-        .test-description {
-          font-size: 1rem;
-          color: var(--text-primary);
+        .about-hero h1 {
+          margin: 0.4rem 0 0.75rem;
+          font-size: 5.25rem;
+          line-height: 0.95;
         }
 
-        .personality-traits h3 {
-          text-align: center;
-          margin-bottom: 2rem;
-          color: var(--accent-purple);
-          font-size: 1.5rem;
+        .about-hero-copy > strong {
+          display: block;
+          font-size: 1.45rem;
         }
 
-        .traits-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
+        .about-hero-copy > p:not(.about-kicker) {
+          max-width: 720px;
+          margin-top: 1rem;
+          color: #c6c6c6;
+          line-height: 1.8;
         }
 
-        .trait-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          text-align: center;
-          transition: transform 0.2s ease;
-        }
-
-        .trait-card:hover {
-          transform: translateY(-4px);
-        }
-
-        .trait-icon {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-          color: var(--accent-purple);
-        }
-
-        .trait-card h4 {
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-          font-size: 1.25rem;
-        }
-
-        .trait-card p {
-          color: var(--text-secondary);
-          line-height: 1.6;
-        }
-
-        .skills {
-          margin: 4rem 0;
-        }
-
-        .skills h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .skills-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-        }
-
-        .skill-group {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-        }
-
-        .skill-group h3 {
-          margin-bottom: 1.5rem;
-          color: var(--accent-purple);
-          border-bottom: 2px solid rgba(179, 157, 219, 0.2);
-          padding-bottom: 0.5rem;
-        }
-
-        .skill-items {
+        .about-actions {
           display: flex;
           flex-wrap: wrap;
           gap: 0.75rem;
+          margin-top: 1.5rem;
         }
 
-        .skill-tag {
-          background: rgba(179, 157, 219, 0.1);
+        .about-primary-action,
+        .about-secondary-action {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          min-height: 44px;
+          border-radius: 6px;
+          padding: 0.7rem 1rem;
+          font-size: 0.82rem;
+          font-weight: 800;
+        }
+
+        .about-primary-action {
+          border: 1px solid var(--accent-purple);
+          color: var(--bg-primary);
+          background: var(--accent-purple);
+        }
+
+        .about-secondary-action {
+          border: 1px solid rgba(255, 255, 255, 0.28);
           color: var(--text-primary);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.875rem;
-          border: 1px solid rgba(179, 157, 219, 0.2);
+          background: rgba(10, 10, 10, 0.58);
         }
 
-        .timeline {
-          margin: 4rem 0;
-        }
-
-        .timeline h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .timeline-list {
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .timeline-item {
-          display: flex;
-          gap: 2rem;
-          margin-bottom: 2rem;
-          padding-bottom: 2rem;
+        .about-facts {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           border-bottom: 1px solid var(--border-color);
         }
 
-        .timeline-item:last-child {
-          border-bottom: none;
-          margin-bottom: 0;
+        .about-facts > div {
+          display: grid;
+          min-width: 0;
+          padding: 1.25rem;
+          border-right: 1px solid var(--border-color);
         }
 
-        .timeline-year {
-          flex-shrink: 0;
-          width: 80px;
-          font-weight: 600;
-          color: var(--accent-purple);
-          font-size: 1.125rem;
+        .about-facts > div:last-child {
+          border-right: 0;
         }
 
-        .timeline-content p {
+        .about-facts strong {
+          margin-top: 0.4rem;
+          font-size: 1rem;
+        }
+
+        .about-facts small {
           color: var(--text-secondary);
-          line-height: 1.6;
+          font-size: 0.72rem;
+        }
+
+        .about-section {
+          display: grid;
+          grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+          gap: 4rem;
+          padding: 5rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-section-heading h2,
+        .about-next h2 {
+          max-width: 520px;
+          margin-top: 0.5rem;
+          font-size: 2.5rem;
+        }
+
+        .about-prose p {
+          max-width: 820px;
+          color: var(--text-secondary);
+          font-size: 1rem;
+          line-height: 1.9;
+        }
+
+        .about-capability-list,
+        .about-timeline {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-capability-list > div,
+        .about-timeline > div {
+          display: grid;
+          grid-template-columns: 50px 210px minmax(0, 1fr);
+          gap: 1rem;
+          align-items: baseline;
+          min-width: 0;
+          padding: 1.2rem 0;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .about-timeline > div {
+          grid-template-columns: 90px 230px minmax(0, 1fr);
+        }
+
+        .about-capability-list span,
+        .about-timeline span,
+        .about-model-ledger > div > span {
+          color: var(--accent-purple);
+          font-size: 0.76rem;
+          font-weight: 800;
+        }
+
+        .about-capability-list h3,
+        .about-capability-list p,
+        .about-timeline h3,
+        .about-timeline p {
           margin: 0;
         }
 
-        .wechat-oa {
-          margin: 4rem 0;
-          text-align: center;
+        .about-capability-list h3,
+        .about-timeline h3 {
+          font-size: 1rem;
         }
 
-        .wechat-oa h2 {
-          margin-bottom: 0.5rem;
-          color: var(--text-primary);
-        }
-
-        .wechat-oa-desc {
+        .about-capability-list p,
+        .about-timeline p,
+        .about-model-ledger p {
           color: var(--text-secondary);
-          margin: 0 auto 2rem;
-          text-align: center;
+          font-size: 0.88rem;
+          line-height: 1.75;
         }
 
-        .wechat-oa-grid {
+        .about-model-ledger {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
-          max-width: 600px;
-          margin: 0 auto;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
         }
 
-        .wechat-oa-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          text-decoration: none;
-          transition: transform 0.2s ease, border-color 0.2s ease;
+        .about-model-ledger > div {
+          min-width: 0;
+          padding: 1.4rem 1.25rem;
+          border-right: 1px solid var(--border-color);
         }
 
-        .wechat-oa-card:hover {
-          transform: translateY(-4px);
-          border-color: var(--accent-purple);
+        .about-model-ledger > div:last-child {
+          border-right: 0;
         }
 
-        .wechat-oa-icon {
-          color: var(--accent-purple);
-          margin-bottom: 1rem;
+        .about-model-ledger strong {
+          display: block;
+          margin: 0.7rem 0 0.6rem;
+          font-size: 0.95rem;
         }
 
-        .wechat-oa-card h3 {
-          color: var(--text-primary);
-          margin-bottom: 0.5rem;
+        .about-next {
+          display: grid;
+          grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+          gap: 4rem;
+          padding: 5rem 0 1rem;
         }
 
-        .wechat-oa-card p {
+        .about-next p {
           color: var(--text-secondary);
-          font-size: 0.875rem;
+          line-height: 1.8;
         }
 
-        .contact-preview {
-          margin: 4rem 0 2rem;
-          text-align: center;
+        .about-next > div:last-child {
+          border-bottom: 1px solid var(--border-color);
         }
 
-        .contact-preview h2 {
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-        }
-
-        .contact-preview p {
-          color: var(--text-secondary);
-          margin-bottom: 2rem;
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .contact-links {
-          display: flex;
-          justify-content: center;
-          gap: 1.5rem;
-          flex-wrap: wrap;
-        }
-
-        .contact-link {
+        .about-next a {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          padding: 0.75rem 1.5rem;
-          background: var(--bg-card);
-          border: 1px solid var(--border-color);
-          border-radius: 25px;
-          color: var(--text-secondary);
-          text-decoration: none;
-          transition: all 0.2s ease;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 1rem 0;
+          border-top: 1px solid var(--border-color);
+          color: var(--text-primary);
+          font-size: 0.88rem;
+          font-weight: 700;
         }
 
-        .contact-link:hover {
-          border-color: var(--accent-purple);
-          color: var(--accent-purple);
-          transform: translateY(-2px);
-        }
-
-        .contact-icon {
-          color: var(--text-secondary);
-          transition: color 0.2s ease;
-        }
-
-        .contact-link:hover .contact-icon {
+        .about-next a:hover {
           color: var(--accent-purple);
         }
 
-        @media (max-width: 768px) {
-          .philosophy-grid {
+        @media (max-width: 900px) {
+          .about-section,
+          .about-next {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 2.5rem;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .about-shell {
+            padding: 0 1rem 4rem;
           }
 
-          .tests-grid {
+          .about-hero {
+            min-height: 600px;
+            padding: 2rem 1.25rem;
+          }
+
+          .about-hero::before {
+            background-position: 62% 34%;
+          }
+
+          .about-hero::after {
+            background: linear-gradient(0deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.86) 72%, rgba(7, 7, 7, 0.48) 100%);
+          }
+
+          .about-hero h1 {
+            font-size: 3.6rem;
+          }
+
+          .about-hero-copy > strong {
+            font-size: 1.15rem;
+          }
+
+          .about-facts {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .about-facts > div:nth-child(2) {
+            border-right: 0;
+          }
+
+          .about-facts > div:nth-child(-n + 2) {
+            border-bottom: 1px solid var(--border-color);
+          }
+
+          .about-section,
+          .about-next {
+            padding: 3.5rem 0;
+          }
+
+          .about-section-heading h2,
+          .about-next h2 {
+            font-size: 1.9rem;
+          }
+
+          .about-capability-list > div,
+          .about-timeline > div {
+            grid-template-columns: 40px minmax(0, 1fr);
+            gap: 0.75rem;
+          }
+
+          .about-timeline > div {
+            grid-template-columns: 70px minmax(0, 1fr);
+          }
+
+          .about-capability-list p,
+          .about-timeline p {
+            grid-column: 2;
+          }
+
+          .about-model-ledger {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
           }
 
-          .traits-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+          .about-model-ledger > div {
+            border-right: 0;
+            border-bottom: 1px solid var(--border-color);
           }
 
-          .skills-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-          }
-
-          .timeline-item {
-            flex-direction: column;
-            gap: 0.5rem;
-          }
-
-          .timeline-year {
-            width: auto;
-          }
-
-          .wechat-oa-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-          }
-
-          .contact-links {
-            flex-direction: column;
-            align-items: center;
+          .about-model-ledger > div:last-child {
+            border-bottom: 0;
           }
         }
       `}</style>
     </>
   )
-} 
+}

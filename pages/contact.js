@@ -1,359 +1,493 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useState } from 'react'
-import { GitHubIcon, XiaohongshuIcon, TwitterIcon, WechatIcon, JikeIcon } from '../components/SocialIcons'
-import { Bot, TrendingUp, Wallet, Mail, Target } from 'lucide-react'
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  Download,
+  ExternalLink,
+  FileText,
+  Github,
+  Mail,
+  MessageCircle,
+  Phone
+} from 'lucide-react'
+import profilesData from '../data/profiles.json'
 
 export default function Contact() {
+  const profile = profilesData[0]
   const [copied, setCopied] = useState('')
-
-  const copyToClipboard = (text, type) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(type)
-      setTimeout(() => setCopied(''), 2000)
-    })
-  }
 
   const contactMethods = [
     {
-      icon: <GitHubIcon size={48} className="social-icon" />,
-      title: 'GitHub',
-      description: '查看我的代码和项目',
-      value: 'MeiYanDong',
-      link: 'https://github.com/MeiYanDong',
-      copyText: 'MeiYanDong'
+      id: 'email',
+      icon: Mail,
+      label: '邮箱',
+      value: profile.contact.email,
+      note: '岗位、实习与项目沟通',
+      href: profile.contact.emailHref
     },
     {
-      icon: <XiaohongshuIcon size={48} className="social-icon" />,
-      title: '小红书',
-      description: '分享AI绘画和视频',
+      id: 'phone',
+      icon: Phone,
+      label: '电话',
+      value: profile.contact.phone,
+      note: '需要即时沟通时使用',
+      href: profile.contact.phoneHref
+    },
+    {
+      id: 'wechat',
+      icon: MessageCircle,
+      label: '微信',
+      value: profile.contact.wechat,
+      note: '添加时请注明来意'
+    },
+    {
+      id: 'github',
+      icon: Github,
+      label: 'GitHub',
+      value: profile.contact.github,
+      note: '查看代码、提交与开源项目',
+      href: profile.contact.githubHref,
+      external: true
+    },
+    {
+      id: 'twitter',
+      icon: ExternalLink,
+      label: '推特',
+      value: profile.contact.twitter,
+      note: 'AI、产品与 Web3 记录',
+      href: profile.contact.twitterHref,
+      external: true
+    },
+    {
+      id: 'xiaohongshu',
+      icon: ExternalLink,
+      label: '小红书',
       value: 'MYanDong',
-      link: 'https://www.xiaohongshu.com/user/profile/64800729000000000f006c55',
-      copyText: 'MYanDong'
-    },
-    {
-      icon: <TwitterIcon size={48} className="social-icon" />,
-      title: '推特',
-      description: 'AI x Web3 成长分享',
-      value: '@MYanDong1',
-      link: 'https://x.com/MYanDong1',
-      copyText: 'MYanDong1'
-    },
-    {
-      icon: <JikeIcon size={48} className="social-icon" />,
-      title: '即刻',
-      description: '分享个人思考和生活感悟',
-      value: '即刻主页',
-      link: 'https://okjk.co/gjPeyX',
-      copyText: 'https://okjk.co/gjPeyX'
-    },
-    {
-      icon: <WechatIcon size={48} className="social-icon" />,
-      title: '微信',
-      description: '深度交流和合作洽谈',
-      value: 'MYanDong-',
-      copyText: 'MYanDong-'
+      note: 'AI 工具与内容实践',
+      href: 'https://www.xiaohongshu.com/user/profile/64800729000000000f006c55',
+      external: true
     }
   ]
+
+  const copyToClipboard = async (value, id) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(id)
+      window.setTimeout(() => setCopied(''), 1800)
+    } catch (error) {
+      setCopied('')
+    }
+  }
 
   return (
     <>
       <Head>
-        <title>联系我 - 梅炎栋</title>
-        <meta name="description" content="通过多种方式与梅炎栋取得联系，交流学习心得或合作机会" />
+        <title>联系 - 梅炎栋</title>
+        <meta
+          name="description"
+          content="联系梅炎栋，沟通 AI 内容运营、AI 产品内容、Vibe Coding 与内容自动化相关机会。"
+        />
       </Head>
 
-      <div className="container">
-        {/* Hero 部分 */}
+      <main className="contact-shell">
         <section className="contact-hero">
-          <h1>联系我</h1>
-          <p className="hero-text">
-            很高兴能与你连接！无论是技术交流、学习心得分享，还是项目合作，<br/>
-            我都很乐意与志同道合的朋友深入交流。
-          </p>
+          <div>
+            <p className="contact-kicker">联系</p>
+            <h1>一起把想法做成内容与系统。</h1>
+            <p>
+              我正在寻找 AI 内容运营、AI 产品内容与内容自动化相关的实习机会。请优先通过邮箱或微信联系，并简单说明岗位或合作背景。
+            </p>
+          </div>
+          <div className="contact-availability">
+            <span>到岗安排</span>
+            <strong>{profile.availability}</strong>
+            <small>{profile.education}</small>
+          </div>
         </section>
 
-        {/* 联系方式卡片 */}
-        <section className="contact-methods">
-          <div className="methods-grid">
-            {contactMethods.map((method, index) => (
-              <div key={index} className="contact-card">
-                <div className="contact-icon">{method.icon}</div>
-                <h3>{method.title}</h3>
-                <p className="contact-description">{method.description}</p>
-                <div className="contact-value">{method.value}</div>
-                <div className="contact-actions">
-                  {method.link && (
-                    <a 
-                      href={method.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="btn btn-outline"
+        <section className="contact-methods" aria-label="联系方式">
+          <div className="contact-section-heading">
+            <span>公开联系方式</span>
+            <strong>{contactMethods.length} 种联系与主页入口</strong>
+          </div>
+          <div className="contact-list">
+            {contactMethods.map((method) => {
+              const Icon = method.icon
+              return (
+                <div key={method.id} className="contact-row">
+                  <Icon size={20} />
+                  <div>
+                    <span>{method.label}</span>
+                    <strong>{method.value}</strong>
+                  </div>
+                  <p>{method.note}</p>
+                  <div className="contact-row-actions">
+                    {method.href && (
+                      <a
+                        href={method.href}
+                        target={method.external ? '_blank' : undefined}
+                        rel={method.external ? 'noopener noreferrer' : undefined}
+                        title={`打开${method.label}`}
+                        aria-label={`打开${method.label}`}
+                      >
+                        <ExternalLink size={17} />
+                      </a>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard(method.value, method.id)}
+                      title={`复制${method.label}`}
+                      aria-label={`复制${method.label}`}
                     >
-                      访问
-                    </a>
-                  )}
-                  <button 
-                    onClick={() => copyToClipboard(method.copyText, method.title)}
-                    className="btn btn-copy"
-                  >
-                    {copied === method.title ? '已复制!' : '复制'}
-                  </button>
+                      {copied === method.id ? <Check size={17} /> : <Copy size={17} />}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </section>
 
-        {/* 交流主题 */}
-        <section className="topics">
-          <h2>我们可以聊什么？</h2>
-          <div className="topics-grid">
-            <div className="topic-card">
-              <div className="topic-icon"><Bot size={32} /></div>
-              <h3>AIGC创作</h3>
-              <p>人工智能在内容创作中的应用、工具使用心得、创作技巧分享</p>
+        <section className="contact-context">
+          <div className="contact-section-heading">
+            <span>适合沟通</span>
+            <h2>我可以参与的工作</h2>
+          </div>
+          <div className="contact-topic-list">
+            <div>
+              <span>01</span>
+              <strong>AI 工具内容运营</strong>
+              <p>选题、研究、内容制作、平台发布、数据复盘和用户教育。</p>
             </div>
-            <div className="topic-card">
-              <div className="topic-icon"><TrendingUp size={32} /></div>
-              <h3>个人成长</h3>
-              <p>习惯养成、目标管理、时间规划、自我提升的心得体会</p>
+            <div>
+              <span>02</span>
+              <strong>AI 产品内容</strong>
+              <p>把复杂能力转化为用户能理解、能选择、能上手的内容。</p>
             </div>
-            <div className="topic-card">
-              <div className="topic-icon"><Wallet size={32} /></div>
-              <h3>理财投资</h3>
-              <p>定投策略、资产配置、理财规划、投资心理学探讨</p>
+            <div>
+              <span>03</span>
+              <strong>内容自动化</strong>
+              <p>用 Prompt、Skill 与脚本提升素材整理、生产和发布准备效率。</p>
             </div>
           </div>
         </section>
 
-        {/* 回复时间说明 */}
-        <section className="response-info">
-          <div className="info-card">
-            <h3><Mail size={20} style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}} />回复时间</h3>
-            <p>
-              我通常会在24小时内回复消息。如果是紧急事务，
-              建议通过微信联系，我会尽快回复。
-            </p>
+        <section className="contact-documents">
+          <div>
+            <span>先了解我的工作</span>
+            <h2>岗位档案与简历</h2>
+            <p>岗位档案展开能力、案例和相关项目；PDF 简历便于直接下载、转发或进入招聘流程。</p>
           </div>
-          <div className="info-card">
-            <h3><Target size={20} style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}} />最佳联系方式</h3>
-            <p>
-              <strong>深度合作</strong>：微信联系
-            </p>
+          <div>
+            <Link href="/profiles/ai-content-operations">
+              <FileText size={18} />
+              <span>
+                AI 内容运营岗位档案
+                <small>能力、案例、项目与协作方式</small>
+              </span>
+              <ArrowUpRight size={17} />
+            </Link>
+            <a href={profile.resume.file} target="_blank" rel="noopener noreferrer">
+              <Download size={18} />
+              <span>
+                PDF 简历
+                <small>{profile.resume.label}</small>
+              </span>
+              <ArrowUpRight size={17} />
+            </a>
           </div>
         </section>
-      </div>
+      </main>
 
-      <style jsx>{`
-        .contact-hero {
-          text-align: center;
-          padding: 3rem 0 4rem;
-          max-width: 600px;
+      <style jsx global>{`
+        .contact-shell {
+          width: 100%;
+          max-width: 1240px;
           margin: 0 auto;
+          padding: 0 1.5rem 5rem;
+        }
+
+        .contact-hero {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) 300px;
+          gap: 4rem;
+          align-items: end;
+          padding: 4.5rem 0 3rem;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-kicker,
+        .contact-section-heading > span,
+        .contact-availability > span,
+        .contact-documents > div:first-child > span {
+          color: var(--accent-purple);
+          font-size: 0.74rem;
+          font-weight: 800;
         }
 
         .contact-hero h1 {
-          margin-bottom: 1.5rem;
-          background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          max-width: 850px;
+          margin-top: 0.6rem;
+          font-size: 4.5rem;
+          line-height: 1;
         }
 
-        .hero-text {
-          font-size: 1.125rem;
+        .contact-hero > div:first-child > p:last-child {
+          max-width: 720px;
           color: var(--text-secondary);
+          line-height: 1.85;
+        }
+
+        .contact-availability {
+          display: grid;
+          min-width: 0;
+          border-top: 1px solid var(--border-color);
+          padding-top: 1rem;
+        }
+
+        .contact-availability strong {
+          margin-top: 0.4rem;
+        }
+
+        .contact-availability small {
+          color: var(--text-secondary);
+          font-size: 0.74rem;
+        }
+
+        .contact-methods,
+        .contact-context {
+          padding: 4.5rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-section-heading {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          margin-bottom: 1.25rem;
+        }
+
+        .contact-section-heading h2 {
+          margin: 0;
+          font-size: 2.5rem;
+        }
+
+        .contact-section-heading > strong {
+          font-size: 0.8rem;
+        }
+
+        .contact-list {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-row {
+          display: grid;
+          grid-template-columns: 38px 230px minmax(0, 1fr) auto;
+          gap: 1rem;
+          align-items: center;
+          min-width: 0;
+          padding: 1rem 0;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .contact-row > svg {
+          color: var(--accent-purple);
+        }
+
+        .contact-row > div:nth-child(2) {
+          display: grid;
+          min-width: 0;
+        }
+
+        .contact-row > div:nth-child(2) span {
+          color: var(--text-secondary);
+          font-size: 0.72rem;
+        }
+
+        .contact-row > div:nth-child(2) strong {
+          overflow-wrap: anywhere;
+          font-size: 0.9rem;
+        }
+
+        .contact-row > p {
+          max-width: none;
+          margin: 0;
+          color: var(--text-secondary);
+          font-size: 0.82rem;
+        }
+
+        .contact-row-actions {
+          display: flex;
+          gap: 0.45rem;
+        }
+
+        .contact-row-actions a,
+        .contact-row-actions button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
+          color: var(--text-secondary);
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .contact-row-actions a:hover,
+        .contact-row-actions button:hover {
+          border-color: var(--accent-purple);
+          color: var(--accent-purple);
+        }
+
+        .contact-context {
+          display: grid;
+          grid-template-columns: minmax(240px, 0.65fr) minmax(0, 1.35fr);
+          gap: 4rem;
+        }
+
+        .contact-context .contact-section-heading {
+          display: block;
+        }
+
+        .contact-context .contact-section-heading h2 {
+          margin-top: 0.5rem;
+        }
+
+        .contact-topic-list {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-topic-list > div {
+          display: grid;
+          grid-template-columns: 46px 190px minmax(0, 1fr);
+          gap: 1rem;
+          align-items: baseline;
+          padding: 1.15rem 0;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .contact-topic-list > div > span {
+          color: var(--accent-purple);
+          font-size: 0.76rem;
+          font-weight: 800;
+        }
+
+        .contact-topic-list p {
+          margin: 0;
+          color: var(--text-secondary);
+          font-size: 0.84rem;
           line-height: 1.7;
         }
 
-        .contact-methods {
-          margin-bottom: 4rem;
-        }
-
-        .methods-grid {
+        .contact-documents {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
+          grid-template-columns: minmax(260px, 0.65fr) minmax(0, 1.35fr);
+          gap: 4rem;
+          padding: 4.5rem 0 1rem;
         }
 
-        .contact-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          text-align: center;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .contact-documents h2 {
+          margin-top: 0.5rem;
+          font-size: 2.5rem;
         }
 
-        .contact-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 8px 24px var(--shadow);
-        }
-
-        .contact-icon {
-          margin-bottom: 1rem;
-          display: flex;
-          justify-content: center;
-        }
-
-        .social-icon {
-          color: var(--accent-purple);
-          transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .contact-card:hover .social-icon {
-          color: #D1C4E9;
-          transform: scale(1.1);
-        }
-
-        .contact-card h3 {
-          margin-bottom: 0.5rem;
-          color: var(--text-primary);
-        }
-
-        .contact-description {
+        .contact-documents p {
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          margin-bottom: 1rem;
+          line-height: 1.8;
         }
 
-        .contact-value {
-          color: var(--accent-purple);
-          font-weight: 500;
-          font-family: 'Monaco', 'Menlo', monospace;
-          background: rgba(179, 157, 219, 0.1);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          margin-bottom: 1.5rem;
-          font-size: 0.875rem;
+        .contact-documents > div:last-child {
+          border-bottom: 1px solid var(--border-color);
         }
 
-        .contact-actions {
-          display: flex;
+        .contact-documents > div:last-child > * {
+          display: grid;
+          grid-template-columns: auto 1fr auto;
           gap: 0.75rem;
-          justify-content: center;
+          align-items: center;
+          padding: 1rem 0;
+          border-top: 1px solid var(--border-color);
+          color: inherit;
         }
 
-        .btn-outline {
-          background: transparent;
-          border: 1px solid var(--accent-purple);
-          color: var(--accent-purple);
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-        }
-
-        .btn-outline:hover {
-          background: var(--accent-purple);
-          color: var(--bg-primary);
-        }
-
-        .btn-copy {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          color: var(--text-secondary);
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-          border-radius: 6px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .btn-copy:hover {
-          border-color: var(--accent-purple);
+        .contact-documents > div:last-child > *:hover {
           color: var(--accent-purple);
         }
 
-        .topics {
-          margin-bottom: 4rem;
-        }
-
-        .topics h2 {
-          text-align: center;
-          margin-bottom: 3rem;
-          color: var(--text-primary);
-        }
-
-        .topics-grid {
+        .contact-documents > div:last-child span {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 1.5rem;
+          font-size: 0.9rem;
+          font-weight: 700;
         }
 
-        .topic-card {
-          background: var(--bg-card);
-          padding: 1.5rem;
-          border-radius: 8px;
-          border: 1px solid var(--border-color);
-          transition: border-color 0.2s ease;
-        }
-
-        .topic-card:hover {
-          border-color: var(--accent-purple);
-        }
-
-        .topic-icon {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: var(--accent-purple);
-        }
-
-        .topic-card h3 {
-          margin-bottom: 0.75rem;
-          color: var(--text-primary);
-          font-size: 1rem;
-        }
-
-        .topic-card p {
+        .contact-documents > div:last-child small {
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          line-height: 1.5;
+          font-size: 0.72rem;
+          font-weight: 500;
         }
 
-        .response-info {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-          margin-bottom: 2rem;
-        }
-
-        .info-card {
-          background: var(--bg-card);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-        }
-
-        .info-card h3 {
-          margin-bottom: 1rem;
-          color: var(--accent-purple);
-        }
-
-        .info-card p {
-          color: var(--text-secondary);
-          line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-          .methods-grid {
+        @media (max-width: 860px) {
+          .contact-hero,
+          .contact-context,
+          .contact-documents {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 2.5rem;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .contact-shell {
+            padding: 0 1rem 4rem;
           }
 
-          .topics-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
+          .contact-hero {
+            padding: 2.5rem 0 2rem;
           }
 
-          .response-info {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+          .contact-hero h1 {
+            font-size: 2.75rem;
           }
 
-          .contact-actions {
-            flex-direction: column;
+          .contact-methods,
+          .contact-context,
+          .contact-documents {
+            padding: 3.5rem 0;
+          }
+
+          .contact-section-heading h2,
+          .contact-documents h2 {
+            font-size: 1.9rem;
+          }
+
+          .contact-row {
+            grid-template-columns: 28px minmax(0, 1fr) auto;
+            gap: 0.75rem;
+          }
+
+          .contact-row > p {
+            grid-column: 2 / -1;
+          }
+
+          .contact-row-actions {
+            grid-column: 3;
+            grid-row: 1;
+          }
+
+          .contact-topic-list > div {
+            grid-template-columns: 36px minmax(0, 1fr);
+            gap: 0.75rem;
+          }
+
+          .contact-topic-list p {
+            grid-column: 2;
           }
         }
       `}</style>
     </>
   )
-} 
+}

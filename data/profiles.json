@@ -1,0 +1,79 @@
+[
+  {
+    "id": "ai-content-operations",
+    "name": "梅炎栋",
+    "role": "AI 内容运营实习生",
+    "headline": "把 AI 工具内容、运营实践和自动化能力，沉淀为可传播内容与可运行系统。",
+    "summary": "南通大学应用统计学专业 2027 届本科生。能独立完成选题、研究、文案、封面、发布和复盘，也能使用 Claude Code、Codex 与 OpenClaw 将重复流程做成 Skill 和自动化脚本。",
+    "education": "南通大学 / 应用统计学本科 / 2027 届",
+    "availability": "暑期全职，开学后兼职",
+    "location": "江苏",
+    "metrics": [
+      {
+        "value": "15B+",
+        "label": "Token 累计使用",
+        "note": "Claude Code + Codex"
+      },
+      {
+        "value": "10w+",
+        "label": "内容累计播放",
+        "note": "小红书 + 抖音"
+      },
+      {
+        "value": "¥7.6k",
+        "label": "累计销售总额",
+        "note": "内容推广结果"
+      },
+      {
+        "value": "9.3w",
+        "label": "单条最高播放",
+        "note": "抖音价格横评"
+      }
+    ],
+    "capabilities": [
+      {
+        "index": "01",
+        "title": "AI 工具内容运营",
+        "description": "围绕用户怎么选、怎么避坑、怎么上手组织内容，而不是只做泛化工具介绍。"
+      },
+      {
+        "index": "02",
+        "title": "平台发布与数据复盘",
+        "description": "熟悉小红书、抖音等内容平台，能够结合播放、互动和推广数据判断内容效果。"
+      },
+      {
+        "index": "03",
+        "title": "AI 提升生产效率",
+        "description": "使用 Claude Code、Codex 与 OpenClaw 辅助研究、内容生产、素材整理和发布准备。"
+      },
+      {
+        "index": "04",
+        "title": "经验沉淀为系统",
+        "description": "把稳定做法整理成 Prompt、Skill、脚本和工作台，并在真实流程中持续迭代。"
+      }
+    ],
+    "workingModel": {
+      "human": "本人负责目标、选题、事实核验、最终判断、发布和复盘。",
+      "ai": "AI 负责加速资料整理、结构探索、初稿、素材准备和重复性操作。",
+      "result": "保持内容责任归属清晰，同时让单人工作流具备更高产能和可复用性。"
+    },
+    "caseIds": ["token-relay-content-operations"],
+    "projectIds": ["xhs-publish-skill", "daily-ai-digest", "prompt-manager", "virtuals-whale-radar", "AI-Coding"],
+    "resume": {
+      "file": "/resume/mei-yandong-ai-content-operations-intern.pdf",
+      "preview": "/resume/mei-yandong-ai-content-operations-intern-preview.png",
+      "label": "梅炎栋 - 南通大学 - 2027 届 - AI 内容运营实习生"
+    },
+    "contact": {
+      "phone": "136-5510-3680",
+      "phoneHref": "tel:+8613655103680",
+      "email": "2557900463@qq.com",
+      "emailHref": "mailto:2557900463@qq.com",
+      "twitter": "@MYanDong1",
+      "twitterHref": "https://x.com/MYanDong1",
+      "github": "MeiYanDong",
+      "githubHref": "https://github.com/MeiYanDong",
+      "wechat": "MYanDong-"
+    }
+  }
+]

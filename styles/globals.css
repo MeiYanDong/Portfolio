@@ -107,7 +107,7 @@ a:hover {
   border-radius: 6px;
   font-weight: 600;
   font-size: 0.875rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

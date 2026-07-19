@@ -11,6 +11,7 @@ out/
 # 生产构建
 build/
 dist/
+output/
 
 # 环境变量文件
 .env

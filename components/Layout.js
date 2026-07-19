@@ -1,136 +1,176 @@
 import Link from 'next/link'
 import { GitHubIcon, XiaohongshuIcon, TwitterIcon, JikeIcon } from './SocialIcons'
 
+const navigation = [
+  { label: '首页', href: '/' },
+  { label: '项目', href: '/projects' },
+  { label: '案例', href: '/cases' },
+  { label: '文章', href: '/articles' },
+  { label: '关于', href: '/about' },
+  { label: '联系', href: '/contact' }
+]
+
 export default function Layout({ children }) {
   return (
     <div className="layout">
-      {/* 导航栏 */}
-      <nav className="nav">
-        <div className="container">
-          <div className="nav-content">
-            <Link href="/" className="logo">
-              Portfolio
-            </Link>
-            <div className="nav-links">
-              <Link href="/">首页</Link>
-              <Link href="/projects">项目</Link>
-              <Link href="/articles">文章</Link>
-              <Link href="/about">关于</Link>
-              <Link href="/contact">联系</Link>
-            </div>
+      <nav className="nav" aria-label="主导航">
+        <div className="nav-shell">
+          <Link href="/" className="logo" aria-label="梅炎栋个人网站首页">
+            梅炎栋
+          </Link>
+          <div className="nav-links">
+            {navigation.map((item) => (
+              <Link href={item.href} key={item.href}>{item.label}</Link>
+            ))}
           </div>
         </div>
       </nav>
 
-      {/* 主要内容 */}
-      <main className="main">
-        {children}
-      </main>
+      <div className="main">{children}</div>
 
-      {/* 页脚 */}
       <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <p>&copy; 2025 Portfolio. 用心设计，极简至上。</p>
-            <div className="social-links">
-              <a href="https://github.com/MeiYanDong" target="_blank" rel="noopener" className="social-link">
-                <GitHubIcon size={16} />
-                <span>GitHub</span>
-              </a>
-              <a href="https://www.xiaohongshu.com/user/profile/64800729000000000f006c55" target="_blank" rel="noopener" className="social-link">
-                <XiaohongshuIcon size={16} />
-                <span>小红书</span>
-              </a>
-              <a href="https://x.com/MYanDong1" target="_blank" rel="noopener" className="social-link">
-                <TwitterIcon size={16} />
-                <span>推特</span>
-              </a>
-              <a href="https://okjk.co/gjPeyX" target="_blank" rel="noopener" className="social-link">
-                <JikeIcon size={16} />
-                <span>即刻</span>
-              </a>
-              <span className="wechat">微信: MYanDong-</span>
-            </div>
+        <div className="footer-shell">
+          <div className="footer-brand">
+            <strong>梅炎栋</strong>
+            <span>AI 内容运营 / Vibe Coding</span>
+            <a href="mailto:2557900463@qq.com">2557900463@qq.com</a>
           </div>
+          <div className="social-links">
+            <a href="https://github.com/MeiYanDong" target="_blank" rel="noopener noreferrer" className="social-link">
+              <GitHubIcon size={16} />
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.xiaohongshu.com/user/profile/64800729000000000f006c55" target="_blank" rel="noopener noreferrer" className="social-link">
+              <XiaohongshuIcon size={16} />
+              <span>小红书</span>
+            </a>
+            <a href="https://x.com/MYanDong1" target="_blank" rel="noopener noreferrer" className="social-link">
+              <TwitterIcon size={16} />
+              <span>推特</span>
+            </a>
+            <a href="https://okjk.co/gjPeyX" target="_blank" rel="noopener noreferrer" className="social-link">
+              <JikeIcon size={16} />
+              <span>即刻</span>
+            </a>
+            <span className="wechat">微信：MYanDong-</span>
+          </div>
+          <p className="copyright">&copy; 2026 梅炎栋</p>
         </div>
       </footer>
 
       <style jsx>{`
         .layout {
-          min-height: 100vh;
           display: flex;
           flex-direction: column;
+          min-height: 100vh;
         }
 
         .nav {
-          background: var(--bg-primary);
-          border-bottom: 1px solid var(--border-color);
-          padding: 1rem 0;
           position: sticky;
           top: 0;
           z-index: 100;
+          border-bottom: 1px solid var(--border-color);
+          background: rgba(15, 15, 15, 0.9);
+          backdrop-filter: blur(16px);
         }
 
-        .nav-content {
+        .nav-shell,
+        .footer-shell {
+          width: 100%;
+          max-width: 1480px;
+          margin: 0 auto;
+          padding-right: 1.5rem;
+          padding-left: 1.5rem;
+        }
+
+        .nav-shell {
           display: flex;
-          justify-content: space-between;
+          gap: 2rem;
           align-items: center;
+          justify-content: space-between;
+          min-height: 64px;
         }
 
         .logo {
-          font-size: 1.25rem;
-          font-weight: 700;
+          flex: 0 0 auto;
+          color: var(--text-primary);
+          font-size: 1rem;
+          font-weight: 800;
+        }
+
+        .logo:hover {
           color: var(--accent-purple);
         }
 
         .nav-links {
           display: flex;
-          gap: 2rem;
+          gap: 1.75rem;
+          align-items: center;
+          min-width: 0;
         }
 
         .nav-links a {
+          flex: 0 0 auto;
           color: var(--text-secondary);
-          font-weight: 500;
-          transition: color 0.2s ease;
+          font-size: 0.84rem;
+          font-weight: 600;
         }
 
         .nav-links a:hover {
-          color: var(--accent-purple);
+          color: var(--text-primary);
         }
 
         .main {
           flex: 1;
+          min-width: 0;
           padding: 2rem 0;
         }
 
         .footer {
-          background: var(--bg-card);
-          border-top: 1px solid var(--border-color);
-          padding: 2rem 0;
           margin-top: 4rem;
+          border-top: 1px solid var(--border-color);
+          background: rgba(18, 18, 18, 0.92);
         }
 
-        .footer-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 1rem;
+        .footer-shell {
+          display: grid;
+          grid-template-columns: minmax(220px, 1fr) auto auto;
+          gap: 2.5rem;
+          align-items: end;
+          padding-top: 2.5rem;
+          padding-bottom: 2.5rem;
+        }
+
+        .footer-brand {
+          display: grid;
+          gap: 0.18rem;
+        }
+
+        .footer-brand strong {
+          font-size: 0.95rem;
+        }
+
+        .footer-brand span,
+        .footer-brand a,
+        .copyright {
+          color: var(--text-secondary);
+          font-size: 0.76rem;
         }
 
         .social-links {
           display: flex;
-          gap: 1.5rem;
+          flex-wrap: wrap;
+          gap: 0.75rem 1.25rem;
           align-items: center;
+          justify-content: flex-end;
         }
 
         .social-link {
-          display: flex;
+          display: inline-flex;
+          gap: 0.4rem;
           align-items: center;
-          gap: 0.5rem;
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          transition: color 0.2s ease;
+          font-size: 0.78rem;
         }
 
         .social-link:hover {
@@ -139,34 +179,50 @@ export default function Layout({ children }) {
 
         .wechat {
           color: var(--text-secondary);
-          font-size: 0.875rem;
-          padding: 0.25rem 0.75rem;
-          background: var(--bg-primary);
-          border-radius: 4px;
-          border: 1px solid var(--border-color);
+          font-size: 0.78rem;
         }
 
-        @media (max-width: 768px) {
-          .nav-content {
-            flex-direction: column;
+        .copyright {
+          margin: 0;
+          white-space: nowrap;
+        }
+
+        @media (max-width: 860px) {
+          .footer-shell {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            align-items: start;
+          }
+
+          .social-links {
+            justify-content: flex-start;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .nav-shell,
+          .footer-shell {
+            padding-right: 1rem;
+            padding-left: 1rem;
+          }
+
+          .nav-shell {
             gap: 1rem;
           }
 
           .nav-links {
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem 1.25rem;
+            gap: 1.15rem;
+            overflow-x: auto;
+            padding: 0.7rem 0;
+            scrollbar-width: none;
           }
 
-          .footer-content {
-            flex-direction: column;
-            text-align: center;
+          .nav-links::-webkit-scrollbar {
+            display: none;
           }
 
-          .social-links {
-            flex-wrap: wrap;
-            justify-content: center;
+          .nav-links a {
+            font-size: 0.8rem;
           }
         }
       `}</style>

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "token-relay-content-operations",
+    "title": "Token 中转站内容运营与转化",
+    "shortTitle": "Token 中转站内容运营",
+    "year": "2026",
+    "period": "2026.04 - 2026.05",
+    "status": "已完成",
+    "category": "AI 工具内容运营",
+    "role": "独立内容运营 / AI 协作",
+    "channels": ["小红书", "抖音"],
+    "headline": "用价格横评、避坑指南和工具教育，把 AI API 的复杂选择转化为可传播内容与可追踪销售结果。",
+    "description": "围绕 Claude API、Claude Code 和国内 API 中转站，独立完成选题、研究、内容制作、发布准备和数据复盘，并将 AI 协作引入生产流程。",
+    "goal": "面向需要使用 Claude API 与 Claude Code、但不清楚价格差异、服务风险和上手方法的用户，提供可以直接辅助选择的内容，并通过推广链路验证内容是否带来真实转化。",
+    "audience": "正在比较国内 API 中转服务、关注价格与稳定性，或希望提高 Claude Code 使用效率的 AI 工具用户。",
+    "cover": "/cases/token-relay-content-operations/douyin-views.png",
+    "coverAlt": "抖音账号作品页中 API 中转站价格横评获得 9.3 万播放",
+    "metrics": [
+      {
+        "value": "10w+",
+        "label": "累计播放量",
+        "note": "小红书 + 抖音"
+      },
+      {
+        "value": "9.3w",
+        "label": "单条最高播放",
+        "note": "抖音价格横评"
+      },
+      {
+        "value": "¥7,614.90",
+        "label": "累计销售总额",
+        "note": "推广后台原始口径"
+      },
+      {
+        "value": "115",
+        "label": "累计网络订单",
+        "note": "推广后台原始口径"
+      }
+    ],
+    "responsibilities": [
+      "独立确定内容方向，将用户问题拆成价格横评、服务避坑和效率教育三类选题。",
+      "完成资料核验、信息结构、文案、封面与发布准备，并根据平台差异调整表达。",
+      "使用 AI 协助研究、初稿、素材整理和流程提效，最终判断、核验、发布与复盘由本人负责。",
+      "持续查看播放与推广后台数据，用真实结果判断内容是否产生传播和转化。"
+    ],
+    "strategy": [
+      {
+        "index": "01",
+        "title": "价格横评",
+        "description": "将不同 API 中转站的模型价格放进同一比较框架，降低用户在分散信息中做选择的成本。"
+      },
+      {
+        "index": "02",
+        "title": "避坑指南",
+        "description": "围绕服务稳定性、使用风险和购买前判断组织内容，回答用户最担心的问题。"
+      },
+      {
+        "index": "03",
+        "title": "工具教育",
+        "description": "用 Claude Code 效率技巧承接更广泛的工具用户，建立不只依赖价格信息的内容入口。"
+      },
+      {
+        "index": "04",
+        "title": "AI 协作生产",
+        "description": "把研究、结构整理、文案初稿、素材准备和发布检查组织成可重复流程，提高单人内容生产效率。"
+      }
+    ],
+    "workflow": [
+      "从真实使用问题中确定选题与目标读者",
+      "核验价格、服务信息与工具操作细节",
+      "与 AI 协作完成结构、初稿和素材整理",
+      "人工完成判断、修改、发布与数据复盘"
+    ],
+    "samples": [
+      {
+        "title": "国内 API 中转站价格横评（2026 最新）",
+        "platform": "小红书",
+        "status": "在线",
+        "result": "价格对比内容",
+        "url": "https://www.xiaohongshu.com/discovery/item/69d7d7d3000000001f0004c1?source=webshare&xhsshare=pc_web&xsec_token=ABobH-JvQleEk8iM4eVSoUOSjRdk2TXoeXIA270gOUMMQ=&xsec_source=pc_share"
+      },
+      {
+        "title": "国内 API 中转站价格横评",
+        "platform": "抖音",
+        "status": "截图存档",
+        "result": "9.3w 播放",
+        "url": null
+      },
+      {
+        "title": "Claude API 中转站避坑指南",
+        "platform": "小红书",
+        "status": "在线",
+        "result": "服务避坑内容",
+        "url": "https://www.xiaohongshu.com/discovery/item/69d87d41000000001f002755?source=webshare&xhsshare=pc_web&xsec_token=ABOomdP_qHEfs8jRrGEUsnWXALTD5ZbhnE0vixnlcvfJc=&xsec_source=pc_share"
+      },
+      {
+        "title": "Claude Code 12 个效率技巧",
+        "platform": "抖音",
+        "status": "在线",
+        "result": "工具教育内容",
+        "url": "https://v.douyin.com/6RBU6-3IjTE"
+      }
+    ],
+    "evidence": [
+      {
+        "title": "传播结果",
+        "image": "/cases/token-relay-content-operations/douyin-views.png",
+        "alt": "抖音作品列表中 API 中转站价格横评获得 9.3 万播放",
+        "caption": "抖音账号作品页截图：价格横评内容获得 9.3 万播放。原视频已下架，因此以后台截图存档。"
+      },
+      {
+        "title": "转化结果",
+        "image": "/cases/token-relay-content-operations/sales-dashboard.png",
+        "alt": "Token 中转站推广后台累计销售与订单数据",
+        "caption": "推广后台原始截图：累计销售总额 ¥7,614.90、累计网络订单 115、累计净应收结算 ¥2,490.95。销售总额与实际净应收分开标注。"
+      }
+    ],
+    "resultSummary": "这次实践证明，面向工具用户的内容不应停留在泛泛介绍。围绕价格、风险和上手效率组织信息，能够同时获得传播数据与可追踪转化结果。",
+    "metricNote": "页面使用推广后台原始字段。累计销售总额为 ¥7,614.90，累计净应收结算为 ¥2,490.95；两者分别表示成交规模与结算口径。",
+    "relatedProjects": ["xhs-publish-skill", "daily-ai-digest", "prompt-manager"],
+    "skills": ["选题策划", "内容研究", "小红书", "抖音", "数据复盘", "AI 协作", "流程自动化"]
+  }
+]
