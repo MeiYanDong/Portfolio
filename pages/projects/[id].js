@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import ProjectCaseStudy from '../../components/ProjectCaseStudy'
+import projectCaseStudies from '../../data/projectCaseStudies.json'
 import projectsData from '../../data/projects.json'
 
 const tierLabels = {
@@ -104,6 +106,20 @@ export default function ProjectDetail({ project, nextProject }) {
           }
         `}</style>
       </div>
+    )
+  }
+
+  const caseStudy = projectCaseStudies[project.id]
+
+  if (caseStudy) {
+    return (
+      <>
+        <Head>
+          <title>{`${project.title} - 梅炎栋`}</title>
+          <meta name="description" content={caseStudy.headline || project.description} />
+        </Head>
+        <ProjectCaseStudy project={project} caseStudy={caseStudy} nextProject={nextProject} />
+      </>
     )
   }
 

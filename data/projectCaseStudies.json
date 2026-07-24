@@ -1,0 +1,345 @@
+{
+  "42-market-sniper": {
+    "label": "链上策略案例",
+    "period": "2026.05 - 至今",
+    "status": "持续迭代",
+    "headline": "从开盘规则中发现低价筹码机会，并把一次次执行实验沉淀为多 Bot 自动交易系统。",
+    "summary": "项目围绕 42Space 预测市场的开盘窗口展开：T+19 路线承担部分反狙击溢价，换取更早的成交排名；T+20 路线避开反狙击溢价，再通过双 Builder、独立 RPC 和精确秒级执行争取首位。",
+    "metrics": [
+      {
+        "value": "+1536 U",
+        "label": "总净盈亏",
+        "note": "已实现减 Gas"
+      },
+      {
+        "value": "+21.0%",
+        "label": "历史净收益率",
+        "note": "截至 2026-07-24"
+      },
+      {
+        "value": "240.63 U",
+        "label": "累计 Gas",
+        "note": "0.4205 BNB / 1,201 笔"
+      },
+      {
+        "value": "1,748 条",
+        "label": "本地账本",
+        "note": "完整同步"
+      }
+    ],
+    "platform": {
+      "title": "机会不在预测结果，而在开盘规则",
+      "lead": "42Space 将一个事件拆成多个可以交易的 Outcome Token。市场开放后，参与者可以买入、卖出或调整仓位；价格会随着筹码供给和资金流持续变化。",
+      "items": [
+        {
+          "label": "平台是什么",
+          "title": "可以持续交易的链上事件市场",
+          "body": "42Space 把持续交易和结算机制结合在一起。每个结果对应一种 Outcome Token，交易者可以在结算前围绕相对价格进入或退出，而不是只能等待最终开奖。",
+          "link": {
+            "label": "查看 42 Markets",
+            "url": "https://docs.42.space/getting-started/protocol-mechanics-101/42-markets"
+          }
+        },
+        {
+          "label": "机会如何出现",
+          "title": "新市场开盘时，低价筹码转瞬即逝",
+          "body": "项目最初从开发者文档和链上合约入手，自动发现即将开盘的市场，并在人工点击无法稳定覆盖的秒级窗口内完成准备、买入和后续退出。目标不是预测一切，而是把规则带来的执行机会变成可重复流程。",
+          "link": {
+            "label": "查看合约部署",
+            "url": "https://docs.42.space/api/deployments"
+          }
+        }
+      ],
+      "note": "公开 REST API 负责市场发现和数据补全，真实买卖通过 BNB Chain 上的市场合约完成。"
+    },
+    "timing": {
+      "title": "同一个 20 秒窗口，两种不同取舍",
+      "lead": "平台加入开盘前 20 秒反狙击溢价后，策略不再只是“越早越好”。我们把问题拆成排名优先和成本优先两条路线，并让不同 Bot 分别验证。",
+      "routes": [
+        {
+          "time": "T+19",
+          "label": "排名优先",
+          "title": "承担部分溢价，换取更早成交",
+          "body": "交易在第 19 秒目标区间进入 Builder。策略接受尚未完全消失的溢价，核心目标是进入更靠前的区块位置，在后续资金进入前拿到筹码。",
+          "tradeoff": "优势：成交排名更早。代价：买入成本包含部分反狙击溢价。"
+        },
+        {
+          "time": "T+20",
+          "label": "成本优先",
+          "title": "避开反狙击溢价，再争取首位",
+          "body": "交易只允许在第 20 秒执行。为了避免等待造成的排名损失，程序会提前私有提交，并通过精确秒级执行器限制交易不能在 T+19 落地。",
+          "tradeoff": "优势：避开前 20 秒溢价。代价：必须和其他等待 T+20 的交易竞争首位。"
+        }
+      ]
+    },
+    "evolution": [
+      {
+        "index": "01",
+        "stage": "定时执行",
+        "title": "先让程序在指定时间自动买入",
+        "problem": "人工盯盘和点击无法稳定命中秒级开盘窗口。",
+        "decision": "读取市场开始时间，提前生成买入计划，到设定时刻触发交易。",
+        "result": "完成从人工操作到无人值守执行的第一步。"
+      },
+      {
+        "index": "02",
+        "stage": "预构建与预签",
+        "title": "把开盘瞬间的工作移到开盘前",
+        "problem": "临场查询余额、授权、报价和签名会消耗关键时间。",
+        "decision": "进入热窗口前完成资金检查、授权、calldata 构建和交易签名，开盘时只负责发送。",
+        "result": "热路径从一串 RPC 请求缩短为一次原始交易广播。"
+      },
+      {
+        "index": "03",
+        "stage": "双 RPC 广播",
+        "title": "同一笔交易走两条独立传播路径",
+        "problem": "单个 RPC 的延迟和抖动会直接影响区块排名。",
+        "decision": "向两个独立 RPC 同时发送同一笔已签名交易，并在短窗口内重复广播。",
+        "result": "降低单点延迟，让最快接受的 RPC 负责把交易送入网络。"
+      },
+      {
+        "index": "04",
+        "stage": "Builder Tip",
+        "title": "把买入和 Builder 激励放进私有 bundle",
+        "problem": "公共传播只能提高到达概率，无法稳定争取区块前排位置。",
+        "decision": "同时提交两个 Builder，给成功打包的一方支付 Tip；两个 Tip 使用相同 nonce，最多只有一个会成交。",
+        "result": "形成双 Builder 私有通道，并保留真实接受耗时和链上 Tip 证据。"
+      },
+      {
+        "index": "05",
+        "stage": "精确秒级与多 Bot",
+        "title": "把时间边界、资金和策略全部隔离",
+        "problem": "仅靠 Builder 时间参数无法保证不提前成交，一个钱包的 nonce 或资金问题也可能影响全部策略。",
+        "decision": "部署链上精确秒级执行器，并将系统拆成多个独立 Bot；每个 Bot 使用自己的钱包、RPC、nonce、资金和买卖策略。",
+        "result": "T+19 与 T+20 可以并行实验，单个 Bot 的异常不会拖垮其他执行路线。"
+      }
+    ],
+    "system": {
+      "title": "多个 Bot 共享情报，不共享执行风险",
+      "lead": "系统把市场发现集中起来，但把交易执行彻底隔离。公共信息可以共享，钱包、RPC、nonce、资金和卖出状态必须归属于具体 Bot。",
+      "flow": [
+        {
+          "title": "发现",
+          "detail": "链上日志 + 42 REST"
+        },
+        {
+          "title": "判断",
+          "detail": "市场分类 + 买入规则"
+        },
+        {
+          "title": "准备",
+          "detail": "资金检查 + 预签交易"
+        },
+        {
+          "title": "执行",
+          "detail": "双 Builder + 独立 RPC"
+        },
+        {
+          "title": "退出",
+          "detail": "定时 / 价格 / 订单流"
+        },
+        {
+          "title": "复盘",
+          "detail": "回执 + 排名 + Gas"
+        }
+      ],
+      "mechanisms": [
+        {
+          "title": "双广播机制",
+          "body": "私有 Builder 路线争取区块排序，独立 RPC 路线承担公开传播或卖出执行；具体是否允许公共回退由每条策略决定。"
+        },
+        {
+          "title": "资金分散",
+          "body": "资金拆到多个热钱包，单个 Bot 余额不足、nonce 异常或服务重启时，其他策略仍可独立运行。"
+        },
+        {
+          "title": "策略隔离",
+          "body": "不同 Bot 可以选择 T+19、T+20、不同结果组合和不同退出方式，不需要修改一套全局规则。"
+        },
+        {
+          "title": "证据闭环",
+          "body": "每次执行保留广播时间、首个接受方、交易回执、市场排名、Gas 与最终仓位，避免把“已发送”误当成“已成交”。"
+        }
+      ]
+    },
+    "playbook": [
+      {
+        "market": "Meme / FDV 区间",
+        "signal": "首次发现时锁定真实价格所在区间",
+        "buy": "买入命中区间及相邻档位，避免临开盘刷新改变计划",
+        "sell": "开盘后快速退出，并保留止损边界",
+        "principle": "先固定信息，再追求执行速度"
+      },
+      {
+        "market": "体育精确比分",
+        "signal": "比较两侧非平局比分组合的相对价格",
+        "buy": "选择价格更低一侧的五个核心比分，人工计划优先",
+        "sell": "赛前退出、保留少量筹码，或按指定事件持有",
+        "principle": "用组合覆盖代替单点猜测"
+      },
+      {
+        "market": "日常固定模板",
+        "signal": "结合外部数据判断目标结果或价格档位",
+        "buy": "为已知模板预先配置结果、时间与资金",
+        "sell": "达到目标价格或固定时间后退出",
+        "principle": "把重复市场变成可验证流程"
+      },
+      {
+        "market": "长周期事件",
+        "signal": "人工判断事件价值与结果组合",
+        "buy": "按市场地址精确指定结果与仓位，不使用全局默认",
+        "sell": "订单流触发、赛前退出或持有至结算",
+        "principle": "让退出规则与持有周期匹配"
+      }
+    ],
+    "principles": {
+      "buy": [
+        "先决定是否值得买，再决定如何抢；展示和通知不等于自动交易。",
+        "开盘前完成资金、授权、nonce 和签名准备，热路径不临时增加慢查询。",
+        "每个市场设置资金上限，每个 Bot 只使用隔离的小额热钱包。",
+        "错过目标时间就放弃，不在价格和排名已经变化后盲目追单。"
+      ],
+      "sell": [
+        "短窗口策略优先快速兑现，不把开盘抢筹自动变成长线预测。",
+        "体育市场可以赛前退出，长周期事件可以保留小比例筹码至结算。",
+        "价格目标、固定时间、止损和订单流触发由市场类型分别配置。",
+        "卖出必须避让下一次买入热窗口，不能用同一钱包 nonce 破坏预签交易。"
+      ]
+    },
+    "evidence": [
+      {
+        "featured": true,
+        "date": "2026.07.16 - 07.17",
+        "title": "西班牙 vs 阿根廷：双 Bot 独立获利",
+        "metric": "合计净收益 +142.34 U",
+        "summary": "同一场精确比分市场形成了一次真正可比的策略对照：Bot3 在 T+19、Bot1 在 T+20 分别买入西班牙取胜的五个核心比分，各投入 49.60 U。两台 Bot 使用独立钱包、RPC 和退出路径，最终均完成卖出并取得正收益。",
+        "facts": [
+          "总投入 99.20 U",
+          "总卖出 251.35 U",
+          "扣 Gas 后 +142.34 U"
+        ],
+        "botResults": [
+          {
+            "bot": "Bot1",
+            "route": "T+20 成本优先",
+            "invested": "49.60 U",
+            "returned": "119.65 U",
+            "gas": "5.32 U",
+            "net": "+64.05 U",
+            "roi": "+129.1%"
+          },
+          {
+            "bot": "Bot3",
+            "route": "T+19 排名优先",
+            "invested": "49.60 U",
+            "returned": "131.70 U",
+            "gas": "3.16 U",
+            "net": "+78.29 U",
+            "roi": "+157.8%"
+          }
+        ],
+        "links": [
+          {
+            "label": "Bot1 T+20 买入",
+            "url": "https://bscscan.com/tx/0xfcc207c4ef67bdcb9c3311c9731b024e1587307e22aa67536362888746dabc76"
+          },
+          {
+            "label": "Bot1 批量卖出",
+            "url": "https://bscscan.com/tx/0x3217f0735e486fb058ccbbb73b632d4faadfa94753cf7a7257d24fc0402e5cd4"
+          },
+          {
+            "label": "Bot3 T+19 买入",
+            "url": "https://bscscan.com/tx/0xb25fba354d25e310dc4d5ee5d0c2d3111f3b1b16802b9fa1ff637012f6332717"
+          },
+          {
+            "label": "Bot3 2-0 卖出",
+            "url": "https://bscscan.com/tx/0xb96e4197b87fbe44cb8d7b6f246963af97a20948f39f87e8de269ba85286459f"
+          },
+          {
+            "label": "查看市场合约",
+            "url": "https://bscscan.com/address/0x479Ca9F5060441D6CCDBD6DF21B8948f425589C4"
+          }
+        ]
+      },
+      {
+        "date": "2026.07.11",
+        "title": "OpenRouter 严格 T+20",
+        "metric": "市场排名 1 / 4",
+        "summary": "交易落在首个 T+20 区块，txIndex 为 1。48Club 在 239ms 内接受 bundle，买入与 0.001 BNB Tip 在同一区块连续成交，没有公共 RPC 回退。",
+        "facts": [
+          "T+20 首区块",
+          "txIndex 1",
+          "48Club 239ms"
+        ],
+        "links": [
+          {
+            "label": "查看买入交易",
+            "url": "https://bscscan.com/tx/0xb1d3f3a42dd2fb1f00ac63f9fe2dba5f6400732cfc18624d8c91cac5386e57b8"
+          }
+        ]
+      },
+      {
+        "date": "2026.07.10",
+        "title": "T+19 路线连续修复",
+        "metric": "两次市场排名第 1",
+        "summary": "CASHCAT 暴露 Builder 时间参数和公共回退问题后，JUGGERNAUT 与 HOODRAT 使用修复后的原子执行路线，均落在 T+19 并取得市场第一，且没有公共 RPC 回退。",
+        "facts": [
+          "JUGGERNAUT rank 1",
+          "HOODRAT rank 1",
+          "builder_only"
+        ],
+        "links": [
+          {
+            "label": "JUGGERNAUT",
+            "url": "https://bscscan.com/tx/0x599a87003e898d8533050f0136e7c0ffdbb68c6e73d69320092e1758cc7f0906"
+          },
+          {
+            "label": "HOODRAT",
+            "url": "https://bscscan.com/tx/0x2793e31a0aeb932f9614c79cff7c6b3345d69b4096dbb35d8648c34158b106e1"
+          }
+        ]
+      }
+    ],
+    "dashboard": {
+      "image": "/projects/covers/42-market-sniper.png",
+      "alt": "42Space Bot1-Bot5 累计净盈亏曲线和每日净增加图",
+      "caption": "截至 2026-07-24 的项目看板：Bot1-Bot5 扣除 Gas 后累计净盈亏 +1536 U，历史净收益率 +21.0%，当日净增加 +6.8365 U，当前浮盈亏 0 U；本地账本 1,748 条并已同步。数据用于说明历史执行结果，不代表未来收益。"
+    },
+    "lessons": [
+      {
+        "index": "01",
+        "title": "更早广播不一定更快",
+        "body": "$GENIUS 测试中，开盘前 750ms 广播的交易被打进前一个区块并回滚。此后开盘前只做预签和私有准备，不默认向公共网络提前发送。"
+      },
+      {
+        "index": "02",
+        "title": "Builder 参数不是链上硬约束",
+        "body": "一次 T+19 计划实际落在 T+18，证明仅设置时间参数无法保证不提前执行。项目随后部署精确秒级执行器，由链上合约承担时间边界。"
+      },
+      {
+        "index": "03",
+        "title": "隔离比统一更重要",
+        "body": "资金不足、外部交易占用 nonce 和单个 RPC 故障都真实发生过。多 Bot 最终选择共享发现、隔离执行，让失败停留在一个钱包和一条策略里。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "GitHub 源码",
+        "url": "https://github.com/MeiYanDong/42space"
+      },
+      {
+        "label": "42 Markets",
+        "url": "https://docs.42.space/getting-started/protocol-mechanics-101/42-markets"
+      },
+      {
+        "label": "REST API Alpha",
+        "url": "https://docs.42.space/api/rest-api-alpha"
+      },
+      {
+        "label": "BNB Chain 合约部署",
+        "url": "https://docs.42.space/api/deployments"
+      }
+    ],
+    "disclosure": "页面中的收益、Gas、交易排名和链上链接均来自项目看板与交易回执。策略描述用于展示产品与工程实践，不构成投资建议，也不承诺未来收益。"
+  }
+}
