@@ -10,4 +10,4 @@
 - [x] 本地完整门禁通过。
 - [x] Pull Request 的 `quality` 检查通过。
 - [x] 启用 `main` 分支保护并关闭 GitHub Pages。
-- [ ] 合并后 Netlify 生产版本与提交 SHA 一致，生产冒烟通过。
+- [x] 合并后 Netlify 生产版本与提交 SHA 一致，生产冒烟通过。

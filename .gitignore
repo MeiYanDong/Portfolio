@@ -42,6 +42,7 @@ Thumbs.db
 .cache/
 .parcel-cache/
 .playwright-cli/
+.netlify/
 playwright-report/
 test-results/
 
