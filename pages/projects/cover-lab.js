@@ -75,9 +75,11 @@ export default function CoverLab() {
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(storageKey)
+      // Restore browser-only review state after hydration so the server markup stays deterministic.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setSelections(JSON.parse(saved))
     } catch {
-      setSelections({})
+      // Ignore malformed legacy selections and keep the empty default.
     }
   }, [])
 
@@ -122,7 +124,9 @@ export default function CoverLab() {
           </div>
 
           <div className="cover-lab-actions">
-            <span>{selectedCount} / {projects.length} 已选择</span>
+            <span>
+              {selectedCount} / {projects.length} 已选择
+            </span>
             <button type="button" onClick={copySummary} disabled={!summary}>
               {copied ? <Check size={16} /> : <Copy size={16} />}
               {copied ? '已复制' : '复制选择结果'}
@@ -161,10 +165,15 @@ export default function CoverLab() {
                     <article
                       className={`candidate${selected ? ' selected' : ''}`}
                       key={direction.id}
-                      onClick={() => setSelections((current) => ({ ...current, [project.id]: direction.id }))}
+                      onClick={() =>
+                        setSelections((current) => ({ ...current, [project.id]: direction.id }))
+                      }
                     >
                       <span className="candidate-image">
-                        <img src={src} alt={`${project.title} ${direction.id}：${direction.title}`} />
+                        <img
+                          src={src}
+                          alt={`${project.title} ${direction.id}：${direction.title}`}
+                        />
                         <a
                           href={src}
                           target="_blank"
@@ -371,7 +380,10 @@ export default function CoverLab() {
           color: inherit;
           text-align: left;
           cursor: pointer;
-          transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+          transition:
+            border-color 160ms ease,
+            transform 160ms ease,
+            background 160ms ease;
         }
 
         .candidate:hover {

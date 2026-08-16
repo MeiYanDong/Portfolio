@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Grid2X2, List } from 'lucide-react'
 import { getAllArticles, getAllSeries, getAllTopics } from '../../lib/articles'
 
@@ -71,19 +71,25 @@ function ArticleRow({ article, index }) {
 
 export default function Articles({ articles, topics, series }) {
   const router = useRouter()
-  const [selectedTopic, setSelectedTopic] = useState('全部')
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState('list')
 
   const allTopics = useMemo(() => ['全部', ...topics], [topics])
   const normalizedQuery = query.trim().toLowerCase()
+  const routeTopic = typeof router.query.topic === 'string' ? router.query.topic : ''
+  const selectedTopic = allTopics.includes(routeTopic) ? routeTopic : '全部'
 
-  useEffect(() => {
-    const topic = typeof router.query.topic === 'string' ? router.query.topic : ''
-    if (topic && allTopics.includes(topic) && topic !== selectedTopic) {
-      setSelectedTopic(topic)
+  function selectTopic(topic) {
+    const nextQuery = { ...router.query }
+    if (topic === '全部') {
+      delete nextQuery.topic
+    } else {
+      nextQuery.topic = topic
     }
-  }, [allTopics, router.query.topic, selectedTopic])
+    void router.replace({ pathname: router.pathname, query: nextQuery }, undefined, {
+      shallow: true
+    })
+  }
 
   const filteredArticles = useMemo(() => {
     const matches = articles.filter((article) => {
@@ -237,7 +243,7 @@ export default function Articles({ articles, topics, series }) {
               <button
                 type="button"
                 key={topic}
-                onClick={() => setSelectedTopic(topic)}
+                onClick={() => selectTopic(topic)}
                 className={selectedTopic === topic ? 'active' : ''}
               >
                 {topic === '全部' ? '全部主题' : topic}

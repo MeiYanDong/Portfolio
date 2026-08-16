@@ -8,12 +8,13 @@
 
 `npm run verify` 按顺序执行：
 
-1. `format:check`：只检查当前分支相对基线发生变化的文本文件，避免一次性重排遗留代码。
-2. `lint`：检查 `components`、`lib`、`pages`、`scripts` 和 `tests`，不允许 warning。
-3. `typecheck:critical`：对共用 Token 动效纯函数执行严格 JavaScript 类型检查。它不是全仓 TypeScript 覆盖。
-4. `test:contracts`：验证项目、案例、个人档案、文章系列和本地素材之间的业务引用。
-5. `build`：执行 Next.js 静态导出，并生成 `out/build-meta.json`。
-6. `test:e2e`：桌面 Chromium 和 Pixel 7 视口验证真实浏览器行为。
+1. `audit:prod`：阻断生产依赖中的 high / critical 安全漏洞。
+2. `format:check`：只检查当前分支相对基线发生变化的文本文件，避免一次性重排遗留代码。
+3. `lint`：以 ESLint 9 flat config 检查 `components`、`lib`、`pages`、`scripts` 和 `tests`，不允许 warning。
+4. `typecheck:critical`：对共用 Token 动效纯函数执行严格 JavaScript 类型检查。它不是全仓 TypeScript 覆盖。
+5. `test:contracts`：验证项目、案例、个人档案、文章系列和本地素材之间的业务引用。
+6. `build`：执行 Next.js 16 静态导出，并生成 `out/build-meta.json`。
+7. `test:e2e`：桌面 Chromium 和 Pixel 7 视口验证真实浏览器行为。
 
 ## 合并门禁
 
@@ -31,4 +32,5 @@ Netlify 是唯一生产发布方。`scripts/smoke-production.mjs` 将构建成�
 
 - 目前只有关键共用动效模块进入严格类型检查，旧页面仍是 JavaScript。
 - 大型页面和自定义 Markdown 解析器仍有维护成本，后续按功能改动风险逐步拆分，不在本次基线中重构。
+- `audit:prod` 只覆盖生产依赖；开发工具依赖仍需在升级 PR 中单独检查完整 `npm audit`。
 - 依赖安全升级独立处理；不得使用破坏性 `npm audit fix --force` 混入内容或 UI 变更。
