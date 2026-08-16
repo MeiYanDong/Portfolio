@@ -5,7 +5,7 @@ const revisionPollMs = Number(process.env.REVISION_POLL_MS || 15 * 1000)
 
 const routes = [
   { path: '/', expected: ['梅炎栋', '40B+', '把反复出现的问题做成产品和自动化系统'] },
-  { path: '/projects/', expected: ['Web2 代表项目', '内容搜索'] },
+  { path: '/projects/', expected: ['Web2 项目 - 梅炎栋', '内容搜索'] },
   { path: '/articles/', expected: ['文章系统', '科学上网入门：购买 VPN 与配置 Clash Verge'] },
   { path: '/projects/42-market-sniper/', expected: ['42Space 预测市场', '+1536 U'] }
 ]
@@ -27,7 +27,10 @@ async function fetchText(path) {
 }
 
 async function waitForRevision() {
-  if (!expectedRevision) return null
+  if (!expectedRevision) {
+    const { text } = await fetchText(`/build-meta.json?revision=${Date.now()}`)
+    return JSON.parse(text)
+  }
 
   const deadline = Date.now() + revisionTimeoutMs
   let latest = null
