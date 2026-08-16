@@ -95,7 +95,7 @@ export default function Articles({ articles, topics, series }) {
       return topicMatched && queryMatched
     })
 
-    if (selectedTopic === '全部' || matches.length < 2) return matches
+    if (matches.length < 2) return matches
 
     const orderedSeries = matches[0].seriesId
     const isSingleOrderedSeries =
@@ -141,7 +141,10 @@ export default function Articles({ articles, topics, series }) {
     <>
       <Head>
         <title>文章 - 梅炎栋</title>
-        <meta name="description" content="梅炎栋的文章系统，支持主题筛选、全文搜索、列表和网格展示。" />
+        <meta
+          name="description"
+          content="梅炎栋的文章系统，支持主题筛选、全文搜索、列表和网格展示。"
+        />
       </Head>
 
       <main className="articles-ledger-shell">
@@ -149,7 +152,9 @@ export default function Articles({ articles, topics, series }) {
           <div className="articles-hero-copy">
             <p className="articles-kicker">阅读路径</p>
             <h1>文章系统</h1>
-            <p>这里收纳长期笔记、工具方法和系列文章。文章不是归档，每一篇都保留主题、时间和所属系列，方便从问题进入阅读。</p>
+            <p>
+              这里收纳长期笔记、工具方法和系列文章。文章不是归档，每一篇都保留主题、时间和所属系列，方便从问题进入阅读。
+            </p>
           </div>
           <aside className="articles-result-card">
             <strong>{filteredArticles.length}</strong>
@@ -177,7 +182,11 @@ export default function Articles({ articles, topics, series }) {
             <div className="articles-series-grid">
               {visibleSeries.length > 0 ? (
                 visibleSeries.map((seriesItem) => (
-                  <Link key={seriesItem.id} href={`/articles/series/${seriesItem.id}`} className="series-card">
+                  <Link
+                    key={seriesItem.id}
+                    href={`/articles/series/${seriesItem.id}`}
+                    className="series-card"
+                  >
                     <div className="series-card-top">
                       <span>{seriesItem.status}</span>
                       <span>{seriesItem.articleCount} 篇</span>
@@ -236,7 +245,9 @@ export default function Articles({ articles, topics, series }) {
             ))}
           </div>
           <div className="articles-search">
-            <label htmlFor="article-search" className="articles-search-label">内容搜索</label>
+            <label htmlFor="article-search" className="articles-search-label">
+              内容搜索
+            </label>
             <input
               id="article-search"
               type="search"
@@ -411,7 +422,10 @@ export default function Articles({ articles, topics, series }) {
           background: var(--bg-card);
           color: inherit;
           text-decoration: none;
-          transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+          transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
         }
 
         .series-card:hover {
@@ -577,7 +591,10 @@ export default function Articles({ articles, topics, series }) {
           background: var(--bg-card);
           color: inherit;
           text-decoration: none;
-          transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+          transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
         }
 
         .article-card:hover {
@@ -627,7 +644,10 @@ export default function Articles({ articles, topics, series }) {
           background: transparent;
           color: inherit;
           text-decoration: none;
-          transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+          transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background 0.25s ease;
         }
 
         .article-row:hover {

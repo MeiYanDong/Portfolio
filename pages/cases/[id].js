@@ -15,13 +15,10 @@ export default function CaseDetail({ caseItem, relatedProjects }) {
       <main className="case-shell">
         <Link href="/cases" className="back-link">
           <ArrowLeft size={17} />
-          返回案例
+          返回实践案例
         </Link>
 
-        <section
-          className="case-hero"
-          style={{ '--case-cover': `url("${caseItem.cover}")` }}
-        >
+        <section className="case-hero" style={{ '--case-cover': `url("${caseItem.cover}")` }}>
           <div className="case-hero-content">
             <div className="case-detail-meta">
               <span>{caseItem.category}</span>
@@ -109,7 +106,9 @@ export default function CaseDetail({ caseItem, relatedProjects }) {
                       <span>{String(index + 1).padStart(2, '0')}</span>
                       <strong>{sample.title}</strong>
                       <p>{sample.result}</p>
-                      <em>{sample.platform} / {sample.status}</em>
+                      <em>
+                        {sample.platform} / {sample.status}
+                      </em>
                       {sample.url && <ArrowUpRight size={17} />}
                     </>
                   )
@@ -264,7 +263,12 @@ export default function CaseDetail({ caseItem, relatedProjects }) {
           inset: 0;
           z-index: -1;
           background:
-            linear-gradient(90deg, rgba(8, 8, 8, 0.98) 0%, rgba(8, 8, 8, 0.88) 48%, rgba(8, 8, 8, 0.44) 100%),
+            linear-gradient(
+              90deg,
+              rgba(8, 8, 8, 0.98) 0%,
+              rgba(8, 8, 8, 0.88) 48%,
+              rgba(8, 8, 8, 0.44) 100%
+            ),
             linear-gradient(0deg, rgba(8, 8, 8, 0.96), transparent 70%);
         }
 
@@ -644,8 +648,12 @@ export default function CaseDetail({ caseItem, relatedProjects }) {
           }
 
           .case-hero::after {
-            background:
-              linear-gradient(0deg, rgba(8, 8, 8, 0.98) 0%, rgba(8, 8, 8, 0.82) 70%, rgba(8, 8, 8, 0.48) 100%);
+            background: linear-gradient(
+              0deg,
+              rgba(8, 8, 8, 0.98) 0%,
+              rgba(8, 8, 8, 0.82) 70%,
+              rgba(8, 8, 8, 0.48) 100%
+            );
           }
 
           .case-hero h1 {

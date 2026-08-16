@@ -133,7 +133,10 @@ export default function ProjectLayoutLab() {
       <main className="lab-shell">
         <nav className="lab-nav">
           <Link href="/projects">返回项目页</Link>
-          <span>Internal LAB</span>
+          <div className="lab-nav-actions">
+            <Link href="/projects/lab/token-image-motion">Token 图片动效实验</Link>
+            <span>Internal LAB</span>
+          </div>
         </nav>
 
         <header className="lab-header">
@@ -172,6 +175,16 @@ export default function ProjectLayoutLab() {
           font-size: 0.78rem;
           letter-spacing: 0.08em;
           text-transform: uppercase;
+        }
+
+        .lab-nav-actions {
+          display: flex;
+          gap: 1.25rem;
+          align-items: center;
+        }
+
+        .lab-nav-actions a {
+          color: var(--accent-purple);
         }
 
         .lab-header {

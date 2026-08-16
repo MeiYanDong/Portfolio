@@ -4,7 +4,7 @@ import { GitHubIcon, XiaohongshuIcon, TwitterIcon, JikeIcon } from './SocialIcon
 const navigation = [
   { label: '首页', href: '/' },
   { label: '项目', href: '/projects' },
-  { label: '案例', href: '/cases' },
+  { label: '实践案例', href: '/cases' },
   { label: '文章', href: '/articles' },
   { label: '关于', href: '/about' },
   { label: '联系', href: '/contact' }
@@ -20,7 +20,9 @@ export default function Layout({ children }) {
           </Link>
           <div className="nav-links">
             {navigation.map((item) => (
-              <Link href={item.href} key={item.href}>{item.label}</Link>
+              <Link href={item.href} key={item.href}>
+                {item.label}
+              </Link>
             ))}
           </div>
         </div>
@@ -32,23 +34,43 @@ export default function Layout({ children }) {
         <div className="footer-shell">
           <div className="footer-brand">
             <strong>梅炎栋</strong>
-            <span>AI 内容运营 / Vibe Coding</span>
+            <span>AI 内容 / 独立产品 / 自动化实践</span>
             <a href="mailto:2557900463@qq.com">2557900463@qq.com</a>
           </div>
           <div className="social-links">
-            <a href="https://github.com/MeiYanDong" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a
+              href="https://github.com/MeiYanDong"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+            >
               <GitHubIcon size={16} />
               <span>GitHub</span>
             </a>
-            <a href="https://www.xiaohongshu.com/user/profile/64800729000000000f006c55" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a
+              href="https://www.xiaohongshu.com/user/profile/64800729000000000f006c55"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+            >
               <XiaohongshuIcon size={16} />
               <span>小红书</span>
             </a>
-            <a href="https://x.com/MYanDong1" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a
+              href="https://x.com/MYanDong1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+            >
               <TwitterIcon size={16} />
               <span>推特</span>
             </a>
-            <a href="https://okjk.co/gjPeyX" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a
+              href="https://okjk.co/gjPeyX"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+            >
               <JikeIcon size={16} />
               <span>即刻</span>
             </a>

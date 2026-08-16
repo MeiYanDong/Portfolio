@@ -1,14 +1,7 @@
 import Link from 'next/link'
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  Github,
-  RadioTower
-} from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Github, RadioTower } from 'lucide-react'
 
-const sectionLinks = [
+const defaultSectionLinks = [
   { id: 'opportunity', label: '机会发现' },
   { id: 'timing', label: '19 / 20 秒' },
   { id: 'evolution', label: '程序迭代' },
@@ -17,6 +10,20 @@ const sectionLinks = [
   { id: 'evidence', label: '真实证据' },
   { id: 'lessons', label: '复盘' }
 ]
+
+const defaultPlaybookColumns = ['市场', '信号', '买入原则', '退出原则', '核心思想']
+
+function ActionIcon({ type }) {
+  if (type === 'github') {
+    return <Github size={17} />
+  }
+
+  if (type === 'live') {
+    return <RadioTower size={17} />
+  }
+
+  return <BookOpen size={17} />
+}
 
 function SectionHeading({ index, label, title, lead }) {
   return (
@@ -31,13 +38,41 @@ function SectionHeading({ index, label, title, lead }) {
   )
 }
 
-export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
+export default function ProjectCaseStudy({ project, caseStudy, nextProject, projectTrack }) {
+  const sectionLinks = caseStudy.navigation || defaultSectionLinks
+  const heroActions =
+    caseStudy.actions ||
+    [
+      project.links?.github && {
+        type: 'github',
+        label: 'GitHub 源码',
+        url: project.links.github
+      }
+    ].filter(Boolean)
+  const heroWindow = caseStudy.heroWindow || {
+    label: '核心窗口',
+    value: 'T+19 / T+20',
+    note: '排名优先 / 成本优先'
+  }
+  const strategy = caseStudy.strategy || caseStudy.timing
+  const strategyTrack = strategy.track || [
+    { value: 'T+0', label: '市场开盘' },
+    { value: 'T+19', label: '承担部分溢价' },
+    { value: 'T+20', label: '避开反狙击溢价' }
+  ]
+  const headings = caseStudy.headings || {}
+  const playbookColumns = caseStudy.playbookColumns || defaultPlaybookColumns
+  const principleLabels = caseStudy.principles.labels || {
+    buy: '自动买入原则',
+    sell: '自动卖出原则'
+  }
+
   return (
     <main className="deep-project-case">
       <div className="deep-case-shell">
-        <Link href="/projects" className="deep-back-link">
+        <Link href={projectTrack.href} className="deep-back-link">
           <ArrowLeft size={17} />
-          返回项目
+          返回 {projectTrack.label} 项目
         </Link>
 
         <section className="deep-hero">
@@ -51,32 +86,25 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <h1>{project.title}</h1>
             <p>{caseStudy.headline}</p>
             <div className="deep-hero-actions">
-              <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                <Github size={17} />
-                GitHub 源码
-                <ArrowUpRight size={15} />
-              </a>
-              <a
-                href="https://docs.42.space/getting-started/protocol-mechanics-101/42-markets"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BookOpen size={17} />
-                42 官方机制
-                <ArrowUpRight size={15} />
-              </a>
+              {heroActions.map((action) => (
+                <a href={action.url} target="_blank" rel="noopener noreferrer" key={action.url}>
+                  <ActionIcon type={action.type} />
+                  {action.label}
+                  <ArrowUpRight size={15} />
+                </a>
+              ))}
             </div>
           </div>
-          <div className="deep-hero-window" aria-label="核心策略窗口">
-            <span>核心窗口</span>
-            <strong>T+19 / T+20</strong>
-            <small>排名优先 / 成本优先</small>
+          <div className="deep-hero-window" aria-label={heroWindow.ariaLabel || heroWindow.label}>
+            <span>{heroWindow.label}</span>
+            <strong>{heroWindow.value}</strong>
+            <small>{heroWindow.note}</small>
           </div>
         </section>
 
         <section className="deep-metrics" aria-label="项目结果">
           {caseStudy.metrics.map((metric) => (
-            <div key={metric.label}>
+            <div className={metric.tone ? `is-${metric.tone}` : ''} key={metric.label}>
               <strong>{metric.value}</strong>
               <span>{metric.label}</span>
               <small>{metric.note}</small>
@@ -109,7 +137,7 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="opportunity">
               <SectionHeading
                 index="01"
-                label="项目背景与机会发现"
+                label={headings.opportunity?.label || '项目背景与机会发现'}
                 title={caseStudy.platform.title}
                 lead={caseStudy.platform.lead}
               />
@@ -132,27 +160,21 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="timing">
               <SectionHeading
                 index="02"
-                label="策略故事"
-                title={caseStudy.timing.title}
-                lead={caseStudy.timing.lead}
+                label={headings.strategy?.label || '策略故事'}
+                title={strategy.title}
+                lead={strategy.lead}
               />
-              <div className="deep-timing-track" aria-label="开盘后 19 秒与 20 秒策略窗口">
-                <div>
-                  <strong>T+0</strong>
-                  <span>市场开盘</span>
-                </div>
-                <div>
-                  <strong>T+19</strong>
-                  <span>承担部分溢价</span>
-                </div>
-                <div>
-                  <strong>T+20</strong>
-                  <span>避开反狙击溢价</span>
-                </div>
+              <div className="deep-timing-track" aria-label={strategy.ariaLabel || strategy.title}>
+                {strategyTrack.map((item) => (
+                  <div key={`${item.value}-${item.label}`}>
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </div>
+                ))}
               </div>
               <div className="deep-route-list">
-                {caseStudy.timing.routes.map((route) => (
-                  <article key={route.time}>
+                {strategy.routes.map((route) => (
+                  <article key={`${route.time}-${route.title}`}>
                     <div className="deep-route-time">{route.time}</div>
                     <div>
                       <span>{route.label}</span>
@@ -168,9 +190,12 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="evolution">
               <SectionHeading
                 index="03"
-                label="程序迭代"
-                title="每一次失败，都改变下一版执行路径"
-                lead="项目没有从一开始就拥有完整架构。时间、传播、Builder 和多钱包隔离，都是在真实交易中逐步补上的。"
+                label={headings.evolution?.label || '程序迭代'}
+                title={headings.evolution?.title || '每一次失败，都改变下一版执行路径'}
+                lead={
+                  headings.evolution?.lead ||
+                  '项目没有从一开始就拥有完整架构。时间、传播、Builder 和多钱包隔离，都是在真实交易中逐步补上的。'
+                }
               />
               <div className="deep-evolution-list">
                 {caseStudy.evolution.map((item) => (
@@ -181,9 +206,18 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
                       <h3>{item.title}</h3>
                     </div>
                     <div className="deep-evolution-detail">
-                      <p><strong>问题</strong>{item.problem}</p>
-                      <p><strong>改进</strong>{item.decision}</p>
-                      <p><strong>结果</strong>{item.result}</p>
+                      <p>
+                        <strong>问题</strong>
+                        {item.problem}
+                      </p>
+                      <p>
+                        <strong>改进</strong>
+                        {item.decision}
+                      </p>
+                      <p>
+                        <strong>结果</strong>
+                        {item.result}
+                      </p>
                     </div>
                   </article>
                 ))}
@@ -193,7 +227,7 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="system">
               <SectionHeading
                 index="04"
-                label="通用技术与策略"
+                label={headings.system?.label || '通用技术与策略'}
                 title={caseStudy.system.title}
                 lead={caseStudy.system.lead}
               />
@@ -221,39 +255,44 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="playbook">
               <SectionHeading
                 index="05"
-                label="交易原则与市场适应"
-                title="不同市场，不套用同一套买卖规则"
-                lead="执行速度只是能力之一。真正的策略来自市场结构、持有周期和退出条件之间的匹配。"
+                label={headings.playbook?.label || '交易原则与市场适应'}
+                title={headings.playbook?.title || '不同市场，不套用同一套买卖规则'}
+                lead={
+                  headings.playbook?.lead ||
+                  '执行速度只是能力之一。真正的策略来自市场结构、持有周期和退出条件之间的匹配。'
+                }
               />
               <div className="deep-playbook">
                 <div className="deep-playbook-head" aria-hidden="true">
-                  <span>市场</span>
-                  <span>信号</span>
-                  <span>买入原则</span>
-                  <span>退出原则</span>
-                  <span>核心思想</span>
+                  {playbookColumns.map((column) => (
+                    <span key={column}>{column}</span>
+                  ))}
                 </div>
                 {caseStudy.playbook.map((item) => (
                   <article key={item.market}>
                     <h3>{item.market}</h3>
-                    <p data-label="信号">{item.signal}</p>
-                    <p data-label="买入原则">{item.buy}</p>
-                    <p data-label="退出原则">{item.sell}</p>
-                    <strong data-label="核心思想">{item.principle}</strong>
+                    <p data-label={playbookColumns[1]}>{item.signal}</p>
+                    <p data-label={playbookColumns[2]}>{item.buy}</p>
+                    <p data-label={playbookColumns[3]}>{item.sell}</p>
+                    <strong data-label={playbookColumns[4]}>{item.principle}</strong>
                   </article>
                 ))}
               </div>
               <div className="deep-principles">
                 <div>
-                  <span>自动买入原则</span>
+                  <span>{principleLabels.buy}</span>
                   <ol>
-                    {caseStudy.principles.buy.map((item) => <li key={item}>{item}</li>)}
+                    {caseStudy.principles.buy.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ol>
                 </div>
                 <div>
-                  <span>自动卖出原则</span>
+                  <span>{principleLabels.sell}</span>
                   <ol>
-                    {caseStudy.principles.sell.map((item) => <li key={item}>{item}</li>)}
+                    {caseStudy.principles.sell.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ol>
                 </div>
               </div>
@@ -262,9 +301,12 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
             <section className="deep-section" id="evidence">
               <SectionHeading
                 index="06"
-                label="真实数据与链上证据"
-                title="不以“已发送”代替“已成交”"
-                lead="项目结果同时使用看板快照和链上交易回执。单次案例说明执行能力，累计数据说明历史结果，两种口径分开呈现。"
+                label={headings.evidence?.label || '真实数据与链上证据'}
+                title={headings.evidence?.title || '不以“已发送”代替“已成交”'}
+                lead={
+                  headings.evidence?.lead ||
+                  '项目结果同时使用看板快照和链上交易回执。单次案例说明执行能力，累计数据说明历史结果，两种口径分开呈现。'
+                }
               />
               <div className="deep-evidence-list">
                 {caseStudy.evidence.map((item) => (
@@ -278,7 +320,9 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
                       <h3>{item.title}</h3>
                       <p>{item.summary}</p>
                       <div className="deep-evidence-facts">
-                        {item.facts.map((fact) => <em key={fact}>{fact}</em>)}
+                        {item.facts.map((fact) => (
+                          <em key={fact}>{fact}</em>
+                        ))}
                       </div>
                       {item.botResults && (
                         <div className="deep-bot-results" aria-label={`${item.title}收益对比`}>
@@ -312,7 +356,7 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
                       )}
                     </div>
                     <div className="deep-evidence-links">
-                      {item.links.map((link) => (
+                      {(item.links || []).map((link) => (
                         <a href={link.url} target="_blank" rel="noopener noreferrer" key={link.url}>
                           {link.label}
                           <ArrowUpRight size={14} />
@@ -322,25 +366,30 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
                   </article>
                 ))}
               </div>
-              <figure className="deep-dashboard-proof">
-                <div>
-                  <span>项目看板</span>
-                  <a href={caseStudy.dashboard.image} target="_blank" rel="noopener noreferrer">
-                    查看原图
-                    <ArrowUpRight size={15} />
-                  </a>
-                </div>
-                <img src={caseStudy.dashboard.image} alt={caseStudy.dashboard.alt} />
-                <figcaption>{caseStudy.dashboard.caption}</figcaption>
-              </figure>
+              {caseStudy.dashboard && (
+                <figure className="deep-dashboard-proof">
+                  <div>
+                    <span>{caseStudy.dashboard.label || '项目看板'}</span>
+                    <a href={caseStudy.dashboard.image} target="_blank" rel="noopener noreferrer">
+                      查看原图
+                      <ArrowUpRight size={15} />
+                    </a>
+                  </div>
+                  <img src={caseStudy.dashboard.image} alt={caseStudy.dashboard.alt} />
+                  <figcaption>{caseStudy.dashboard.caption}</figcaption>
+                </figure>
+              )}
             </section>
 
             <section className="deep-section" id="lessons">
               <SectionHeading
                 index="07"
-                label="复盘"
-                title="真正沉淀下来的不是某个参数，而是边界"
-                lead="系统后来变复杂，不是为了堆技术，而是为了把已经发生过的失败变成不能再次跨越的执行边界。"
+                label={headings.lessons?.label || '复盘'}
+                title={headings.lessons?.title || '真正沉淀下来的不是某个参数，而是边界'}
+                lead={
+                  headings.lessons?.lead ||
+                  '系统后来变复杂，不是为了堆技术，而是为了把已经发生过的失败变成不能再次跨越的执行边界。'
+                }
               />
               <div className="deep-lessons">
                 {caseStudy.lessons.map((item) => (
@@ -354,23 +403,25 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
               <p className="deep-disclosure">{caseStudy.disclosure}</p>
             </section>
 
-            <section className="deep-sources">
-              <div>
-                <RadioTower size={18} />
-                <span>资料与源码</span>
-              </div>
-              <nav>
-                {caseStudy.sources.map((source) => (
-                  <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>
-                    {source.label}
-                    <ArrowUpRight size={14} />
-                  </a>
-                ))}
-              </nav>
-            </section>
+            {caseStudy.sources?.length > 0 && (
+              <section className="deep-sources">
+                <div>
+                  <RadioTower size={18} />
+                  <span>资料与源码</span>
+                </div>
+                <nav>
+                  {caseStudy.sources.map((source) => (
+                    <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>
+                      {source.label}
+                      <ArrowUpRight size={14} />
+                    </a>
+                  ))}
+                </nav>
+              </section>
+            )}
 
             <section className="deep-next-project">
-              <span>下一个项目</span>
+              <span>下一个 {projectTrack.label} 项目</span>
               <Link href={`/projects/${nextProject.id}`}>
                 <strong>{nextProject.title}</strong>
                 <p>{nextProject.resumeLine || nextProject.description}</p>
@@ -551,6 +602,18 @@ export default function ProjectCaseStudy({ project, caseStudy, nextProject }) {
 
         .deep-metrics > div:nth-child(3) strong {
           color: #f05a87;
+        }
+
+        .deep-metrics > div.is-accent strong {
+          color: var(--accent-purple);
+        }
+
+        .deep-metrics > div.is-positive strong {
+          color: #61c77a;
+        }
+
+        .deep-metrics > div.is-neutral strong {
+          color: var(--text-primary);
         }
 
         .deep-metrics span {

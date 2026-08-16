@@ -10,7 +10,7 @@
     "location": "江苏",
     "metrics": [
       {
-        "value": "15B+",
+        "value": "40B+",
         "label": "Token 累计使用",
         "note": "Claude Code + Codex"
       },
@@ -58,7 +58,13 @@
       "result": "保持内容责任归属清晰，同时让单人工作流具备更高产能和可复用性。"
     },
     "caseIds": ["token-relay-content-operations"],
-    "projectIds": ["xhs-publish-skill", "daily-ai-digest", "prompt-manager", "virtuals-whale-radar", "AI-Coding"],
+    "projectIds": [
+      "xhs-publish-skill",
+      "daily-ai-digest",
+      "prompt-manager",
+      "virtuals-whale-radar",
+      "AI-Coding"
+    ],
     "resume": {
       "file": "/resume/mei-yandong-ai-content-operations-intern.pdf",
       "preview": "/resume/mei-yandong-ai-content-operations-intern-preview.png",
