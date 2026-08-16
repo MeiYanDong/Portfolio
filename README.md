@@ -1,6 +1,6 @@
 # MeiYanDong Portfolio
 
-梅炎栋的个人网站，展示 Web2 / Web3 项目、实践案例、系列文章与个人档案。项目使用 Next.js 14 静态导出，生产站点为 [myandong.xyz](https://myandong.xyz)。
+梅炎栋的个人网站，展示 Web2 / Web3 项目、实践案例、系列文章与个人档案。项目使用 Next.js 16 静态导出，生产站点为 [myandong.xyz](https://myandong.xyz)。
 
 ## 本地开发
 
@@ -16,6 +16,7 @@ npm run dev
 ```bash
 npm run format        # 格式化当前分支发生变化的文本文件
 npm run lint          # ESLint，警告也会阻断
+npm run audit:prod    # 阻断生产依赖中的 high / critical 漏洞
 npm run typecheck:critical
 npm run test:contracts
 npm run build         # 静态导出到 out/，并写入 build-meta.json
@@ -42,4 +43,4 @@ npm run smoke:prod    # 检查生产关键路由和内容
 3. 构建生成 `/build-meta.json`，记录本次提交 SHA。
 4. 合并后的 Runtime Smoke 等待生产 SHA 一致，再验证关键路由和页面内容。
 
-详细说明见 [质量门禁](docs/engineering/quality-gates.md) 与 [部署 ADR](docs/adr/0001-netlify-canonical-deployment.md)。
+详细说明见 [质量门禁](docs/engineering/quality-gates.md)、[部署 ADR](docs/adr/0001-netlify-canonical-deployment.md) 与 [Next 16 升级 ADR](docs/adr/0002-next-16-security-upgrade.md)。
