@@ -8,6 +8,6 @@
 - [x] 增加 Netlify 配置、构建版本元数据和生产冒烟脚本。
 - [x] 增加 GitHub Actions 质量与运行时工作流。
 - [x] 本地完整门禁通过。
-- [ ] Pull Request 的 `quality` 检查通过。
-- [ ] 启用 `main` 分支保护并关闭 GitHub Pages。
+- [x] Pull Request 的 `quality` 检查通过。
+- [x] 启用 `main` 分支保护并关闭 GitHub Pages。
 - [ ] 合并后 Netlify 生产版本与提交 SHA 一致，生产冒烟通过。
