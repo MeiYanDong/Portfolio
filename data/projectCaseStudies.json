@@ -3,6 +3,23 @@
     "label": "链上策略案例",
     "period": "2026.05 - 至今",
     "status": "持续迭代",
+    "actions": [
+      {
+        "type": "github",
+        "label": "GitHub 源码",
+        "url": "https://github.com/MeiYanDong/42space"
+      },
+      {
+        "type": "docs",
+        "label": "42 官方机制",
+        "url": "https://docs.42.space/getting-started/protocol-mechanics-101/42-markets"
+      }
+    ],
+    "heroWindow": {
+      "label": "核心窗口",
+      "value": "T+19 / T+20",
+      "note": "排名优先 / 成本优先"
+    },
     "headline": "从开盘规则中发现低价筹码机会，并把一次次执行实验沉淀为多 Bot 自动交易系统。",
     "summary": "项目围绕 42Space 预测市场的开盘窗口展开：T+19 路线承担部分反狙击溢价，换取更早的成交排名；T+20 路线避开反狙击溢价，再通过双 Builder、独立 RPC 和精确秒级执行争取首位。",
     "metrics": [
@@ -213,11 +230,7 @@
         "title": "西班牙 vs 阿根廷：双 Bot 独立获利",
         "metric": "合计净收益 +142.34 U",
         "summary": "同一场精确比分市场形成了一次真正可比的策略对照：Bot3 在 T+19、Bot1 在 T+20 分别买入西班牙取胜的五个核心比分，各投入 49.60 U。两台 Bot 使用独立钱包、RPC 和退出路径，最终均完成卖出并取得正收益。",
-        "facts": [
-          "总投入 99.20 U",
-          "总卖出 251.35 U",
-          "扣 Gas 后 +142.34 U"
-        ],
+        "facts": ["总投入 99.20 U", "总卖出 251.35 U", "扣 Gas 后 +142.34 U"],
         "botResults": [
           {
             "bot": "Bot1",
@@ -266,11 +279,7 @@
         "title": "OpenRouter 严格 T+20",
         "metric": "市场排名 1 / 4",
         "summary": "交易落在首个 T+20 区块，txIndex 为 1。48Club 在 239ms 内接受 bundle，买入与 0.001 BNB Tip 在同一区块连续成交，没有公共 RPC 回退。",
-        "facts": [
-          "T+20 首区块",
-          "txIndex 1",
-          "48Club 239ms"
-        ],
+        "facts": ["T+20 首区块", "txIndex 1", "48Club 239ms"],
         "links": [
           {
             "label": "查看买入交易",
@@ -283,11 +292,7 @@
         "title": "T+19 路线连续修复",
         "metric": "两次市场排名第 1",
         "summary": "CASHCAT 暴露 Builder 时间参数和公共回退问题后，JUGGERNAUT 与 HOODRAT 使用修复后的原子执行路线，均落在 T+19 并取得市场第一，且没有公共 RPC 回退。",
-        "facts": [
-          "JUGGERNAUT rank 1",
-          "HOODRAT rank 1",
-          "builder_only"
-        ],
+        "facts": ["JUGGERNAUT rank 1", "HOODRAT rank 1", "builder_only"],
         "links": [
           {
             "label": "JUGGERNAUT",
@@ -341,5 +346,423 @@
       }
     ],
     "disclosure": "页面中的收益、Gas、交易排名和链上链接均来自项目看板与交易回执。策略描述用于展示产品与工程实践，不构成投资建议，也不承诺未来收益。"
+  },
+  "virtuals-whale-radar": {
+    "label": "链上情报产品",
+    "period": "2026.04 - 至今",
+    "status": "生产运行 / 持续迭代",
+    "actions": [
+      {
+        "type": "github",
+        "label": "GitHub 源码",
+        "url": "https://github.com/MeiYanDong/virtuals-whale-radar"
+      },
+      {
+        "type": "live",
+        "label": "访问生产站点",
+        "url": "https://virtuals.club"
+      }
+    ],
+    "heroWindow": {
+      "label": "决策主线",
+      "value": "发现 → 验证 → 准入",
+      "note": "先过滤，再承担风险"
+    },
+    "navigation": [
+      {
+        "id": "opportunity",
+        "label": "机会发现"
+      },
+      {
+        "id": "timing",
+        "label": "决策框架"
+      },
+      {
+        "id": "evolution",
+        "label": "产品迭代"
+      },
+      {
+        "id": "system",
+        "label": "系统链路"
+      },
+      {
+        "id": "playbook",
+        "label": "项目分型"
+      },
+      {
+        "id": "evidence",
+        "label": "验证证据"
+      },
+      {
+        "id": "lessons",
+        "label": "复盘"
+      }
+    ],
+    "headline": "把碎片化的发射项目、鲸鱼资金和钱包行为，转化为可筛选、可回放、可拒绝的链上决策系统。",
+    "summary": "Virtuals Whale Radar 从“盯盘工具”演进为一套发射项目决策基础设施：SignalHub 先发现项目，实时采集与回扫补齐链上事实，策略实验室用历史窗口验证规则，GO / NO-GO 门槛再决定是否允许进入执行准备。",
+    "metrics": [
+      {
+        "value": "4,136 组",
+        "label": "策略回放结果",
+        "note": "3 个历史项目数据集",
+        "tone": "accent"
+      },
+      {
+        "value": "737 条",
+        "label": "测试规则",
+        "note": "控制变量与组合策略",
+        "tone": "neutral"
+      },
+      {
+        "value": "34 类",
+        "label": "压力场景",
+        "note": "延迟、滑点、税率与走势",
+        "tone": "neutral"
+      },
+      {
+        "value": "14 组",
+        "label": "阶段候选",
+        "note": "通过硬门槛后进入 dry-run",
+        "tone": "positive"
+      }
+    ],
+    "headings": {
+      "opportunity": {
+        "label": "项目背景与机会发现"
+      },
+      "strategy": {
+        "label": "决策框架"
+      },
+      "evolution": {
+        "label": "产品与策略迭代",
+        "title": "从看见链上数据，到知道什么时候不该行动",
+        "lead": "产品的每一层都对应一个更难的问题：先把项目和资金看全，再把历史窗口变成可复现样本，最后把“看起来能买”收紧为一套可以明确拒绝的执行门槛。"
+      },
+      "system": {
+        "label": "系统链路"
+      },
+      "playbook": {
+        "label": "项目分型与策略适配",
+        "title": "项目形态不同，规则必须先分型",
+        "lead": "同一套阈值在 Strike Robot 上可能有效，在 TDS 或 ISC 上却可能完全不触发或产生大额亏损。系统先识别发射形态，再决定使用哪种观察与执行配置。"
+      },
+      "evidence": {
+        "label": "回放、拒绝与生产证据",
+        "title": "不仅展示成功候选，也展示为什么拒绝",
+        "lead": "这里的收益全部是历史回放口径，不冒充真实成交。更重要的证据，是系统能够在样本不足、结构不匹配或执行条件未就绪时输出 NO-GO。"
+      },
+      "lessons": {
+        "label": "复盘",
+        "title": "一个策略系统的价值，首先来自它拒绝了什么",
+        "lead": "项目最终沉淀的不是某个神奇阈值，而是数据、策略和执行三者之间不可跳过的验证顺序。"
+      }
+    },
+    "platform": {
+      "title": "发射窗口很短，但真正稀缺的是可靠判断",
+      "lead": "Virtuals 新项目发射前后，项目时间、税率、鲸鱼投入、加权成本、钱包持仓和交易事件分散在不同入口。手动刷新不仅慢，也很难区分“资金真的形成共识”和“少量早期样本制造的假信号”。",
+      "items": [
+        {
+          "label": "原始问题",
+          "title": "项目发现、资金行为和持仓线索彼此割裂",
+          "body": "一个项目是否值得持续关注，需要同时看发射时间、合约准备状态、分钟消耗、鲸鱼榜单、关注钱包和数据延迟。项目先把这些信息组织成可切换、可回看的统一观察台。",
+          "link": {
+            "label": "查看产品说明",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar#readme"
+          }
+        },
+        {
+          "label": "策略机会",
+          "title": "比较含税价格与真实资金成本，而不是只看涨跌",
+          "body": "核心假设是：当鲸鱼样本数量和累计投入足够，且当前含税估算 FDV 不高于鲸鱼榜单加权成本时，才可能出现值得继续验证的价格窗口。税率、资金规模和成本保护缺一不可。",
+          "link": {
+            "label": "查看回测说明",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/launch-strategy-backtest-2026-05-07.md"
+          }
+        }
+      ],
+      "note": "系统把“发现项目”和“允许执行”分开：进入项目列表只代表值得观察，通过策略回放也只代表可以进入 dry-run，任何真实广播仍需要独立的资金、授权、RPC、熔断和模拟检查。"
+    },
+    "strategy": {
+      "title": "把一次买入冲动，拆成三个可以被否决的判断",
+      "lead": "策略不是一个触发按钮，而是一条逐层收紧的证据链。任意一层不成立，项目就停在当前阶段，不会因为时间临近而自动放宽标准。",
+      "ariaLabel": "项目发现、历史回放与执行准入三层决策框架",
+      "track": [
+        {
+          "value": "SIGNAL",
+          "label": "项目与资金信号"
+        },
+        {
+          "value": "REPLAY",
+          "label": "历史窗口验证"
+        },
+        {
+          "value": "GO / NO-GO",
+          "label": "执行前硬闸"
+        }
+      ],
+      "routes": [
+        {
+          "time": "发现",
+          "label": "信息层",
+          "title": "SignalHub 先回答“哪些项目值得看”",
+          "body": "持续抓取 upcoming 与刚发射项目，补齐官方 launchInfo、合约地址和税率形态；管理员只把真正需要跟踪的项目加入 managed_projects。",
+          "tradeoff": "广泛发现，但不因为进入观察池就默认承担资金风险。"
+        },
+        {
+          "time": "验证",
+          "label": "策略层",
+          "title": "用真实历史窗口验证“什么条件才值得继续”",
+          "body": "将交易事件重放成高分辨率样本，系统测试鲸鱼人数、累计投入、税率、含税 FDV、冷却时间和预算上限，并加入延迟、滑点、价格走势等压力场景。",
+          "tradeoff": "保留表现稳定的区间，同时把高收益但缺少保护条件的规则标记为拒绝项。"
+        },
+        {
+          "time": "准入",
+          "label": "执行层",
+          "title": "GO / NO-GO 只看当前事实，不看主观期待",
+          "body": "执行前统一检查项目身份、运行状态、独立 RPC、余额、授权、simulation、预算、服务与 active fuse。只有 blockers 为空，策略才有资格进入广播准备。",
+          "tradeoff": "宁可错过窗口，也不绕过未解决的阻断项。"
+        }
+      ]
+    },
+    "evolution": [
+      {
+        "index": "01",
+        "stage": "观察台",
+        "title": "先把项目、鲸鱼和钱包放到一个页面",
+        "problem": "链上事件和项目资料分散，人工刷新难以形成连续判断。",
+        "decision": "建立实时看板、项目列表、即将发射和钱包跟踪视图。",
+        "result": "从临时查链转为按项目持续观察。"
+      },
+      {
+        "index": "02",
+        "stage": "数据完整性",
+        "title": "实时监听之外，再加入持续回扫",
+        "problem": "只依赖实时订阅会受 RPC 抖动和短时断线影响。",
+        "decision": "拆分 realtime 与 backfill，活跃期滚动补扫，结束后执行 final sweep。",
+        "result": "分钟图、榜单与钱包持仓拥有可追溯的补全路径。"
+      },
+      {
+        "index": "03",
+        "stage": "项目发现",
+        "title": "用 SignalHub 接管 upcoming 项目入口",
+        "problem": "人工添加项目容易错过发射，也难以及时补齐合约和税率信息。",
+        "decision": "建立独立 SignalHub，抓取候选、识别地址并连接 managed_projects 调度器。",
+        "result": "项目可以按发射时间自动进入 scheduled、prelaunch、live 和 ended。"
+      },
+      {
+        "index": "04",
+        "stage": "策略实验室",
+        "title": "把观点变成可重放、可消融的规则",
+        "problem": "单个项目上的盈利结果无法说明规则是否稳定，也看不出哪个条件真正有效。",
+        "decision": "建设历史回放矩阵、控制变量、压力测试、失败样本和稳定区间。",
+        "result": "策略结论从“这次赚了”升级为“哪些条件贡献了结果，哪些项目应被拒绝”。"
+      },
+      {
+        "index": "05",
+        "stage": "执行准入",
+        "title": "给策略增加身份、资金和运行时硬闸",
+        "problem": "历史回放通过不代表热钱包、授权、RPC、nonce 和当前项目状态已经就绪。",
+        "decision": "加入 prewarm、readiness、独立 execution RPC、fuse、预算隔离和统一 preflight gate。",
+        "result": "策略候选与真实广播被明确分层，NO-GO 成为系统的一等结果。"
+      }
+    ],
+    "system": {
+      "title": "一条链路连接发现、采集、判断和准入",
+      "lead": "系统不是单页看板。它由用户端、管理员端、项目发现服务、链上采集角色、策略回放工具与执行安全门组成，每一层只解决自己负责的问题。",
+      "flow": [
+        {
+          "title": "发现",
+          "detail": "SignalHub + launchInfo"
+        },
+        {
+          "title": "纳管",
+          "detail": "managed_projects"
+        },
+        {
+          "title": "采集",
+          "detail": "realtime + backfill"
+        },
+        {
+          "title": "聚合",
+          "detail": "分钟图 + 榜单 + 持仓"
+        },
+        {
+          "title": "验证",
+          "detail": "replay + stress suite"
+        },
+        {
+          "title": "准入",
+          "detail": "preflight + fuse"
+        }
+      ],
+      "mechanisms": [
+        {
+          "title": "实时与回扫双通道",
+          "body": "realtime 负责及时性，backfill 负责完整性；活跃窗口持续补扫，结束后 final sweep 收口。"
+        },
+        {
+          "title": "项目状态机",
+          "body": "项目按 draft、scheduled、prelaunch、live、ended 推进，采集和策略只在对应窗口工作。"
+        },
+        {
+          "title": "策略与执行分层",
+          "body": "回放候选不会自动升级为真实交易；dry-run、prewarm、autobuy 与 autosell 使用不同服务和显式开关。"
+        },
+        {
+          "title": "产品与运营闭环",
+          "body": "用户端提供项目、钱包与历史回看，管理员端负责项目纳管、策略配置、用户权限和积分解锁。"
+        }
+      ]
+    },
+    "playbookColumns": ["项目形态", "数据特征", "观察规则", "执行边界", "核心判断"],
+    "playbook": [
+      {
+        "market": "98 分钟 / Robotic",
+        "signal": "鲸鱼榜单人数、累计投入、税率与加权成本逐步形成有效样本",
+        "buy": "优先验证鲸鱼满 20、投入达到门槛、税率下降且含税 FDV 不高于榜单成本",
+        "sell": "先进入 dry-run；真实执行仍需预算、授权、RPC 与 preflight 全绿",
+        "principle": "SR 属于可研究样本，不等于所有项目通用"
+      },
+      {
+        "market": "低参与度项目",
+        "signal": "完整窗口内鲸鱼累计投入始终低于硬门槛",
+        "buy": "保留采集和历史回看，不为了产生候选而降低资金门槛",
+        "sell": "不进入自动执行候选",
+        "principle": "TDS 的零候选是有效结论"
+      },
+      {
+        "market": "早期样本 / 高风险走势",
+        "signal": "样本数量少、榜单成本不稳定，或压力场景出现晚期下跌",
+        "buy": "拒绝 tax-only、no-FDV、no-board-spent 等缺少保护条件的高收益规则",
+        "sell": "仅作为失败样本和消融对照",
+        "principle": "ISC 证明低门槛会放大误判"
+      },
+      {
+        "market": "无反狙击税项目",
+        "signal": "官方 launchInfo 明确 antiSniperTaxType=0",
+        "buy": "切换为独立 open-sniper profile，不复用正常税率项目的鲸鱼门槛",
+        "sell": "未知税率形态直接阻断真实调度",
+        "principle": "先识别机制，再选择执行器"
+      }
+    ],
+    "principles": {
+      "labels": {
+        "buy": "进入观察池",
+        "sell": "进入执行候选"
+      },
+      "buy": [
+        "SignalHub 发现只负责不漏项目，不负责给出买入结论。",
+        "项目身份、合约、发射时间和官方税率形态必须可以交叉确认。",
+        "实时采集与回扫共同维持数据完整性，单次页面刷新不作为策略依据。",
+        "低参与度项目允许保持零候选，不为展示效果强行降低门槛。"
+      ],
+      "sell": [
+        "先用真实历史窗口回放，再看控制变量、压力场景和失败样本。",
+        "候选规则必须同时具备资金门槛、税率门槛和成本保护。",
+        "dry-run 通过后仍需独立检查余额、授权、RPC、simulation、预算和 fuse。",
+        "任何 blocker 未解决都输出 NO-GO，不用人工口头判断绕过。"
+      ]
+    },
+    "evidence": [
+      {
+        "featured": true,
+        "date": "2026.05.07",
+        "title": "Strike Robot 高分辨率历史回放",
+        "metric": "1,034 个样本 / 基线模拟 +38.05%",
+        "summary": "系统从 753 笔交易中解析出 602 个事件，形成 1,034 个高分辨率样本。用户基线规则在该历史窗口内模拟买入 2 次、投入 100 VIRTUAL，期末模拟收益 +38.050128 VIRTUAL。该结果用于筛选策略，不代表真实成交。",
+        "facts": ["753 笔交易", "602 个解析事件", "17,496 组参数策略"],
+        "links": [
+          {
+            "label": "查看回测报告",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/launch-strategy-backtest-2026-05-07.md"
+          }
+        ]
+      },
+      {
+        "date": "2026.05.07",
+        "title": "策略测试矩阵与硬门槛重筛",
+        "metric": "737 条规则 / 34 类场景",
+        "summary": "三组历史数据共产生 4,136 个规则结果。加入鲸鱼人数 20、累计投入至少 50,000 V、税率不高于 95% 的硬门槛后，最终保留 14 组可进入 dry-run 的候选。",
+        "facts": ["4,136 个结果", "1,501 个硬门槛结果", "14 组 dry-run 候选"],
+        "links": [
+          {
+            "label": "查看矩阵报告",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/phases/phase-052-strategy-test-matrix-report.md"
+          }
+        ]
+      },
+      {
+        "date": "2026.05.07",
+        "title": "TDS 与 ISC：拒绝也是策略结果",
+        "metric": "TDS 0 组硬门槛候选 / ISC 0 组 dry-run 候选",
+        "summary": "TDS 完整窗口最高鲸鱼投入约 29,822 V，达不到 50,000 V 门槛；ISC 在低阈值下虽会触发，但早期窗口估值结果显著为负。系统保留数据，却不把它们包装成可交易策略。",
+        "facts": ["TDS 最高约 29,822 V", "ISC 低阈值高风险", "不降低门槛补候选"],
+        "links": [
+          {
+            "label": "查看策略实验室证据",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/phases/phase-052-strategy-test-matrix-report.md"
+          }
+        ]
+      },
+      {
+        "date": "持续运行",
+        "title": "从研究工具到生产产品",
+        "metric": "HTTPS 生产站点 + 四角色运行链路",
+        "summary": "项目已部署用户端、管理员端和认证入口；SignalHub 负责发现，writer、realtime、backfill 分别承担 API 与聚合、实时采集和历史补扫。备份、日志轮转与一键诊断也进入运维流程。",
+        "facts": ["邮箱验证注册", "自动项目调度", "历史项目回看"],
+        "links": [
+          {
+            "label": "访问 virtuals.club",
+            "url": "https://virtuals.club"
+          },
+          {
+            "label": "查看系统结构",
+            "url": "https://github.com/MeiYanDong/virtuals-whale-radar#第二部分面向开发者的系统结构说明"
+          }
+        ]
+      }
+    ],
+    "dashboard": {
+      "label": "策略实验室",
+      "image": "/projects/covers/virtuals-whale-radar.png",
+      "alt": "Virtuals Whale Radar 策略实验室中 TDS 项目没有通过硬门槛候选的界面",
+      "caption": "真实策略实验室截图：TDS 的完整回放窗口只有 144 个样本，最高鲸鱼累计投入约 29,822 V，未通过 50,000 V 硬门槛，因此候选区保持为空。这个页面重点展示系统如何拒绝，而不是为了视觉完整强行生成策略。"
+    },
+    "lessons": [
+      {
+        "index": "01",
+        "title": "盈利回放不等于可交易策略",
+        "body": "SR 上表现最好的低门槛规则更可能过拟合单个项目。项目保留了高收益结果，但没有让它绕过样本数量、资金规模和 dry-run 验证。"
+      },
+      {
+        "index": "02",
+        "title": "单一变量会制造虚假的确定性",
+        "body": "只看税率、只看鲸鱼投入或只看 FDV 都会显著改变暴露。控制变量结果显示，缺少成本保护的规则会买入更多仓位，却不一定带来更好的风险收益。"
+      },
+      {
+        "index": "03",
+        "title": "执行安全必须独立于策略信心",
+        "body": "即使历史规则通过，当前项目身份、余额、授权、RPC、simulation 或 fuse 仍可能阻断执行。统一 GO / NO-GO 将这些事实放在同一个不可绕过的入口。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "GitHub 源码",
+        "url": "https://github.com/MeiYanDong/virtuals-whale-radar"
+      },
+      {
+        "label": "产品与系统说明",
+        "url": "https://github.com/MeiYanDong/virtuals-whale-radar#readme"
+      },
+      {
+        "label": "Launch Strategy Backtest",
+        "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/launch-strategy-backtest-2026-05-07.md"
+      },
+      {
+        "label": "Strategy Test Matrix",
+        "url": "https://github.com/MeiYanDong/virtuals-whale-radar/blob/main/docs/phases/phase-052-strategy-test-matrix-report.md"
+      }
+    ],
+    "disclosure": "页面中的收益百分比来自历史回放与压力测试，不是链上真实成交或已实现收益。生产站点与系统状态用于说明产品和工程落地，不构成投资建议，也不承诺任何交易结果。"
   }
 }

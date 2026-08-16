@@ -18,7 +18,20 @@ function cleanArticle(article) {
   return meta
 }
 
-export default function ArticleDetail({ article, html, series, seriesArticles, previousArticle, nextArticle }) {
+function articleBodyWithoutDuplicateTitle(content, title) {
+  const leadingHeading = content.match(/^#\s+(.+?)\n+/)
+  if (!leadingHeading || leadingHeading[1].trim() !== title.trim()) return content
+  return content.slice(leadingHeading[0].length)
+}
+
+export default function ArticleDetail({
+  article,
+  html,
+  series,
+  seriesArticles,
+  previousArticle,
+  nextArticle
+}) {
   return (
     <>
       <Head>
@@ -449,14 +462,19 @@ export async function getStaticProps({ params }) {
 
   const series = article.seriesId ? getSeriesById(article.seriesId) : null
   const seriesArticles = article.seriesId ? getArticlesBySeries(article.seriesId) : []
-  const currentIndex = seriesArticles.findIndex((seriesArticle) => seriesArticle.slug === article.slug)
+  const currentIndex = seriesArticles.findIndex(
+    (seriesArticle) => seriesArticle.slug === article.slug
+  )
   const previousArticle = currentIndex > 0 ? seriesArticles[currentIndex - 1] : null
   const nextArticle = currentIndex > -1 ? seriesArticles[currentIndex + 1] || null : null
 
   return {
     props: {
       article: cleanArticle(article),
-      html: markdownToHtml(article.content, article.slug),
+      html: markdownToHtml(
+        articleBodyWithoutDuplicateTitle(article.content, article.title),
+        article.slug
+      ),
       series,
       seriesArticles: seriesArticles.map(cleanArticle),
       previousArticle: previousArticle ? cleanArticle(previousArticle) : null,

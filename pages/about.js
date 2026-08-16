@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ArrowUpRight, Download } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import profilesData from '../data/profiles.json'
 
 const timeline = [
@@ -17,12 +17,14 @@ const timeline = [
   {
     year: '2026',
     title: '进入内容运营与自动化',
-    description: '围绕 AI 工具完成内容选题、制作、发布和复盘，并把稳定流程沉淀为 Skill 与自动化脚本。'
+    description:
+      '围绕 AI 工具完成内容选题、制作、发布和复盘，并把稳定流程沉淀为 Skill 与自动化脚本。'
   },
   {
     year: '现在',
-    title: '寻找 AI 内容运营实践机会',
-    description: '希望在真实团队中继续验证内容判断、平台运营、AI 协作和流程搭建能力。'
+    title: '持续公开项目与实践过程',
+    description:
+      '继续围绕 AI 内容、个人工具和自动化系统做项目，并把过程、证据和阶段性判断公开下来。'
   }
 ]
 
@@ -35,7 +37,7 @@ export default function About() {
         <title>关于 - 梅炎栋</title>
         <meta
           name="description"
-          content="了解梅炎栋的学习背景、AI 内容运营能力、Vibe Coding 实践与人机协作方式。"
+          content="了解梅炎栋的学习背景、AI 内容实践、独立产品、自动化系统与人机协作方式。"
         />
       </Head>
 
@@ -44,22 +46,20 @@ export default function About() {
           <div className="about-hero-copy">
             <p className="about-kicker">关于</p>
             <h1>梅炎栋</h1>
-            <strong>{profile.role} / Vibe Coding 实践者</strong>
-            <p>{profile.summary}</p>
+            <strong>AI 内容、独立产品与自动化实践者</strong>
+            <p>
+              南通大学应用统计学专业 2027 届本科生。我关注 AI
+              如何进入真实工作：既做内容，也把反复出现的问题做成产品、Skill 和自动化脚本。
+            </p>
             <div className="about-actions">
-              <Link href="/profiles/ai-content-operations" className="about-primary-action">
-                查看岗位档案
+              <Link href="/projects" className="about-primary-action">
+                浏览代表项目
                 <ArrowUpRight size={17} />
               </Link>
-              <a
-                href={profile.resume.file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="about-secondary-action"
-              >
-                <Download size={17} />
-                PDF 简历
-              </a>
+              <Link href="/profiles/ai-content-operations" className="about-secondary-action">
+                查看专业档案
+                <ArrowUpRight size={17} />
+              </Link>
             </div>
           </div>
         </section>
@@ -72,18 +72,18 @@ export default function About() {
           </div>
           <div>
             <span>方向</span>
-            <strong>AI 内容运营</strong>
-            <small>内容、产品与自动化</small>
+            <strong>AI 内容与产品</strong>
+            <small>内容实践、独立产品与自动化</small>
           </div>
           <div>
-            <span>到岗</span>
-            <strong>暑期全职</strong>
-            <small>开学后可兼职</small>
+            <span>实践方式</span>
+            <strong>做中记录</strong>
+            <small>项目、案例与文章持续公开</small>
           </div>
           <div>
             <span>所在地</span>
             <strong>{profile.location}</strong>
-            <small>可沟通实习安排</small>
+            <small>保持线上交流与协作</small>
           </div>
         </section>
 
@@ -94,10 +94,13 @@ export default function About() {
           </div>
           <div className="about-prose">
             <p>
-              我的起点不是“会使用多少 AI 工具”，而是遇到一个真实问题后，能否把它研究清楚、组织成别人能理解的内容，或者进一步做成可运行的产品。
+              我的起点不是“会使用多少 AI
+              工具”，而是遇到一个真实问题后，能否把它研究清楚、组织成别人能理解的内容，或者进一步做成可运行的产品。
             </p>
             <p>
-              在内容工作中，我独立负责选题、事实核验、文案、素材、发布和复盘；在产品工作中，我使用 Claude Code 与 Codex 完成需求拆解、实现、测试和迭代。AI 参与执行，但目标、判断和最终责任始终由我承担。
+              在内容工作中，我独立负责选题、事实核验、文案、素材、发布和复盘；在产品工作中，我使用
+              Claude Code 与 Codex 完成需求拆解、实现、测试和迭代。AI
+              参与执行，但目标、判断和最终责任始终由我承担。
             </p>
             <p>
               我希望个人网站不只陈列作品，所以把“项目”“案例”“文章”分开：项目说明做出了什么，案例说明如何产生结果，文章记录对具体问题的理解。
@@ -108,7 +111,7 @@ export default function About() {
         <section className="about-section">
           <div className="about-section-heading">
             <span>能力结构</span>
-            <h2>四项可以进入真实工作的能力</h2>
+            <h2>四项贯穿内容与产品的能力</h2>
           </div>
           <div className="about-capability-list">
             {profile.capabilities.map((capability) => (
@@ -220,7 +223,12 @@ export default function About() {
           inset: 0;
           z-index: -1;
           background:
-            linear-gradient(90deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.9) 52%, rgba(7, 7, 7, 0.24) 100%),
+            linear-gradient(
+              90deg,
+              rgba(7, 7, 7, 0.99) 0%,
+              rgba(7, 7, 7, 0.9) 52%,
+              rgba(7, 7, 7, 0.24) 100%
+            ),
             linear-gradient(0deg, rgba(7, 7, 7, 0.9), transparent 70%);
         }
 
@@ -462,7 +470,12 @@ export default function About() {
           }
 
           .about-hero::after {
-            background: linear-gradient(0deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.86) 72%, rgba(7, 7, 7, 0.48) 100%);
+            background: linear-gradient(
+              0deg,
+              rgba(7, 7, 7, 0.99) 0%,
+              rgba(7, 7, 7, 0.86) 72%,
+              rgba(7, 7, 7, 0.48) 100%
+            );
           }
 
           .about-hero h1 {

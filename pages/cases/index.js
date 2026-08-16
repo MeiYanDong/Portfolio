@@ -7,7 +7,7 @@ export default function Cases() {
   return (
     <>
       <Head>
-        <title>案例 - 梅炎栋</title>
+        <title>实践案例 - 梅炎栋</title>
         <meta
           name="description"
           content="梅炎栋的内容运营、增长转化与 AI 协作案例，呈现目标、过程、职责、结果和原始证据。"
@@ -17,17 +17,18 @@ export default function Cases() {
       <main className="cases-shell">
         <section className="cases-hero">
           <div>
-            <p className="cases-kicker">案例</p>
+            <p className="cases-kicker">实践案例</p>
             <h1>把工作过程，变成结果证据。</h1>
             <p>
-              项目回答“做出了什么”，案例回答“为什么做、如何推进、产生了什么结果”。这里记录内容运营、增长转化和 AI 协作的完整闭环。
+              项目回答“做出了什么”，案例回答“为什么做、如何推进、产生了什么结果”。这里记录内容运营、增长转化和
+              AI 协作的完整闭环。
             </p>
           </div>
           <Link href="/profiles/ai-content-operations" className="profile-entry">
             <BriefcaseBusiness size={18} />
             <span>
-              查看岗位档案
-              <small>AI 内容运营实习生</small>
+              查看专业档案
+              <small>经历、能力与简历</small>
             </span>
             <ArrowUpRight size={17} />
           </Link>
@@ -254,7 +255,9 @@ export default function Cases() {
           object-fit: cover;
           object-position: center 32%;
           filter: saturate(0.76) contrast(1.04);
-          transition: transform 0.45s ease, filter 0.3s ease;
+          transition:
+            transform 0.45s ease,
+            filter 0.3s ease;
         }
 
         .case-row:hover .case-image img {

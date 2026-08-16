@@ -1,5 +1,5 @@
 ---
-title: 科学上网：购买 VPN 与配置 Clash Verge
+title: 科学上网入门：购买 VPN 与配置 Clash Verge
 summary: 从白月光、SakuraCat 的购买与订阅，到在 Clash Verge 里管理订阅、测试节点和开启系统代理的完整流程。
 date: 2026-07-06
 topics: 科学上网
@@ -12,6 +12,7 @@ cover: /articles/scientific-networking/vpn-baiyueguang-01-package.png
 ## 一、购买 VPN
 
 ## 01 首选：白月光
+
 优势：网络稳定、IP 干净
 
 注册、登录 [白月光](https://www.sibker.com/register?invite_code=pen2jYoo)
@@ -27,6 +28,7 @@ cover: /articles/scientific-networking/vpn-baiyueguang-01-package.png
 ![image.png](/articles/scientific-networking/vpn-baiyueguang-02-subscription.png)
 
 ## 02 备选：SakuraCat
+
 优势：流量较多，高性价比
 劣势：网络最近不稳定
 
@@ -58,7 +60,7 @@ cover: /articles/scientific-networking/vpn-baiyueguang-01-package.png
 
 1. 使用过程，打开「系统代理」即可
 2. 「虚拟网卡模式」一般默认关闭就行
-    1. 默认是灰色状态，需要安装
+   1. 默认是灰色状态，需要安装
 
 Tip：电脑关机前需要关闭「系统代理」，否则有概率开机后，无线网失效（必须开着系统代理才能使用）
 

@@ -1,5 +1,5 @@
 ---
-title: 科学上网进阶：静态住宅
+title: 科学上网进阶：静态住宅 与 AI 网络智能分流脚本
 summary: Claude 对 IP 管控很严，一般的节点不行，得配上静态住宅 IP。
 date: 2026-07-07
 topics: 科学上网
@@ -9,9 +9,9 @@ seriesOrder: 2
 cover: /articles/scientific-networking/static-ip-01-purchase.png
 ---
 
-# 科学上网进阶：静态住宅（应对 ChatGPT、Claude 等 AI 软件封号）
+# 科学上网进阶：静态住宅 与 AI 网络智能分流脚本
 
-阅读前，先完成 [科学上网：节点配置](https://www.notion.so/32bad7f2aeaa80fca694ee0d36a79892?pvs=24)
+阅读前，先完成 [科学上网入门：购买 VPN 与配置 Clash Verge](https://www.notion.so/32bad7f2aeaa80fca694ee0d36a79892?pvs=24)
 
 ### 客户端
 

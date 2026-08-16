@@ -1,77 +1,130 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ArrowUpRight, BriefcaseBusiness, Download } from 'lucide-react'
+import { ArrowUpRight, BriefcaseBusiness } from 'lucide-react'
+import TokenProofPreview from '../components/TokenProofPreview'
 import profilesData from '../data/profiles.json'
 import casesData from '../data/cases.json'
 import projectsData from '../data/projects.json'
+import { getAllArticles } from '../lib/articles'
+import { getTrackProjects, projectTrackOrder, projectTracks } from '../lib/projectTracks'
 
-export default function Home() {
+const showcaseProjectIds = [
+  'daily-ai-digest',
+  'xhs-publish-skill',
+  '42-market-sniper',
+  'virtuals-whale-radar'
+]
+
+function formatDate(date) {
+  return String(date || '').replace(/-/g, '.')
+}
+
+export default function Home({ latestArticles }) {
   const profile = profilesData[0]
   const featuredCase = casesData[0]
-  const featuredProjects = profile.projectIds
-    .slice(0, 4)
+  const featuredProjects = showcaseProjectIds
     .map((projectId) => projectsData.find((project) => project.id === projectId))
     .filter(Boolean)
+  const trackCounts = Object.fromEntries(
+    projectTrackOrder.map((trackId) => [trackId, getTrackProjects(projectsData, trackId).length])
+  )
 
   return (
     <>
       <Head>
-        <title>梅炎栋 - AI 内容运营与 Vibe Coding</title>
+        <title>梅炎栋 - AI 内容、独立产品与自动化实践</title>
         <meta
           name="description"
-          content="梅炎栋的个人网站：AI 内容运营、Vibe Coding 项目、内容自动化流程与真实运营案例。"
+          content="梅炎栋的个人网站：记录 AI 内容实践、独立产品、自动化系统、真实案例与长期文章。"
         />
       </Head>
 
       <main className="home-shell">
         <section className="home-hero">
           <div className="home-hero-copy">
-            <p className="home-kicker">AI 内容运营 / Vibe Coding</p>
+            <p className="home-kicker">AI 内容 / 独立产品 / 自动化实践</p>
             <h1>梅炎栋</h1>
-            <strong>把 AI 工具内容、运营实践和自动化能力，沉淀为可传播内容与可运行系统。</strong>
+            <strong>我用 AI 做内容，也把反复出现的问题做成产品和自动化系统。</strong>
             <p>
-              南通大学应用统计学专业 2027 届本科生。独立完成内容选题、研究、制作、发布和复盘，并使用 Claude Code、Codex 将重复流程做成 Skill 与自动化脚本。
+              这里记录我做过的产品、产生过真实结果的实践，以及在解决具体问题时写下的文章。你不必按顺序阅读，可以从任何感兴趣的入口开始。
             </p>
             <div className="home-actions">
-              <Link href="/profiles/ai-content-operations" className="home-primary-action">
-                <BriefcaseBusiness size={17} />
-                查看岗位档案
-              </Link>
-              <Link href={`/cases/${featuredCase.id}`} className="home-secondary-action">
-                阅读代表案例
+              <Link href="/projects" className="home-primary-action">
+                浏览代表项目
                 <ArrowUpRight size={17} />
               </Link>
-              <a
-                href={profile.resume.file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="home-secondary-action"
-              >
-                <Download size={17} />
-                简历
-              </a>
+              <Link href="/cases" className="home-secondary-action">
+                查看实践案例
+                <ArrowUpRight size={17} />
+              </Link>
+              <Link href="/about" className="home-secondary-action">
+                关于我
+              </Link>
             </div>
           </div>
           <div className="home-availability">
-            <span>目前状态</span>
-            <strong>{profile.availability}</strong>
-            <small>{profile.education}</small>
+            <span>当前关注</span>
+            <strong>AI 内容、个人工具与可运行系统</strong>
+            <small>持续公开项目、实践过程与阶段性判断</small>
+            <Link href="/profiles/ai-content-operations" className="home-profile-link">
+              <BriefcaseBusiness size={15} />
+              专业档案
+              <ArrowUpRight size={15} />
+            </Link>
           </div>
         </section>
 
         <section className="home-metrics" aria-label="关键结果">
-          {profile.metrics.map((metric) => (
-            <div key={metric.label}>
-              <strong>{metric.value}</strong>
-              <span>{metric.label}</span>
-              <small>{metric.note}</small>
-            </div>
-          ))}
+          {profile.metrics.map((metric) => {
+            const isTokenMetric = metric.label === 'Token 累计使用'
+
+            return (
+              <div
+                key={metric.label}
+                className={`home-metric${isTokenMetric ? ' home-metric--token' : ''}`}
+              >
+                <div className="home-metric-copy">
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                  <small>{metric.note}</small>
+                </div>
+                {isTokenMetric && <TokenProofPreview />}
+              </div>
+            )
+          })}
+        </section>
+
+        <section className="home-start" aria-labelledby="home-start-title">
+          <div className="home-start-heading">
+            <span>从这里开始</span>
+            <h2 id="home-start-title">第一次来，可以从三条路径认识我</h2>
+            <p>看做出来的东西、看事情如何被做成，或者直接进入一篇具体文章。</p>
+          </div>
+          <nav className="home-routes" aria-label="网站内容入口">
+            <Link href="/projects">
+              <span>项目</span>
+              <strong>我做出了什么</strong>
+              <p>产品、工具、内容工作流与链上自动化系统。</p>
+              <ArrowUpRight size={17} />
+            </Link>
+            <Link href="/cases">
+              <span>实践案例</span>
+              <strong>我如何把事情做成</strong>
+              <p>目标、职责、推进过程、真实结果与原始证据。</p>
+              <ArrowUpRight size={17} />
+            </Link>
+            <Link href="/articles">
+              <span>文章</span>
+              <strong>我如何理解问题</strong>
+              <p>从具体问题出发，记录方法、判断与完整操作路径。</p>
+              <ArrowUpRight size={17} />
+            </Link>
+          </nav>
         </section>
 
         <section className="home-section home-case-section">
           <div className="home-section-heading">
-            <span>代表案例</span>
+            <span>实践案例</span>
             <h2>内容不只获得播放，也要回答是否带来真实结果</h2>
             <p>{featuredCase.headline}</p>
           </div>
@@ -104,48 +157,77 @@ export default function Home() {
 
         <section className="home-section home-projects-section">
           <div className="home-section-heading">
-            <span>相关项目</span>
-            <h2>用真实项目证明产品与自动化能力</h2>
-            <p>从内容发布到信息整理和链上雷达，项目记录我如何把个人需求做成可以运行的系统。</p>
+            <span>代表项目</span>
+            <h2>把反复出现的问题，做成能运行的工具和系统</h2>
+            <p>
+              项目横跨内容工作流、个人工具和链上策略。这里先给出四个起点，完整项目仍可按 Web2 与
+              Web3 路线浏览。
+            </p>
           </div>
-          <div className="home-project-list">
-            {featuredProjects.map((project, index) => (
-              <Link href={`/projects/${project.id}`} key={project.id}>
+          <div className="home-project-directory">
+            <div className="home-project-list">
+              {featuredProjects.map((project, index) => (
+                <Link href={`/projects/${project.id}`} key={project.id}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <strong>{project.title}</strong>
+                    <small>
+                      {project.year} / {project.tags.slice(0, 3).join(' / ')}
+                    </small>
+                  </div>
+                  <p>{project.resumeLine || project.description}</p>
+                  <ArrowUpRight size={17} />
+                </Link>
+              ))}
+            </div>
+            <nav className="home-track-routes" aria-label="项目经验路线">
+              {projectTrackOrder.map((trackId) => {
+                const track = projectTracks[trackId]
+
+                return (
+                  <Link href={track.href} key={track.id}>
+                    <div>
+                      <span>{track.label} 路线</span>
+                      <em>{trackCounts[trackId]} 个项目</em>
+                    </div>
+                    <strong>{track.title}</strong>
+                    <p>{track.description}</p>
+                    <ArrowUpRight size={17} />
+                  </Link>
+                )
+              })}
+            </nav>
+          </div>
+        </section>
+
+        <section className="home-section home-articles-section">
+          <div className="home-section-heading">
+            <span>最近文章</span>
+            <h2>从一个具体问题开始，保留完整的理解过程</h2>
+            <p>
+              文章不是项目说明的附录，而是另一条认识路径：这里会留下方法、选择依据和可以复用的操作过程。
+            </p>
+          </div>
+          <div className="home-article-list">
+            {latestArticles.map((article, index) => (
+              <Link href={`/articles/${article.slug}`} key={article.slug}>
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <div>
-                  <strong>{project.title}</strong>
-                  <small>{project.year} / {project.tags.slice(0, 3).join(' / ')}</small>
+                  <small>{article.topics[0] || '文章'}</small>
+                  <strong>{article.title}</strong>
+                  <p>{article.summary}</p>
                 </div>
-                <p>{project.resumeLine || project.description}</p>
+                <em>
+                  {formatDate(article.date)} / {article.readingTime} 分钟
+                </em>
                 <ArrowUpRight size={17} />
               </Link>
             ))}
+            <Link href="/articles" className="home-all-articles">
+              浏览全部文章
+              <ArrowUpRight size={16} />
+            </Link>
           </div>
-          <Link href="/projects" className="home-inline-link">
-            浏览全部项目
-            <ArrowUpRight size={16} />
-          </Link>
-        </section>
-
-        <section className="home-routes" aria-label="网站内容结构">
-          <Link href="/projects">
-            <span>项目</span>
-            <strong>做出了什么</strong>
-            <p>产品、工具、自动化流程与可运行系统。</p>
-            <ArrowUpRight size={17} />
-          </Link>
-          <Link href="/cases">
-            <span>案例</span>
-            <strong>如何产生结果</strong>
-            <p>目标、职责、过程、结果和原始证据。</p>
-            <ArrowUpRight size={17} />
-          </Link>
-          <Link href="/articles">
-            <span>文章</span>
-            <strong>如何理解问题</strong>
-            <p>围绕具体主题沉淀可检索的实践笔记。</p>
-            <ArrowUpRight size={17} />
-          </Link>
         </section>
       </main>
 
@@ -187,7 +269,12 @@ export default function Home() {
           inset: 0;
           z-index: -1;
           background:
-            linear-gradient(90deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.92) 48%, rgba(7, 7, 7, 0.28) 100%),
+            linear-gradient(
+              90deg,
+              rgba(7, 7, 7, 0.99) 0%,
+              rgba(7, 7, 7, 0.92) 48%,
+              rgba(7, 7, 7, 0.28) 100%
+            ),
             linear-gradient(0deg, rgba(7, 7, 7, 0.9), transparent 70%);
         }
 
@@ -196,6 +283,7 @@ export default function Home() {
         }
 
         .home-kicker,
+        .home-start-heading > span,
         .home-section-heading > span,
         .home-routes > a > span,
         .home-availability > span {
@@ -279,6 +367,21 @@ export default function Home() {
           font-size: 0.76rem;
         }
 
+        .home-profile-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          width: fit-content;
+          margin-top: 1rem;
+          color: #d2d2d2;
+          font-size: 0.76rem;
+          font-weight: 700;
+        }
+
+        .home-profile-link:hover {
+          color: var(--accent-purple);
+        }
+
         .home-metrics {
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -290,6 +393,75 @@ export default function Home() {
           min-width: 0;
           padding: 1.35rem 1.25rem;
           border-right: 1px solid var(--border-color);
+        }
+
+        .home-metric-copy {
+          display: grid;
+          min-width: 0;
+        }
+
+        .home-metric--token {
+          grid-template-columns: minmax(0, 1fr) 128px;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .home-token-proof {
+          position: relative;
+          display: block;
+          width: 128px;
+          height: 78px;
+          overflow: hidden;
+          justify-self: end;
+          border: 0;
+          border-radius: 5px;
+          padding: 0;
+          background: #fff;
+          line-height: 0;
+          cursor: zoom-in;
+        }
+
+        .home-token-proof > img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 220ms ease;
+        }
+
+        .home-token-proof-indicator {
+          position: absolute;
+          right: 6px;
+          bottom: 6px;
+          display: grid;
+          width: 24px;
+          height: 24px;
+          margin: 0 !important;
+          place-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.36);
+          border-radius: 50%;
+          background: rgba(8, 8, 8, 0.76);
+          color: #fff;
+          opacity: 0;
+          transform: translateY(3px);
+          transition:
+            opacity 180ms ease,
+            transform 180ms ease;
+        }
+
+        .home-token-proof:hover > img {
+          transform: scale(1.025);
+        }
+
+        .home-token-proof:hover .home-token-proof-indicator,
+        .home-token-proof:focus-visible .home-token-proof-indicator {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .home-token-proof:focus-visible {
+          outline: 2px solid var(--accent-purple);
+          outline-offset: 3px;
         }
 
         .home-metrics > div:last-child {
@@ -310,6 +482,26 @@ export default function Home() {
         .home-metrics small {
           color: var(--text-secondary);
           font-size: 0.72rem;
+        }
+
+        .home-start {
+          display: grid;
+          grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+          gap: 4rem;
+          padding: 4.5rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .home-start-heading h2 {
+          max-width: 520px;
+          margin-top: 0.5rem;
+          font-size: 2.35rem;
+        }
+
+        .home-start-heading p {
+          max-width: 520px;
+          color: var(--text-secondary);
+          line-height: 1.8;
         }
 
         .home-section {
@@ -333,7 +525,7 @@ export default function Home() {
 
         .home-case-link {
           display: grid;
-          grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.2fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           min-width: 0;
           border-top: 1px solid var(--border-color);
           border-bottom: 1px solid var(--border-color);
@@ -341,23 +533,24 @@ export default function Home() {
         }
 
         .home-case-image {
+          display: grid;
           min-height: 430px;
           overflow: hidden;
           border-right: 1px solid var(--border-color);
+          background: #11131d;
         }
 
         .home-case-image img {
           display: block;
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          object-position: center 28%;
+          object-fit: contain;
+          object-position: center;
           filter: saturate(0.72) contrast(1.05);
-          transition: transform 0.45s ease, filter 0.3s ease;
+          transition: filter 0.3s ease;
         }
 
         .home-case-link:hover .home-case-image img {
-          transform: scale(1.025);
           filter: saturate(0.92) contrast(1.05);
         }
 
@@ -414,8 +607,7 @@ export default function Home() {
           font-size: 0.7rem;
         }
 
-        .home-case-copy > strong,
-        .home-inline-link {
+        .home-case-copy > strong {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
@@ -423,6 +615,74 @@ export default function Home() {
           margin-top: 1.15rem;
           color: var(--accent-purple);
           font-size: 0.82rem;
+        }
+
+        .home-project-directory {
+          min-width: 0;
+        }
+
+        .home-track-routes {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .home-track-routes > a {
+          position: relative;
+          display: grid;
+          min-width: 0;
+          min-height: 160px;
+          align-content: start;
+          padding: 1.2rem;
+          border-right: 1px solid var(--border-color);
+          color: inherit;
+          transition: background 0.2s ease;
+        }
+
+        .home-track-routes > a:last-child {
+          border-right: 0;
+        }
+
+        .home-track-routes > a:hover {
+          background: rgba(179, 157, 219, 0.045);
+        }
+
+        .home-track-routes > a > div {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .home-track-routes span,
+        .home-track-routes em {
+          color: var(--accent-purple);
+          font-size: 0.72rem;
+          font-style: normal;
+          font-weight: 800;
+        }
+
+        .home-track-routes strong {
+          margin-top: 0.75rem;
+          font-size: 1.08rem;
+        }
+
+        .home-track-routes p {
+          max-width: none;
+          margin: 0.4rem 0 0;
+          color: var(--text-secondary);
+          font-size: 0.76rem;
+          line-height: 1.7;
+        }
+
+        .home-track-routes svg {
+          align-self: end;
+          margin-top: 0.7rem;
+          color: var(--accent-purple);
+        }
+
+        .home-track-routes > a:hover strong {
+          color: var(--accent-purple);
         }
 
         .home-project-list {
@@ -470,6 +730,7 @@ export default function Home() {
         .home-routes {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
+          border-top: 1px solid var(--border-color);
           border-bottom: 1px solid var(--border-color);
         }
 
@@ -505,12 +766,75 @@ export default function Home() {
           color: var(--accent-purple);
         }
 
+        .home-article-list {
+          min-width: 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .home-article-list > a:not(.home-all-articles) {
+          display: grid;
+          grid-template-columns: 42px minmax(0, 1fr) auto auto;
+          gap: 1rem;
+          align-items: start;
+          min-width: 0;
+          border-top: 1px solid var(--border-color);
+          padding: 1.25rem 0;
+          color: inherit;
+        }
+
+        .home-article-list > a > span,
+        .home-article-list small,
+        .home-article-list em {
+          color: var(--accent-purple);
+          font-size: 0.74rem;
+          font-style: normal;
+          font-weight: 800;
+        }
+
+        .home-article-list > a > div {
+          display: grid;
+          min-width: 0;
+          gap: 0.35rem;
+        }
+
+        .home-article-list strong {
+          font-size: 1.08rem;
+        }
+
+        .home-article-list p {
+          max-width: 720px;
+          margin: 0;
+          color: var(--text-secondary);
+          font-size: 0.78rem;
+          line-height: 1.7;
+        }
+
+        .home-article-list em {
+          color: var(--text-secondary);
+          white-space: nowrap;
+        }
+
+        .home-article-list > a:hover strong {
+          color: var(--accent-purple);
+        }
+
+        .home-all-articles {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 1rem 0;
+          color: var(--accent-purple) !important;
+          font-size: 0.8rem;
+          font-weight: 800;
+        }
+
         @media (max-width: 980px) {
           .home-hero {
             grid-template-columns: 1fr;
             gap: 2rem;
           }
 
+          .home-start,
           .home-section {
             grid-template-columns: 1fr;
             gap: 2.5rem;
@@ -536,7 +860,12 @@ export default function Home() {
           }
 
           .home-hero::after {
-            background: linear-gradient(0deg, rgba(7, 7, 7, 0.99) 0%, rgba(7, 7, 7, 0.86) 72%, rgba(7, 7, 7, 0.48) 100%);
+            background: linear-gradient(
+              0deg,
+              rgba(7, 7, 7, 0.99) 0%,
+              rgba(7, 7, 7, 0.86) 72%,
+              rgba(7, 7, 7, 0.48) 100%
+            );
           }
 
           .home-hero h1 {
@@ -559,10 +888,33 @@ export default function Home() {
             border-bottom: 1px solid var(--border-color);
           }
 
+          .home-metric--token {
+            position: relative;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
+          }
+
+          .home-token-proof {
+            position: absolute;
+            top: 1.35rem;
+            right: 1.25rem;
+            width: 56px;
+            height: 34px;
+          }
+
+          .home-token-proof-indicator {
+            display: none;
+          }
+
           .home-section {
             padding: 3.5rem 0;
           }
 
+          .home-start {
+            padding: 3.5rem 0;
+          }
+
+          .home-start-heading h2,
           .home-section-heading h2 {
             font-size: 1.9rem;
           }
@@ -587,7 +939,30 @@ export default function Home() {
             gap: 0.75rem;
           }
 
+          .home-track-routes {
+            grid-template-columns: 1fr;
+          }
+
+          .home-track-routes > a {
+            min-height: 180px;
+            border-right: 0;
+            border-bottom: 1px solid var(--border-color);
+          }
+
+          .home-track-routes > a:last-child {
+            border-bottom: 0;
+          }
+
           .home-project-list p {
+            grid-column: 2 / -1;
+          }
+
+          .home-article-list > a:not(.home-all-articles) {
+            grid-template-columns: 32px minmax(0, 1fr) auto;
+            gap: 0.75rem;
+          }
+
+          .home-article-list em {
             grid-column: 2 / -1;
           }
 
@@ -608,4 +983,23 @@ export default function Home() {
       `}</style>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const latestArticles = getAllArticles()
+    .slice(0, 3)
+    .map(({ slug, title, summary, date, topics, readingTime }) => ({
+      slug,
+      title,
+      summary,
+      date,
+      topics,
+      readingTime
+    }))
+
+  return {
+    props: {
+      latestArticles
+    }
+  }
 }

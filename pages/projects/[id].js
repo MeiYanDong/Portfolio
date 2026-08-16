@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ProjectCaseStudy from '../../components/ProjectCaseStudy'
 import projectCaseStudies from '../../data/projectCaseStudies.json'
 import projectsData from '../../data/projects.json'
+import { getProjectTrack, getTrackProjects } from '../../lib/projectTracks'
 
 const tierLabels = {
   featured: '精选项目',
@@ -110,6 +111,7 @@ export default function ProjectDetail({ project, nextProject }) {
   }
 
   const caseStudy = projectCaseStudies[project.id]
+  const projectTrack = getProjectTrack(project.track)
 
   if (caseStudy) {
     return (
@@ -118,7 +120,12 @@ export default function ProjectDetail({ project, nextProject }) {
           <title>{`${project.title} - 梅炎栋`}</title>
           <meta name="description" content={caseStudy.headline || project.description} />
         </Head>
-        <ProjectCaseStudy project={project} caseStudy={caseStudy} nextProject={nextProject} />
+        <ProjectCaseStudy
+          project={project}
+          caseStudy={caseStudy}
+          nextProject={nextProject}
+          projectTrack={projectTrack}
+        />
       </>
     )
   }
@@ -140,8 +147,8 @@ export default function ProjectDetail({ project, nextProject }) {
 
       <div className="container">
         <nav className="breadcrumb">
-          <Link href="/projects" className="back-link">
-            返回项目列表
+          <Link href={projectTrack.href} className="back-link">
+            返回 {projectTrack.label} 项目
           </Link>
         </nav>
 
@@ -153,6 +160,7 @@ export default function ProjectDetail({ project, nextProject }) {
             <div className="project-meta-header">
               <span>{tierLabels[project.tier] || '项目'}</span>
               <span>{project.year}</span>
+              <span>{projectTrack.label}</span>
               <span>{categoryLabel(project.category)}</span>
             </div>
             <h1>{project.title}</h1>
@@ -166,12 +174,22 @@ export default function ProjectDetail({ project, nextProject }) {
             )}
             <div className="project-links">
               {project.links?.github && (
-                <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                >
                   GitHub 源码
                 </a>
               )}
               {project.links?.demo && (
-                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn">
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                >
                   访问网站
                 </a>
               )}
@@ -226,7 +244,7 @@ export default function ProjectDetail({ project, nextProject }) {
         )}
 
         <section className="next-project">
-          <h2>下一个项目</h2>
+          <h2>下一个 {projectTrack.label} 项目</h2>
           <Link href={`/projects/${nextProject.id}`} className="next-project-card card">
             <div className="next-project-image">
               <ProjectVisual project={nextProject} compact />
@@ -301,8 +319,7 @@ export default function ProjectDetail({ project, nextProject }) {
           padding: 1.25rem;
           background:
             linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
-            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%),
-            #101010;
+            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%), #101010;
         }
 
         .generated-project-visual * {
@@ -330,7 +347,11 @@ export default function ProjectDetail({ project, nextProject }) {
           height: 56%;
           border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 38%);
           transform: rotate(-12deg);
-          background: linear-gradient(135deg, color-mix(in srgb, var(--visual-accent), transparent 82%), transparent);
+          background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--visual-accent), transparent 82%),
+            transparent
+          );
         }
 
         .visual-scanline,
@@ -759,8 +780,7 @@ export default function ProjectDetail({ project, nextProject }) {
           padding: 1.25rem;
           background:
             linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
-            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%),
-            #101010;
+            linear-gradient(150deg, rgba(179, 157, 219, 0.1), transparent 42%), #101010;
         }
 
         .generated-project-visual * {
@@ -788,7 +808,11 @@ export default function ProjectDetail({ project, nextProject }) {
           height: 56%;
           border: 1px solid color-mix(in srgb, var(--visual-accent), transparent 38%);
           transform: rotate(-12deg);
-          background: linear-gradient(135deg, color-mix(in srgb, var(--visual-accent), transparent 82%), transparent);
+          background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--visual-accent), transparent 82%),
+            transparent
+          );
         }
 
         .visual-scanline,
@@ -968,10 +992,14 @@ export async function getStaticProps({ params }) {
     return { notFound: true }
   }
 
+  const project = projectsData[currentIndex]
+  const trackProjects = getTrackProjects(projectsData, project.track)
+  const trackIndex = trackProjects.findIndex((item) => item.id === project.id)
+
   return {
     props: {
-      project: projectsData[currentIndex],
-      nextProject: projectsData[(currentIndex + 1) % projectsData.length]
+      project,
+      nextProject: trackProjects[(trackIndex + 1) % trackProjects.length]
     }
   }
 }

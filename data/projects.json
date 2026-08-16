@@ -10,20 +10,11 @@
     "year": "2026",
     "tier": "featured",
     "category": "On-chain Automation",
+    "track": "web3",
+    "trackOrder": 1,
     "role": "产品设计 / Node.js 工程 / 链上执行 / 生产运维",
-    "stack": [
-      "Node.js",
-      "viem",
-      "42 REST",
-      "systemd",
-      "Feishu 通知"
-    ],
-    "tags": [
-      "42Space",
-      "预测市场",
-      "链上交易",
-      "自动化"
-    ],
+    "stack": ["Node.js", "viem", "42 REST", "systemd", "Feishu 通知"],
+    "tags": ["42Space", "预测市场", "链上交易", "自动化"],
     "highlights": [
       "将 T+19 定义为排名优先路线：承担部分反狙击溢价，换取更早的区块位置。",
       "将 T+20 定义为成本优先路线：避开反狙击溢价，再通过精确秒级执行争取首位。",
@@ -43,36 +34,27 @@
     "id": "virtuals-whale-radar",
     "source": "virtuals-whale-radar",
     "title": "Virtuals Whale Radar",
-    "description": "面向 Virtuals 生态的项目、钱包与资金信号雷达，用策略实验室承载观察、回放和执行前判断。",
-    "resumeLine": "构建 Virtuals 生态链上雷达，将项目采集、钱包监控、资金信号、策略回放和执行准备组织成持续运行的工作台。",
-    "impact": "把“哪个项目值得盯、资金是否异常、策略是否稳定”从临时判断变成可切换项目、可回放、可恢复的情报系统。",
+    "description": "将 Virtuals 项目发现、鲸鱼资金、历史回放与执行准入组织成一条可筛选、可拒绝的链上决策链。",
+    "resumeLine": "构建 Virtuals 发射项目决策系统，连接 SignalHub、实时采集、历史回放和 GO / NO-GO 门槛；以 737 条规则、34 类压力场景验证 4,136 组结果，并将策略候选与真实执行严格分层。",
+    "impact": "把“值得看、值得验证、允许执行”拆成三个独立阶段，让低参与度、样本不足或运行条件未就绪的项目可以被系统明确拒绝。",
     "cover": "/projects/covers/virtuals-whale-radar.png",
     "year": "2026",
     "tier": "featured",
     "category": "On-chain Automation",
+    "track": "web3",
+    "trackOrder": 2,
     "role": "产品设计 / 链上数据工程 / 自动化策略",
-    "stack": [
-      "Node.js",
-      "链上数据",
-      "RPC",
-      "钱包监控",
-      "运行脚本"
-    ],
-    "tags": [
-      "Virtuals",
-      "链上雷达",
-      "钱包监控",
-      "Web3"
-    ],
+    "stack": ["Node.js", "链上数据", "RPC", "钱包监控", "运行脚本"],
+    "tags": ["Virtuals", "链上雷达", "钱包监控", "Web3"],
     "highlights": [
-      "围绕项目发射前后最关键的问题组织信息：谁在买、资金怎么动、是否值得继续盯。",
-      "将观察、策略回放、风险判断和执行准备拆成可维护的工作区。",
-      "长期补齐恢复、启动、自动买入和运行状态诊断等运维流程。"
+      "SignalHub 发现项目，realtime 与 backfill 共同补齐链上交易、分钟消耗、鲸鱼榜单和钱包持仓。",
+      "用 737 条规则与 34 类压力场景生成 4,136 组回放结果，并保留失败样本、稳定区间和拒绝项。",
+      "通过项目身份、余额、授权、独立 RPC、simulation、预算和 fuse 组成统一 GO / NO-GO 执行硬闸。"
     ],
     "story": {
-      "problem": "Virtuals 生态项目变化快，项目、钱包和资金信号分散，单靠手动刷新很难持续判断。",
-      "process": "搭建以项目、钱包、资金行为为核心的雷达工作区，并围绕发射、买入、监控、恢复和运行状态持续补齐工具链。",
-      "result": "形成一个可持续使用的 Virtuals 生态观察台，把链上信号转化成更清晰的项目判断和执行准备。"
+      "problem": "Virtuals 发射窗口短，项目资料、税率、鲸鱼投入、加权成本和钱包行为分散；单靠人工盯盘既容易漏信号，也容易把早期噪声误判为机会。",
+      "process": "先建立项目与钱包观察台，再拆分实时采集和历史回扫，引入 SignalHub 自动发现、策略矩阵与压力测试，最后用统一 preflight 将研究候选和真实执行隔离。",
+      "result": "形成一套从项目发现到执行准入的生产系统：能筛出候选，也能在低参与度、样本不足或运行条件不满足时给出 NO-GO。"
     },
     "links": {
       "github": "https://github.com/MeiYanDong/virtuals-whale-radar"
@@ -90,21 +72,11 @@
     "year": "2026",
     "tier": "featured",
     "category": "Product Workbenches",
+    "track": "web3",
+    "trackOrder": 3,
     "role": "全栈开发 / 链上数据处理 / 产品设计",
-    "stack": [
-      "React",
-      "Vite",
-      "TypeScript",
-      "Node.js",
-      "Redis",
-      "链上扫描"
-    ],
-    "tags": [
-      "OKX",
-      "交易量计算",
-      "多钱包",
-      "数据工作台"
-    ],
+    "stack": ["React", "Vite", "TypeScript", "Node.js", "Redis", "链上扫描"],
+    "tags": ["OKX", "交易量计算", "多钱包", "数据工作台"],
     "highlights": [
       "把多钱包、多链、快照窗口和活动规则统一进一个工作台。",
       "支持按钱包查看进度、缺口和历史结果，降低手动表格统计成本。",
@@ -130,21 +102,11 @@
     "year": "2026",
     "tier": "featured",
     "category": "Product Workbenches",
+    "track": "web2",
+    "trackOrder": 1,
     "role": "产品设计 / 全栈开发 / AI 工作流设计",
-    "stack": [
-      "Next.js",
-      "React",
-      "Supabase",
-      "OpenAI",
-      "Anthropic",
-      "PDF 解析"
-    ],
-    "tags": [
-      "AI 工作台",
-      "CRM",
-      "语音转文字",
-      "结构化信息"
-    ],
+    "stack": ["Next.js", "React", "Supabase", "OpenAI", "Anthropic", "PDF 解析"],
+    "tags": ["AI 工作台", "CRM", "语音转文字", "结构化信息"],
     "highlights": [
       "围绕红娘这个具体业务角色设计，不做通用聊天机器人。",
       "把录音、转写、结构化客户档案、补问和匹配进度连接成工作流。",
@@ -162,12 +124,7 @@
       "accent": "#ef9a9a",
       "kicker": "婚恋服务 AI 工作台",
       "summary": "把录音、档案、补问和匹配跟进串成一个可追踪流程。",
-      "signals": [
-        "录音转写",
-        "结构化档案",
-        "补问建议",
-        "匹配跟进"
-      ],
+      "signals": ["录音转写", "结构化档案", "补问建议", "匹配跟进"],
       "metrics": [
         {
           "value": "AI 工作台",
@@ -194,20 +151,11 @@
     "year": "2026",
     "tier": "featured",
     "category": "AI Agent Systems",
+    "track": "web2",
+    "trackOrder": 3,
     "role": "系统设计 / Next.js 开发 / 数据建模",
-    "stack": [
-      "Next.js",
-      "TypeScript",
-      "SQLite",
-      "better-sqlite3",
-      "TwitterAPI.io"
-    ],
-    "tags": [
-      "AI Agent",
-      "情报系统",
-      "知识库",
-      "监控"
-    ],
+    "stack": ["Next.js", "TypeScript", "SQLite", "better-sqlite3", "TwitterAPI.io"],
+    "tags": ["AI Agent", "情报系统", "知识库", "监控"],
     "highlights": [
       "每个追踪目标拥有独立 agent 指令、memory 和数据源配置。",
       "用工作台承载持续追踪，而不是一次性摘要。",
@@ -225,12 +173,7 @@
       "accent": "#80cbc4",
       "kicker": "多 Agent 情报系统",
       "summary": "为不同追踪对象维护独立指令、记忆、数据源和更新流程。",
-      "signals": [
-        "Agent Memory",
-        "数据源配置",
-        "质量门控",
-        "情报追踪"
-      ],
+      "signals": ["Agent Memory", "数据源配置", "质量门控", "情报追踪"],
       "metrics": [
         {
           "value": "Agent",
@@ -257,20 +200,11 @@
     "year": "2026",
     "tier": "featured",
     "category": "AI Agent Systems",
+    "track": "web2",
+    "trackOrder": 2,
     "role": "自动化工程 / 内容系统设计 / Python 脚本开发",
-    "stack": [
-      "Python",
-      "Readwise Reader",
-      "RSS",
-      "Claude",
-      "Markdown"
-    ],
-    "tags": [
-      "信息流",
-      "自动摘要",
-      "Readwise",
-      "AI 日报"
-    ],
+    "stack": ["Python", "Readwise Reader", "RSS", "Claude", "Markdown"],
+    "tags": ["信息流", "自动摘要", "Readwise", "AI 日报"],
     "highlights": [
       "将 RSS、Readwise 订阅和 Claude Code 社区内容纳入统一日报流程。",
       "支持原始输入导出、摘要生成、保存回 Reader 和自动化记忆同步。",
@@ -288,12 +222,7 @@
       "accent": "#90caf9",
       "kicker": "AI 信息流自动化",
       "summary": "把多源订阅、摘要、去重和 Reader 保存变成每日可执行流程。",
-      "signals": [
-        "RSS",
-        "Readwise",
-        "摘要生成",
-        "去重保存"
-      ],
+      "signals": ["RSS", "Readwise", "摘要生成", "去重保存"],
       "metrics": [
         {
           "value": "日报",
@@ -320,20 +249,11 @@
     "year": "2026",
     "tier": "selected",
     "category": "Personal Knowledge Tools",
+    "track": "web2",
+    "trackOrder": 5,
     "role": "产品设计 / 自动化脚本 / TTS 工作流",
-    "stack": [
-      "Python",
-      "flomo",
-      "MiniMax TTS",
-      "Markdown",
-      "音频生成"
-    ],
-    "tags": [
-      "个人知识库",
-      "TTS",
-      "flomo",
-      "自动化"
-    ],
+    "stack": ["Python", "flomo", "MiniMax TTS", "Markdown", "音频生成"],
+    "tags": ["个人知识库", "TTS", "flomo", "自动化"],
     "highlights": [
       "用 memo id 和更新时间做版本 key，避免重复生成。",
       "每条 memo 支持中文和英文两个音频版本。",
@@ -351,12 +271,7 @@
       "accent": "#ffcc80",
       "kicker": "个人声音记忆",
       "summary": "将 memo 变成中英文音频，让笔记从一次性记录变成可复听材料。",
-      "signals": [
-        "flomo",
-        "TTS",
-        "版本跳过",
-        "随机复听"
-      ],
+      "signals": ["flomo", "TTS", "版本跳过", "随机复听"],
       "metrics": [
         {
           "value": "音频化",
@@ -383,19 +298,11 @@
     "year": "2026",
     "tier": "selected",
     "category": "AI Agent Systems",
+    "track": "web2",
+    "trackOrder": 4,
     "role": "Skill 设计 / 内容工作流 / 自动化发布",
-    "stack": [
-      "Markdown",
-      "Codex Skill",
-      "内容结构化",
-      "图片卡片生成"
-    ],
-    "tags": [
-      "小红书",
-      "内容自动化",
-      "Skill",
-      "图文卡片"
-    ],
+    "stack": ["Markdown", "Codex Skill", "内容结构化", "图片卡片生成"],
+    "tags": ["小红书", "内容自动化", "Skill", "图文卡片"],
     "highlights": [
       "从原始内容中提炼适合小红书传播的重点。",
       "生成竖版图文卡片、标题、正文和话题标签。",
@@ -413,12 +320,7 @@
       "accent": "#ff8a80",
       "kicker": "内容发布 Skill",
       "summary": "把长内容拆成卡片、标题、正文和话题标签，形成发布素材包。",
-      "signals": [
-        "内容拆解",
-        "竖版卡片",
-        "发布文案",
-        "素材整理"
-      ],
+      "signals": ["内容拆解", "竖版卡片", "发布文案", "素材整理"],
       "metrics": [
         {
           "value": "Skill",
@@ -445,20 +347,11 @@
     "year": "2026",
     "tier": "selected",
     "category": "Product Workbenches",
+    "track": "web3",
+    "trackOrder": 4,
     "role": "全栈开发 / 本地工具设计 / 数据聚合",
-    "stack": [
-      "React",
-      "Vite",
-      "Express",
-      "TypeScript",
-      "OKX Onchain OS CLI"
-    ],
-    "tags": [
-      "资产追踪",
-      "多钱包",
-      "本地工作台",
-      "加密资产"
-    ],
+    "stack": ["React", "Vite", "Express", "TypeScript", "OKX Onchain OS CLI"],
+    "tags": ["资产追踪", "多钱包", "本地工作台", "加密资产"],
     "highlights": [
       "按币种汇总所有钱包资产，快速看整体持仓。",
       "按钱包展示总金额和主要持仓，保留执行视角。",
@@ -476,12 +369,7 @@
       "accent": "#4dd0e1",
       "kicker": "本地资产工作台",
       "summary": "按钱包和币种双维度聚合链上资产，保持本地隐私边界。",
-      "signals": [
-        "多钱包",
-        "资产聚合",
-        "本地服务",
-        "OKX CLI"
-      ],
+      "signals": ["多钱包", "资产聚合", "本地服务", "OKX CLI"],
       "metrics": [
         {
           "value": "本地优先",
@@ -506,17 +394,11 @@
     "year": "2026",
     "tier": "archive",
     "category": "On-chain Automation",
+    "track": "web3",
+    "trackOrder": 5,
     "role": "自动化脚本 / 通知系统",
-    "stack": [
-      "自动化脚本",
-      "Feishu 通知",
-      "信息监控"
-    ],
-    "tags": [
-      "加密货币",
-      "自动化",
-      "监控"
-    ],
+    "stack": ["自动化脚本", "Feishu 通知", "信息监控"],
+    "tags": ["加密货币", "自动化", "监控"],
     "story": {
       "problem": "空投活动信息变化快，人工反复刷新容易漏掉新活动或规则更新。",
       "process": "将信息源检查、变更判断和飞书通知拆成自动化流程，减少人工查看频率。",
@@ -543,17 +425,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "Creative Applications",
+    "track": "web2",
+    "trackOrder": 6,
     "role": "AI 应用开发 / 产品体验设计",
-    "stack": [
-      "AI 图片生成",
-      "Web App",
-      "图片上传"
-    ],
-    "tags": [
-      "AI",
-      "图片生成",
-      "应用"
-    ],
+    "stack": ["AI 图片生成", "Web App", "图片上传"],
+    "tags": ["AI", "图片生成", "应用"],
     "story": {
       "problem": "通用图片生成工具对普通用户门槛较高，节日场景下用户更需要一个明确、快速的生成入口。",
       "process": "把需求收窄到宠物圣诞照，围绕图片上传、风格生成和结果下载设计体验。",
@@ -580,17 +456,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "Personal Knowledge Tools",
+    "track": "web2",
+    "trackOrder": 7,
     "role": "Obsidian 插件开发 / 可视化设计",
-    "stack": [
-      "Obsidian",
-      "插件",
-      "数据可视化"
-    ],
-    "tags": [
-      "Obsidian",
-      "插件",
-      "可视化"
-    ],
+    "stack": ["Obsidian", "插件", "数据可视化"],
+    "tags": ["Obsidian", "插件", "可视化"],
     "story": {
       "problem": "长期目标和时间消耗很难在日常笔记里被持续感知，容易只关注短期任务。",
       "process": "将人生时间映射成可视化方块，并封装为 Obsidian 插件，放回用户已有知识库环境。",
@@ -617,17 +487,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "Personal Knowledge Tools",
+    "track": "web2",
+    "trackOrder": 8,
     "role": "Chrome 扩展开发 / 内容工具设计",
-    "stack": [
-      "Chrome Extension",
-      "Markdown",
-      "图片生成"
-    ],
-    "tags": [
-      "Chrome扩展",
-      "Markdown",
-      "分享"
-    ],
+    "stack": ["Chrome Extension", "Markdown", "图片生成"],
+    "tags": ["Chrome扩展", "Markdown", "分享"],
     "story": {
       "problem": "网页内容想转成可分享图片时，常常需要截图、裁剪和重新排版，流程割裂。",
       "process": "用 Chrome 扩展承接文本选择和手动输入，再生成统一风格的分享卡片。",
@@ -654,17 +518,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "AI Agent Systems",
+    "track": "web2",
+    "trackOrder": 9,
     "role": "浏览器扩展开发 / AI 工作流设计",
-    "stack": [
-      "浏览器扩展",
-      "AI 工作流",
-      "提示词管理"
-    ],
-    "tags": [
-      "AI",
-      "提示词",
-      "浏览器扩展"
-    ],
+    "stack": ["浏览器扩展", "AI 工作流", "提示词管理"],
+    "tags": ["AI", "提示词", "浏览器扩展"],
     "story": {
       "problem": "常用提示词分散在聊天记录、文档和剪贴板里，查找和复用都不稳定。",
       "process": "把提示词管理前置到浏览器扩展，提供统一的组织和调用入口。",
@@ -690,17 +548,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "Personal Knowledge Tools",
+    "track": "web2",
+    "trackOrder": 10,
     "role": "产品设计 / 应用开发",
-    "stack": [
-      "生产力工具",
-      "Web App",
-      "行为设计"
-    ],
-    "tags": [
-      "习惯",
-      "自律",
-      "生产力"
-    ],
+    "stack": ["生产力工具", "Web App", "行为设计"],
+    "tags": ["习惯", "自律", "生产力"],
     "story": {
       "problem": "直接用奖励刺激习惯，容易变成先消费后放弃，也难以判断某个奖励是否真的值得。",
       "process": "将习惯和奖励绑定，完成习惯后获得对应能量，只有积累到一定能量才能兑换奖励。",
@@ -722,12 +574,7 @@
       "accent": "#c5e1a5",
       "kicker": "习惯与奖励机制",
       "summary": "用能量积累把习惯完成和奖励兑换连接起来。",
-      "signals": [
-        "习惯完成",
-        "能量积累",
-        "奖励兑换",
-        "行为闭环"
-      ],
+      "signals": ["习惯完成", "能量积累", "奖励兑换", "行为闭环"],
       "metrics": [
         {
           "value": "飞轮",
@@ -752,17 +599,11 @@
     "year": "2025",
     "tier": "archive",
     "category": "Creative Applications",
+    "track": "web2",
+    "trackOrder": 11,
     "role": "游戏开发 / 前端交互实现",
-    "stack": [
-      "游戏",
-      "Web",
-      "交互设计"
-    ],
-    "tags": [
-      "游戏",
-      "休闲",
-      "策略"
-    ],
+    "stack": ["游戏", "Web", "交互设计"],
+    "tags": ["游戏", "休闲", "策略"],
     "story": {
       "problem": "游戏开发能力很难只靠文字说明呈现，访问者需要直接体验规则和交互反馈。",
       "process": "将小游戏整理成统一作品集入口，让每个作品都能作为独立 Demo 被打开和体验。",

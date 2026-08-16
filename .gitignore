@@ -42,6 +42,8 @@ Thumbs.db
 .cache/
 .parcel-cache/
 .playwright-cli/
+playwright-report/
+test-results/
 
 # 临时文件
 *.tmp
