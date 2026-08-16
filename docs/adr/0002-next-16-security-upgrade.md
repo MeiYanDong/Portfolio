@@ -14,6 +14,7 @@
 3. 接受 Next.js 16 默认的 Turbopack 构建路径；只有出现可复现的不兼容时才回退到 webpack。
 4. 将 ESLint 固定在兼容 Node.js 20.9 的 9.x，并把 legacy `.eslintrc` 迁移为 flat config。
 5. 在合并门禁中执行生产依赖审计，并继续运行静态构建、内容契约和桌面/移动端浏览器测试。
+6. 保留 Next.js 16.3 默认的 `agentRules`，将其生成的 `AGENTS.md` 与 `CLAUDE.md` 纳入版本控制，使 AI 编程工具读取随当前框架版本发布的本地文档。
 
 ## 验收标准
 
@@ -27,4 +28,5 @@
 - Node.js 20.20.2 下从锁文件执行 `npm ci && npm run verify` 通过：3 条业务契约、65 个静态页面和 12 条桌面/移动端浏览器用例均通过。
 - `npm audit --omit=dev` 与完整 `npm audit` 均为 0 个已知漏洞。
 - React 19 lint 规则暴露的既有状态同步已收敛：文章主题由 URL 直接派生；封面评审页仅对保持 SSR 一致所需的浏览器存储恢复做局部豁免。
+- `next dev` 首次启动产生的 agent rules 已纳入仓库，后续启动不会重复制造未跟踪文件；项目自定义规则只能写在受管标记之外。
 - Pull Request CI 和合并后的生产回读仍作为外部交付回执，不能由本地结果替代。
