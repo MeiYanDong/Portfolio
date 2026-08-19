@@ -187,6 +187,7 @@ test('文章系列顺序、主题和本地图片保持一致', () => {
   )
   assert.ok(aiReflection, '缺少 AI 两年复盘文章')
   assert.equal(aiReflection.data.series, undefined, 'AI 两年复盘应作为独立文章展示')
+  assert.equal(aiReflection.data.toc, 'true', 'AI 两年复盘应开启自动目录')
   assert.equal(
     aiReflection.data.cover,
     '/articles/ai-earned-ten-thousand-reflection/cover.jpg',

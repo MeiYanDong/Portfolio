@@ -66,6 +66,13 @@ test('独立文章保留完整正文、本地图片与无系列布局', async ({
   ).toBeVisible()
   await expect(page.locator('.reader-layout')).toHaveClass(/standalone/)
   await expect(page.locator('.series-toc')).toHaveCount(0)
+  await expect(page.locator('.article-toc')).toBeVisible()
+  await expect(page.locator('.article-toc a')).toHaveCount(9)
+  await expect
+    .poll(() => page.locator('.article-toc').evaluate((toc) => toc.getBoundingClientRect().width))
+    .toBeGreaterThan(250)
+  await expect(page.locator('.article-toc a').first()).toHaveAttribute('href', '#从一张图片开始')
+  await expect(page.locator('[id="从一张图片开始"]')).toHaveText('从一张图片开始')
 
   const bodyImages = page.locator('.article-body img')
   await expect(bodyImages).toHaveCount(6)
