@@ -4,7 +4,7 @@ summary: 回头看，从第一次接触 AI，到第一次真正靠 AI 赚到钱�
 date: 2026-08-19
 topics: AI 实践, 个人成长
 tags: AI 编程, Web3, 自动化, 42Space, 风险管理
-cover: /articles/ai-earned-ten-thousand-reflection/01-first-ai-art.webp
+cover: /articles/ai-earned-ten-thousand-reflection/cover.jpg
 ---
 
 # 用 AI 赚到一万多之后，我回头看了看这两年
