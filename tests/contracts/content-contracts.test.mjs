@@ -187,5 +187,10 @@ test('文章系列顺序、主题和本地图片保持一致', () => {
   )
   assert.ok(aiReflection, '缺少 AI 两年复盘文章')
   assert.equal(aiReflection.data.series, undefined, 'AI 两年复盘应作为独立文章展示')
+  assert.equal(
+    aiReflection.data.cover,
+    '/articles/ai-earned-ten-thousand-reflection/cover.jpg',
+    'AI 两年复盘应使用独立封面，不应复用正文首图'
+  )
   assert.equal(localMarkdownAssets(aiReflection).length, 6, 'AI 两年复盘的正文图片数量不完整')
 })
