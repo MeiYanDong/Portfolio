@@ -26,11 +26,12 @@ test('文章目录保持系列顺序，并支持搜索与视图切换', async ({
   await page.goto('/articles/')
 
   const rows = page.locator('.article-row')
-  await expect(rows).toHaveCount(2)
-  await expect(rows.nth(0).locator('strong')).toHaveText(
+  await expect(rows).toHaveCount(3)
+  await expect(rows.nth(0).locator('strong')).toHaveText('用 AI 赚到一万多之后，我回头看了看这两年')
+  await expect(rows.nth(1).locator('strong')).toHaveText(
     '科学上网入门：购买 VPN 与配置 Clash Verge'
   )
-  await expect(rows.nth(1).locator('strong')).toHaveText(
+  await expect(rows.nth(2).locator('strong')).toHaveText(
     '科学上网进阶：静态住宅 与 AI 网络智能分流脚本'
   )
 
@@ -39,9 +40,44 @@ test('文章目录保持系列顺序，并支持搜索与视图切换', async ({
   await expect(rows.locator('strong')).toHaveText('科学上网进阶：静态住宅 与 AI 网络智能分流脚本')
 
   await page.getByLabel('内容搜索').fill('')
+  await page.getByRole('button', { name: '科学上网', exact: true }).click()
+  await expect(rows).toHaveCount(2)
+  await expect(rows.nth(0).locator('strong')).toHaveText(
+    '科学上网入门：购买 VPN 与配置 Clash Verge'
+  )
+  await expect(rows.nth(1).locator('strong')).toHaveText(
+    '科学上网进阶：静态住宅 与 AI 网络智能分流脚本'
+  )
+
+  await page.getByRole('button', { name: '全部主题' }).click()
   await page.getByRole('button', { name: '网格展示' }).click()
-  await expect(page.locator('.article-card')).toHaveCount(2)
+  await expect(page.locator('.article-card')).toHaveCount(3)
   await expect(page.locator('.article-row')).toHaveCount(0)
+})
+
+test('独立文章保留完整正文、本地图片与无系列布局', async ({ page }) => {
+  await page.goto('/articles/ai-earned-ten-thousand-reflection/')
+
+  await expect(
+    page.getByRole('heading', {
+      level: 1,
+      name: '用 AI 赚到一万多之后，我回头看了看这两年'
+    })
+  ).toBeVisible()
+  await expect(page.locator('.reader-layout')).toHaveClass(/standalone/)
+  await expect(page.locator('.series-toc')).toHaveCount(0)
+
+  const bodyImages = page.locator('.article-body img')
+  await expect(bodyImages).toHaveCount(6)
+  for (let index = 0; index < 6; index += 1) {
+    await expect
+      .poll(() => bodyImages.nth(index).evaluate((image) => image.naturalWidth))
+      .toBeGreaterThan(0)
+  }
+
+  await expect(page.locator('.article-body')).toContainText(
+    '她投资的是我在一次次没有结果之后，依然还有资格再试一次。'
+  )
 })
 
 test('文章详情渲染正文链接、本地图片与系列导航', async ({ page }) => {
