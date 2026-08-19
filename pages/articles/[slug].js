@@ -74,7 +74,7 @@ export default function ArticleDetail({
             </div>
           )}
 
-          <div className="reader-layout">
+          <div className={`reader-layout${series ? '' : ' standalone'}`}>
             <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
 
             {series && (
@@ -209,7 +209,7 @@ export default function ArticleDetail({
           display: block;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
         }
 
         .reader-layout {
@@ -217,6 +217,11 @@ export default function ArticleDetail({
           grid-template-columns: minmax(0, 760px) 280px;
           gap: 3rem;
           align-items: start;
+        }
+
+        .reader-layout.standalone {
+          grid-template-columns: minmax(0, 760px);
+          justify-content: center;
         }
 
         .article-body {

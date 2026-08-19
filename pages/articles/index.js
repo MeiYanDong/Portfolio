@@ -22,6 +22,27 @@ function textPool(article) {
     .join(' ')
 }
 
+function orderArticlesForDisplay(articles) {
+  const groups = new Map()
+
+  articles.forEach((article) => {
+    const groupKey = article.seriesId ? `series:${article.seriesId}` : `article:${article.slug}`
+    const group = groups.get(groupKey) || []
+    group.push(article)
+    groups.set(groupKey, group)
+  })
+
+  return [...groups.values()]
+    .sort((a, b) => {
+      const aLatest = Math.max(...a.map((article) => new Date(article.date).getTime()))
+      const bLatest = Math.max(...b.map((article) => new Date(article.date).getTime()))
+      return bLatest - aLatest
+    })
+    .flatMap((group) =>
+      group[0].seriesId ? [...group].sort((a, b) => a.seriesOrder - b.seriesOrder) : group
+    )
+}
+
 function ArticleMeta({ article }) {
   return (
     <div className="article-meta">
@@ -101,18 +122,7 @@ export default function Articles({ articles, topics, series }) {
       return topicMatched && queryMatched
     })
 
-    if (matches.length < 2) return matches
-
-    const orderedSeries = matches[0].seriesId
-    const isSingleOrderedSeries =
-      orderedSeries &&
-      matches.every(
-        (article) => article.seriesId === orderedSeries && Number.isFinite(article.seriesOrder)
-      )
-
-    return isSingleOrderedSeries
-      ? [...matches].sort((a, b) => a.seriesOrder - b.seriesOrder)
-      : matches
+    return orderArticlesForDisplay(matches)
   }, [articles, normalizedQuery, selectedTopic])
 
   const visibleSeries = useMemo(() => {

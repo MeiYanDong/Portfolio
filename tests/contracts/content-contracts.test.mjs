@@ -146,8 +146,12 @@ test('文章系列顺序、主题和本地图片保持一致', () => {
     assert.ok(data.summary, `${article.slug} 缺少摘要`)
     assert.match(data.date, /^\d{4}-\d{2}-\d{2}$/, `${article.slug} 日期格式无效`)
     assert.ok(data.topics, `${article.slug} 缺少主题`)
-    assert.ok(seriesIds.has(data.series), `${article.slug} 引用了不存在的系列: ${data.series}`)
-    assert.ok(Number.isInteger(Number(data.seriesOrder)), `${article.slug} 缺少系列顺序`)
+    if (data.series) {
+      assert.ok(seriesIds.has(data.series), `${article.slug} 引用了不存在的系列: ${data.series}`)
+      assert.ok(Number.isInteger(Number(data.seriesOrder)), `${article.slug} 缺少系列顺序`)
+    } else {
+      assert.equal(data.seriesOrder, undefined, `${article.slug} 是独立文章，不应设置系列顺序`)
+    }
     assert.ok(publicAssetExists(data.cover), `${article.slug} 的文章封面不存在: ${data.cover}`)
 
     for (const assetPath of localMarkdownAssets(article)) {
@@ -177,4 +181,11 @@ test('文章系列顺序、主题和本地图片保持一致', () => {
     'scientific-networking-static-residential-ip': 2,
     'scientific-networking-vpn-clash-verge': 1
   })
+
+  const aiReflection = articles.find(
+    (article) => article.slug === 'ai-earned-ten-thousand-reflection'
+  )
+  assert.ok(aiReflection, '缺少 AI 两年复盘文章')
+  assert.equal(aiReflection.data.series, undefined, 'AI 两年复盘应作为独立文章展示')
+  assert.equal(localMarkdownAssets(aiReflection).length, 6, 'AI 两年复盘的正文图片数量不完整')
 })
