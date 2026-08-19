@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Clock, Layers, ListTree } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Clock, Layers } from 'lucide-react'
 import {
   getAllArticles,
   getArticleHeadings,
@@ -81,18 +81,9 @@ export default function ArticleDetail({
           <div
             className={`reader-layout${series ? '' : ' standalone'}${hasTableOfContents ? ' with-toc' : ''}`}
           >
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
-
             {hasTableOfContents && (
               <aside className="article-toc" aria-label="文章目录">
-                <div className="toc-heading">
-                  <ListTree size={18} />
-                  <div>
-                    <span>本文</span>
-                    <h2>目录</h2>
-                  </div>
-                </div>
-
+                <span>文章目录</span>
                 <nav className="toc-list article-toc-list">
                   {tableOfContents.map((heading, index) => (
                     <a
@@ -107,6 +98,8 @@ export default function ArticleDetail({
                 </nav>
               </aside>
             )}
+
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
 
             {!hasTableOfContents && series && (
               <aside className="series-toc">
@@ -256,7 +249,8 @@ export default function ArticleDetail({
         }
 
         .reader-layout.standalone.with-toc {
-          grid-template-columns: minmax(0, 760px) 280px;
+          grid-template-columns: 180px minmax(0, 1fr);
+          gap: 4.5rem;
           justify-content: stretch;
         }
 
@@ -264,16 +258,35 @@ export default function ArticleDetail({
           min-width: 0;
         }
 
-        .series-toc,
-        .article-toc {
+        .series-toc {
           position: sticky;
           top: 96px;
-          max-height: calc(100vh - 120px);
-          overflow-y: auto;
           background: var(--bg-card);
           border: 1px solid var(--border-color);
           border-radius: 8px;
           padding: 1rem;
+        }
+
+        .article-toc {
+          position: sticky;
+          top: 96px;
+          display: grid;
+          gap: 1rem;
+          max-height: calc(100vh - 120px);
+          overflow-y: auto;
+          border-left: 1px solid var(--border-color);
+          padding-left: 1rem;
+          scrollbar-width: none;
+        }
+
+        .article-toc::-webkit-scrollbar {
+          display: none;
+        }
+
+        .article-toc > span {
+          color: var(--accent-purple);
+          font-size: 0.72rem;
+          font-weight: 800;
         }
 
         .toc-heading {
@@ -321,8 +334,27 @@ export default function ArticleDetail({
 
         .article-toc-list a strong {
           color: inherit;
-          font-size: 0.84rem;
-          font-weight: 600;
+          font-size: 0.78rem;
+          font-weight: 400;
+        }
+
+        .article-toc-list {
+          gap: 0;
+        }
+
+        .article-toc-list a {
+          grid-template-columns: 28px minmax(0, 1fr);
+          gap: 0.4rem;
+          border: 0;
+          border-radius: 0;
+          padding: 0.48rem 0;
+          background: transparent;
+          font-size: 0.78rem;
+        }
+
+        .article-toc-list a span {
+          color: #666666;
+          font-size: 0.68rem;
         }
 
         .article-toc-list a.level-3 {
@@ -334,6 +366,11 @@ export default function ArticleDetail({
           color: var(--text-primary);
           border-color: var(--accent-purple);
           background: rgba(179, 157, 219, 0.08);
+        }
+
+        .article-toc-list a:hover {
+          border-color: transparent;
+          background: transparent;
         }
 
         .series-nav {
@@ -476,23 +513,54 @@ export default function ArticleDetail({
           padding: 0;
         }
 
-        @media (max-width: 960px) {
-          .reader-layout,
+        @media (max-width: 1100px) {
           .reader-layout.standalone.with-toc {
             grid-template-columns: 1fr;
-            gap: 2rem;
             justify-content: stretch;
-          }
-
-          .series-toc {
-            position: static;
           }
 
           .article-toc {
             position: static;
             order: -1;
+            display: flex;
             max-height: none;
-            overflow: visible;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 1.25rem;
+            border-left: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 0 1rem;
+          }
+
+          .article-toc > span {
+            flex: 0 0 auto;
+            align-self: center;
+          }
+
+          .article-toc-list {
+            display: flex;
+            flex: 0 0 auto;
+            gap: 1rem;
+          }
+
+          .article-toc-list a {
+            grid-template-columns: auto auto;
+            white-space: nowrap;
+          }
+
+          .article-toc-list a.level-3 {
+            margin-left: 0;
+          }
+        }
+
+        @media (max-width: 960px) {
+          .reader-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+
+          .series-toc {
+            position: static;
           }
         }
 

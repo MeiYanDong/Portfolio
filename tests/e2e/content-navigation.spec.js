@@ -70,7 +70,14 @@ test('独立文章保留完整正文、本地图片与无系列布局', async ({
   await expect(page.locator('.article-toc a')).toHaveCount(9)
   await expect
     .poll(() => page.locator('.article-toc').evaluate((toc) => toc.getBoundingClientRect().width))
-    .toBeGreaterThan(250)
+    .toBeGreaterThan(160)
+  const tocBox = await page.locator('.article-toc').boundingBox()
+  const bodyBox = await page.locator('.article-body').boundingBox()
+  if (page.viewportSize().width > 960) {
+    expect(tocBox.x).toBeLessThan(bodyBox.x)
+  } else {
+    expect(tocBox.y).toBeLessThan(bodyBox.y)
+  }
   await expect(page.locator('.article-toc a').first()).toHaveAttribute('href', '#从一张图片开始')
   await expect(page.locator('[id="从一张图片开始"]')).toHaveText('从一张图片开始')
 
