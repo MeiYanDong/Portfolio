@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Clock, Layers } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Clock, Layers, ListTree } from 'lucide-react'
 import {
   getAllArticles,
+  getArticleHeadings,
   getArticleBySlug,
   getArticlesBySeries,
   getSeriesById,
@@ -30,8 +31,11 @@ export default function ArticleDetail({
   series,
   seriesArticles,
   previousArticle,
-  nextArticle
+  nextArticle,
+  tableOfContents
 }) {
+  const hasTableOfContents = tableOfContents.length > 0
+
   return (
     <>
       <Head>
@@ -74,10 +78,37 @@ export default function ArticleDetail({
             </div>
           )}
 
-          <div className={`reader-layout${series ? '' : ' standalone'}`}>
+          <div
+            className={`reader-layout${series ? '' : ' standalone'}${hasTableOfContents ? ' with-toc' : ''}`}
+          >
             <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
 
-            {series && (
+            {hasTableOfContents && (
+              <aside className="article-toc" aria-label="文章目录">
+                <div className="toc-heading">
+                  <ListTree size={18} />
+                  <div>
+                    <span>本文</span>
+                    <h2>目录</h2>
+                  </div>
+                </div>
+
+                <nav className="toc-list article-toc-list">
+                  {tableOfContents.map((heading, index) => (
+                    <a
+                      key={heading.id}
+                      href={`#${heading.id}`}
+                      className={`level-${heading.level}`}
+                    >
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <strong>{heading.text}</strong>
+                    </a>
+                  ))}
+                </nav>
+              </aside>
+            )}
+
+            {!hasTableOfContents && series && (
               <aside className="series-toc">
                 <div className="toc-heading">
                   <Layers size={18} />
@@ -224,13 +255,21 @@ export default function ArticleDetail({
           justify-content: center;
         }
 
+        .reader-layout.standalone.with-toc {
+          grid-template-columns: minmax(0, 760px) 280px;
+          justify-content: stretch;
+        }
+
         .article-body {
           min-width: 0;
         }
 
-        .series-toc {
+        .series-toc,
+        .article-toc {
           position: sticky;
           top: 96px;
+          max-height: calc(100vh - 120px);
+          overflow-y: auto;
           background: var(--bg-card);
           border: 1px solid var(--border-color);
           border-radius: 8px;
@@ -278,6 +317,16 @@ export default function ArticleDetail({
         .toc-list a span {
           color: var(--text-secondary);
           font-size: 0.72rem;
+        }
+
+        .article-toc-list a strong {
+          color: inherit;
+          font-size: 0.84rem;
+          font-weight: 600;
+        }
+
+        .article-toc-list a.level-3 {
+          margin-left: 0.75rem;
         }
 
         .toc-list a.active,
@@ -332,6 +381,7 @@ export default function ArticleDetail({
           margin: 2rem 0 0.85rem;
           color: var(--text-primary);
           line-height: 1.3;
+          scroll-margin-top: 96px;
         }
 
         :global(.article-body h1) {
@@ -427,13 +477,22 @@ export default function ArticleDetail({
         }
 
         @media (max-width: 960px) {
-          .reader-layout {
+          .reader-layout,
+          .reader-layout.standalone.with-toc {
             grid-template-columns: 1fr;
             gap: 2rem;
+            justify-content: stretch;
           }
 
           .series-toc {
             position: static;
+          }
+
+          .article-toc {
+            position: static;
+            order: -1;
+            max-height: none;
+            overflow: visible;
           }
         }
 
@@ -472,14 +531,13 @@ export async function getStaticProps({ params }) {
   )
   const previousArticle = currentIndex > 0 ? seriesArticles[currentIndex - 1] : null
   const nextArticle = currentIndex > -1 ? seriesArticles[currentIndex + 1] || null : null
+  const articleBody = articleBodyWithoutDuplicateTitle(article.content, article.title)
 
   return {
     props: {
       article: cleanArticle(article),
-      html: markdownToHtml(
-        articleBodyWithoutDuplicateTitle(article.content, article.title),
-        article.slug
-      ),
+      html: markdownToHtml(articleBody, article.slug),
+      tableOfContents: article.toc ? getArticleHeadings(articleBody) : [],
       series,
       seriesArticles: seriesArticles.map(cleanArticle),
       previousArticle: previousArticle ? cleanArticle(previousArticle) : null,

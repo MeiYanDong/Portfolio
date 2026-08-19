@@ -5,6 +5,7 @@ date: 2026-08-19
 topics: AI 实践, 个人成长
 tags: AI 编程, Web3, 自动化, 42Space, 风险管理
 cover: /articles/ai-earned-ten-thousand-reflection/cover.jpg
+toc: true
 ---
 
 # 用 AI 赚到一万多之后，我回头看了看这两年
